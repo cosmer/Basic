@@ -7,10 +7,12 @@ import Foundation
 import Combine
 
 public extension URLSession {
-    func dataTaskPublisher<Tag>(for endpoint: Endpoint<Tag>) -> AnyPublisher<Tag.Model, Error> {
+    func dataTaskPublisher<Tag>(for endpoint: Endpoint<Tag>) -> AnyPublisher<Tag.Model, Error> where Tag.Model: Decodable {
         typealias Model = Tag.Model
 
-        var request = URLRequest(url: endpoint.url)
+        let url = endpoint.buildURL()
+
+        var request = URLRequest(url: url)
         request.setValue("application/geo+json", forHTTPHeaderField: "Accept")
 
         let decoder = JSONDecoder.makeEndpointDecoder()
@@ -19,7 +21,7 @@ public extension URLSession {
                 if let response = response as? HTTPURLResponse {
                     if response.statusCode < 200 || response.statusCode >= 300 {
                         let problem = try? decoder.decode(ProblemModel.self, from: data)
-                        throw HTTPError(statusCode: response.statusCode, url: endpoint.url, problem: problem)
+                        throw HTTPError(statusCode: response.statusCode, url: url, problem: problem)
                     }
                 }
                 return data
@@ -28,7 +30,7 @@ public extension URLSession {
                 do {
                     return try decoder.decode(Model.self, from: data)
                 } catch let error as DecodingError {
-                    throw WebServiceDecodingError(error: error, url: endpoint.url, modelType: "\(Model.self)")
+                    throw WebServiceDecodingError(error: error, url: url, modelType: "\(Model.self)")
                 } catch {
                     throw error
                 }

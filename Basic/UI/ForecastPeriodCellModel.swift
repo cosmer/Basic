@@ -5,19 +5,27 @@
 
 import Foundation
 import API
+import ImageLoading
 
 struct ForecastPeriodCellModel: Identifiable {
     var id: Int
     var name: String
-    var iconName: String?
+    var icon: LoadableImageAsset
     var detailedForecast: String
 }
 
 extension ForecastPeriodCellModel {
+    private static var iconMetrics: IconMetrics {
+        IconMetrics(
+            size: .large,
+            fontSize: 20
+        )
+    }
+
     init(period: ForecastModel.Period) {
         id = period.number
         name = period.name
-        iconName = nil // TODO
+        icon = .url(period.icon.with(Self.iconMetrics).buildURL())
         detailedForecast = period.detailedForecast
     }
 }

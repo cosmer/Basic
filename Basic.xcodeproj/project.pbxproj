@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF737326230175200015FCA1 /* ImageLoading in Frameworks */ = {isa = PBXBuildFile; productRef = EF737325230175200015FCA1 /* ImageLoading */; };
 		EFBB2DC622FC2BA900AAF7EE /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB2DC522FC2BA900AAF7EE /* ForecastView.swift */; };
 		EFBB2DC822FC2BB500AAF7EE /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB2DC722FC2BB500AAF7EE /* ForecastViewModel.swift */; };
 		EFBB2DCA22FC2F4E00AAF7EE /* Result+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB2DC922FC2F4E00AAF7EE /* Result+Properties.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF737324230175110015FCA1 /* ImageLoading */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ImageLoading; path = lib/ImageLoading; sourceTree = "<group>"; };
 		EFBB2DC522FC2BA900AAF7EE /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
 		EFBB2DC722FC2BB500AAF7EE /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		EFBB2DC922FC2F4E00AAF7EE /* Result+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Properties.swift"; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFD354D822FAD8F000B98ECE /* API in Frameworks */,
+				EF737326230175200015FCA1 /* ImageLoading in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				EFEE486722F6EF7A00F4C7B8 /* API */,
+				EF737324230175110015FCA1 /* ImageLoading */,
 				EFEE483A22F6EB5200F4C7B8 /* Basic */,
 				EFEE485422F6EB5300F4C7B8 /* BasicTests */,
 				EFEE483922F6EB5200F4C7B8 /* Products */,
@@ -180,6 +184,7 @@
 			name = Basic;
 			packageProductDependencies = (
 				EFD354D722FAD8F000B98ECE /* API */,
+				EF737325230175200015FCA1 /* ImageLoading */,
 			);
 			productName = Basic;
 			productReference = EFEE483822F6EB5200F4C7B8 /* Basic.app */;
@@ -540,6 +545,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EF737325230175200015FCA1 /* ImageLoading */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ImageLoading;
+		};
 		EFD354D722FAD8F000B98ECE /* API */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = API;

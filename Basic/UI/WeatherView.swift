@@ -11,11 +11,13 @@ struct WeatherView: View {
     var body: some View {
         NavigationView {
             Group {
-                if model.forecastResult.value != nil {
-                    ForecastView(model: model.forecastResult.value!)
-                        .navigationBarTitle(model.forecastResult.value!.locationName)
-                } else {
-                    Text(model.forecastResult.error!.localizedDescription)
+                model.forecastResult.value.map { (forecast) in
+                    ForecastView(model: forecast)
+                        .navigationBarTitle(forecast.locationName)
+                }
+
+                model.forecastResult.error.map { (error) in
+                    Text(error.localizedDescription)
                         .navigationBarTitle("Weather")
                 }
             }

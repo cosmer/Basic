@@ -9,12 +9,31 @@ private let baseURL = URL(string: "https://api.weather.gov")!
 
 public struct Endpoint<Tag> where Tag: EndpointTag {
     typealias Tag = Tag
+    typealias QueryItem = (name: String, value: String)
 
-    var url: URL
+    private var url: URL
+    var queryItems: [QueryItem]
+
+    public func buildURL() -> URL {
+        if queryItems.isEmpty {
+            return url
+        }
+
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
+        components.queryItems = queryItems
+            .map { URLQueryItem(name: $0.name, value: $0.value) }
+
+        return components.url!
+    }
+
+    init(url: URL, queryItems: [QueryItem] = []) {
+        self.url = url
+        self.queryItems = queryItems
+    }
 }
 
 public protocol EndpointTag {
-    associatedtype Model where Model: Decodable
+    associatedtype Model
 }
 
 extension Endpoint: Decodable {

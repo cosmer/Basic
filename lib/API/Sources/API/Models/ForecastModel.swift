@@ -16,7 +16,7 @@ public struct ForecastModel: Decodable {
         public var temperatureUnit: String
         public var windSpeed: String
         public var windDirection: String
-        public var icon: URL
+        public var icon: Endpoints.Icon
         public var shortForecast: String
         public var detailedForecast: String
     }

@@ -27,14 +27,14 @@ struct ForecastView_Previews: PreviewProvider {
             ForecastPeriodCellModel(
                 id: 1,
                 name: "Overnight",
-                iconName: "cloud.sun",
+                icon: .name("icons/night/bkn"),
                 detailedForecast: "Mostly cloudy, with a low around 66. East wind around 0 mph."
             ),
 
             ForecastPeriodCellModel(
                 id: 2,
                 name: "Sunday",
-                iconName: "cloud.sun",
+                icon: .name("icons/day/bkn"),
                 detailedForecast: "Partly sunny, with a high near 84. Southeast wind 0 to 5 mph."
             )
         ]
