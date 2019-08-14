@@ -5,11 +5,19 @@
 
 import UIKit
 import CoreData
+import ImageLoading
+import os.log
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        let imageLoadingLog = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "ImageLoading")
+        LoadableImage.setErrorLogger {
+            os_log(.error, log: imageLoadingLog, "%{public}@", $0.localizedDescription)
+        }
 
-
+        return true
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

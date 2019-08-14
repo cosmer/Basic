@@ -47,13 +47,27 @@ public final class LoadableImage: ObservableObject {
             cancellable = publisher
                 .receive(on: RunLoop.main)
                 .sink(
-                    receiveCompletion: { [unowned self] _ in
+                    receiveCompletion: { [unowned self] in
                         self.cancellable = nil
+
+                        if case let .failure(error) = $0 {
+                            Self.logError(error)
+                        }
                     },
                     receiveValue: { [unowned self] in
                         self.image = $0
                     }
                 )
         }
+    }
+}
+
+extension LoadableImage {
+    public typealias ErrorLogger = (Error) -> Void
+
+    private static var logError: ErrorLogger = { _ in }
+
+    public static func setErrorLogger(_ logger: @escaping ErrorLogger) {
+        logError = logger
     }
 }
