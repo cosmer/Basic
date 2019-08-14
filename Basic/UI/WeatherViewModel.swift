@@ -11,8 +11,7 @@ final class WeatherViewModel: ObservableObject {
     enum WeatherError: Error {
         case waitingForLocation
         case location(Error)
-        case pointsEndpoint(Error)
-        case forecastEndpoint(Error)
+        case api(Error)
     }
 
     @Published var forecastResult: Result<ForecastViewModel, WeatherError> = .failure(.waitingForLocation)
@@ -46,7 +45,7 @@ final class WeatherViewModel: ObservableObject {
                 case .success(let location):
                     let endpoint = Endpoints.points(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
                     return urlSession.dataTaskPublisher(for: endpoint)
-                        .mapError { WeatherError.pointsEndpoint($0) }
+                        .mapError { WeatherError.api($0) }
                         .materialize()
                         .eraseToAnyPublisher()
                 case .failure(let error):
@@ -58,7 +57,7 @@ final class WeatherViewModel: ObservableObject {
                 switch result {
                 case .success(let point):
                     return urlSession.dataTaskPublisher(for: point.properties.forecast)
-                        .mapError { WeatherError.forecastEndpoint($0) }
+                        .mapError { WeatherError.api($0) }
                         .map { (point, $0) }
                         .materialize()
                         .eraseToAnyPublisher()
@@ -75,5 +74,18 @@ final class WeatherViewModel: ObservableObject {
     func deactivate() {
         cancellable?.cancel()
         cancellable = nil
+    }
+}
+
+extension WeatherViewModel.WeatherError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .waitingForLocation:
+            return "Waiting for location."
+        case .location(let error):
+            return "Failed to update location '\(error.localizedDescription)'."
+        case .api(let error):
+            return error.localizedDescription
+        }
     }
 }
