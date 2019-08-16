@@ -169,4 +169,32 @@ final class GeometryModelTests: XCTestCase {
 
         XCTAssertNoThrow(try decoder.decode(GeometryModel.self, from: data))
     }
+
+    // A position is an array of numbers.  There MUST be two or more
+    // elements.  The first two elements are longitude and latitude, or
+    // easting and northing, precisely in that order and using decimal
+    // numbers.
+    func testPosition() {
+        let data =
+            """
+            {
+                "type": "Point",
+                "coordinates": [30, 10]
+            }
+            """
+            .data(using: .utf8)!
+
+        guard let model = try? decoder.decode(GeometryModel.self, from: data) else {
+            XCTFail("Failed to decode point model")
+            return
+        }
+
+        guard case let .point(position) = model.object else {
+            XCTFail("Unexpected geometry type")
+            return
+        }
+
+        XCTAssertEqual(position.latitude, 10)
+        XCTAssertEqual(position.longitude, 30)
+    }
 }

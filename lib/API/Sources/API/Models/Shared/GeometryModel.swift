@@ -80,7 +80,7 @@ extension GeometryModel: Decodable {
         guard coordinates.count == 2 else {
             throw InvalidCoordinatePair(componentCount: coordinates.count)
         }
-        return Position(latitude: coordinates[0], longitude: coordinates[1])
+        return Position(latitude: coordinates[1], longitude: coordinates[0])
     }
 
     private static func decodePoint(from container: KeyedDecodingContainer<CodingKeys>) throws -> Object {
