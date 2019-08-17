@@ -6,6 +6,18 @@
 import Foundation
 
 public struct PointsModel: Decodable {
+    public struct RelativeLocation: Decodable {
+        public struct Properties: Decodable {
+            public var city: String
+            public var state: String
+            public var distance: QuantitativeValueModel<Double>
+            public var bearing: QuantitativeValueModel<Double>
+        }
+
+        public var geometry: GeometryModel
+        public var properties: Properties
+    }
+
     public struct Properties: Decodable {
         public var cwa: String
         public var forecastOffice: URL
