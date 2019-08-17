@@ -9,8 +9,8 @@ public struct RelativeLocation: Decodable {
     public struct Properties: Decodable {
         public var city: String
         public var state: String
-        public var distance: MeasurementModel
-        public var bearing: MeasurementModel
+        public var distance: QuantitativeValueModel<Double>
+        public var bearing: QuantitativeValueModel<Double>
     }
 
     public var geometry: GeometryModel

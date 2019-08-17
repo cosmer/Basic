@@ -27,7 +27,7 @@ public struct ForecastModel: Decodable {
         public var forecastGenerator: String
         public var generatedAt: Date
         public var updateTime: Date
-        public var elevation: MeasurementModel
+        public var elevation: QuantitativeValueModel<Double>
         public var periods: [Period]
     }
 

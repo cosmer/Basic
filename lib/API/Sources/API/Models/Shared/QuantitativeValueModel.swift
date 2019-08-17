@@ -5,7 +5,8 @@
 
 import Foundation
 
-public struct MeasurementModel: Decodable {
-    public var value: Double
+/// https://codes.wmo.int/common/unit
+public struct QuantitativeValueModel<Value>: Decodable where Value: Decodable {
+    public var value: Value
     public var unitCode: String
 }
