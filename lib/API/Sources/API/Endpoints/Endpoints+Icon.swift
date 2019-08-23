@@ -6,6 +6,9 @@
 import Foundation
 
 extension Endpoints {
+    /// Returns a forecast icon.
+    ///
+    /// `/icons/{set}/{timeOfDay}/{first}/{second}`
     public typealias Icon = Endpoint<EndpointTags.Icon>
 }
 
@@ -15,44 +18,44 @@ extension EndpointTags {
     }
 }
 
-public struct IconMetrics {
-    public enum Size: String {
-        case small
-        case medium
-        case large
-    }
-
-    public var size: Size?
-    public var fontSize: Int?
-
-    public init(size: Size?, fontSize: Int?) {
-        if let fontSize = fontSize {
-            precondition(fontSize >= 2 && fontSize <= 24)
+extension Endpoint where Tag == EndpointTags.Icon {
+    public struct IconMetrics {
+        public enum Size: String {
+            case small
+            case medium
+            case large
         }
 
-        self.size = size
-        self.fontSize = fontSize
-    }
-}
+        public var size: Size?
+        public var fontSize: Int?
 
-extension Endpoint where Tag == EndpointTags.Icon {
+        public init(size: Size?, fontSize: Int?) {
+            if let fontSize = fontSize {
+                precondition(fontSize >= 2 && fontSize <= 24)
+            }
+
+            self.size = size
+            self.fontSize = fontSize
+        }
+    }
+
     public func with(_ metrics: IconMetrics) -> Endpoint {
-        var endpoint = self
+        var queryItems: [Endpoint.QueryItem] = []
 
         if let size = metrics.size {
-            endpoint.queryItems.append((
+            queryItems.append((
                 name: "size",
                 value: size.rawValue
             ))
         }
 
         if let fontSize = metrics.fontSize {
-            endpoint.queryItems.append((
+            queryItems.append((
                 name: "fontsize",
                 value: "\(fontSize)"
             ))
         }
 
-        return endpoint
+        return replacingQueryItems(with: queryItems)
     }
 }

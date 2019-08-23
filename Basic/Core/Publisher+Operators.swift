@@ -16,4 +16,18 @@ public extension Publisher {
         return map { .success($0) }
             .catch { Just(.failure($0)) }
     }
+
+    @inlinable func flatMapResult<V, S, F>(maxPublishers: Subscribers.Demand = .unlimited, transform: @escaping (S) -> AnyResultPublisher<V, F>)
+        -> Publishers.FlatMap<AnyResultPublisher<V, F>, Self> where Output == Result<S, F>, Failure == Never
+    {
+        return flatMap(maxPublishers: maxPublishers) { (result) -> AnyResultPublisher<V, F> in
+            switch result {
+            case .success(let value):
+                return transform(value)
+            case .failure(let error):
+                return Just(.failure(error))
+                    .eraseToAnyPublisher()
+            }
+        }
+    }
 }

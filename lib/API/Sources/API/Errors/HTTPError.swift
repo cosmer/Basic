@@ -24,7 +24,6 @@ extension HTTPError: LocalizedError, CustomNSError {
             "url": url,
         ]
 
-        // TODO: Test me!
         if let problem = problem {
             let mirror = Mirror(reflecting: problem)
             for (label, value) in mirror.children {

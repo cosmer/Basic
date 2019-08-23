@@ -13,7 +13,7 @@ public struct ForecastModel: Decodable {
         public var endTime: Date
         public var isDaytime: Bool
         public var temperature: Int
-        public var temperatureUnit: String
+        public var temperatureUnit: UnitModel<UnitTemperature>
         public var windSpeed: String
         public var windDirection: String
         public var icon: Endpoints.Icon
@@ -27,7 +27,7 @@ public struct ForecastModel: Decodable {
         public var forecastGenerator: String
         public var generatedAt: Date
         public var updateTime: Date
-        public var elevation: QuantitativeValueModel<Double>
+        public var elevation: QuantitativeValueModel<Double, UnitLength>
         public var periods: [Period]
     }
 

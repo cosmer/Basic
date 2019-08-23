@@ -9,8 +9,14 @@ struct ForecastView: View {
     let model: ForecastViewModel
 
     var body: some View {
-        List(model.periods) {
-            ForecastPeriodCell(model: $0)
+        List {
+            self.model.currentConditions.map {
+                CurrentConditionsView(model: $0)
+            }
+
+            ForEach(self.model.periods) {
+                ForecastPeriodCell(model: $0)
+            }
         }
     }
 }

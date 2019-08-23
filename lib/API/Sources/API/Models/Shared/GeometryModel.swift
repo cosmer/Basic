@@ -157,3 +157,24 @@ extension GeometryModel.InvalidCoordinatePair: LocalizedError, CustomNSError {
         ["component count": componentCount]
     }
 }
+
+extension GeometryModel.Object {
+    var caseName: String {
+        switch self {
+        case .point:
+            return "point"
+        case .multiPoint:
+            return "multiPoint"
+        case .lineString:
+            return "lineString"
+        case .multiLineString:
+            return "multiLineString"
+        case .polygon:
+            return "polygon"
+        case .multiPolygon:
+            return "multiPolygon"
+        case .collection:
+            return "collection"
+        }
+    }
+}

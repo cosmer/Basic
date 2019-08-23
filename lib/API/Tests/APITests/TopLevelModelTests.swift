@@ -19,6 +19,24 @@ final class TopLevelModelTests: XCTestCase {
         XCTAssertNoThrow(try decoder.decode(ForecastModel.self, from: data))
     }
 
+    func testDecodeObservationModel() {
+        let decoder = JSONDecoder.makeEndpointDecoder()
+        let data = observationModelData.data(using: .utf8)!
+        XCTAssertNoThrow(try decoder.decode(ObservationModel.self, from: data))
+    }
+
+    func testDecodeObservationsModel() {
+        let decoder = JSONDecoder.makeEndpointDecoder()
+        let data = observationsModelData.data(using: .utf8)!
+        XCTAssertNoThrow(try decoder.decode(ObservationsModel.self, from: data))
+    }
+
+    func testDecodeStationsModel() {
+        let decoder = JSONDecoder.makeEndpointDecoder()
+        let data = stationsModelData.data(using: .utf8)!
+        XCTAssertNoThrow(try decoder.decode(StationsModel.self, from: data))
+    }
+
     func testDecodeProblemModel() {
         let decoder = JSONDecoder.makeEndpointDecoder()
         let data = problemModelData.data(using: .utf8)!

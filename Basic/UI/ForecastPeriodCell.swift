@@ -35,25 +35,6 @@ struct ForecastPeriodCell: View {
     }
 }
 
-private struct IconModifier: ViewModifier {
-    let size: CGFloat
-
-    private var shape: RoundedRectangle {
-        RoundedRectangle(cornerRadius: 6, style: .continuous)
-    }
-
-    func body(content: Content) -> some View {
-        content
-            .frame(width: size, height: size)
-            .clipShape(shape)
-            .padding(2)
-            .background(
-                shape
-                    .fill(Color(.secondarySystemBackground))
-            )
-    }
-}
-
 #if DEBUG
 struct ForecastPeriodCell_Previews: PreviewProvider {
     static var previews: some View {

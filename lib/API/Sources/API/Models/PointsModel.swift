@@ -10,8 +10,8 @@ public struct PointsModel: Decodable {
         public struct Properties: Decodable {
             public var city: String
             public var state: String
-            public var distance: QuantitativeValueModel<Double>
-            public var bearing: QuantitativeValueModel<Double>
+            public var distance: QuantitativeValueModel<Double, UnitLength>
+            public var bearing: QuantitativeValueModel<Double, UnitDirection>
         }
 
         public var geometry: GeometryModel
@@ -26,9 +26,9 @@ public struct PointsModel: Decodable {
         public var forecast: Endpoints.Forecast
         public var forecastHourly: URL
         public var forecastGridData: URL
-        public var observationStations: URL
+        public var observationStations: Endpoints.ObservationStations
         public var relativeLocation: RelativeLocation
-        public var forecastZone: URL
+        public var forecastZone: Endpoints.ForecastZone
         public var county: URL
         public var fireWeatherZone: URL
         public var timeZone: String
@@ -36,5 +36,6 @@ public struct PointsModel: Decodable {
     }
 
     public var id: URL
+    public var geometry: GeometryPointModel
     public var properties: Properties
 }

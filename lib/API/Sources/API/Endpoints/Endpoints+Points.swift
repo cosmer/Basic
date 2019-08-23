@@ -6,6 +6,9 @@
 import Foundation
 
 extension Endpoints {
+    /// Returns metadata about a given latitude/longitude point.
+    ///
+    /// `/points/{point}`
     public typealias Points = Endpoint<EndpointTags.Points>
 
     public static func points(latitude: Double, longitude: Double) -> Points {

@@ -12,23 +12,27 @@ public struct Endpoint<Tag> where Tag: EndpointTag {
     typealias QueryItem = (name: String, value: String)
 
     private var url: URL
-    var queryItems: [QueryItem]
+    private var queryItems: [QueryItem]?
+
+    init(url: URL, queryItems: [QueryItem]? = nil) {
+        self.url = url
+        self.queryItems = queryItems
+    }
 
     public func buildURL() -> URL {
-        if queryItems.isEmpty {
+        guard let queryItems = queryItems else {
             return url
         }
 
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
-        components.queryItems = queryItems
-            .map { URLQueryItem(name: $0.name, value: $0.value) }
+        if !queryItems.isEmpty {
+            components.queryItems = queryItems
+                .map { URLQueryItem(name: $0.name, value: $0.value) }
+        } else {
+            components.queryItems = nil
+        }
 
         return components.url!
-    }
-
-    init(url: URL, queryItems: [QueryItem] = []) {
-        self.url = url
-        self.queryItems = queryItems
     }
 }
 
@@ -48,5 +52,21 @@ extension Endpoint {
     init(pathComponents: [String]) {
         let url = pathComponents.reduce(into: baseURL) { $0.appendPathComponent($1) }
         self.init(url: url)
+    }
+
+    func appending<ResultTag>(pathComponent: String) -> Endpoint<ResultTag> {
+        let url = self.url.appendingPathComponent(pathComponent)
+        return Endpoint<ResultTag>(url: url, queryItems: [])
+    }
+
+    func appending<ResultTag>(pathComponents: [String]) -> Endpoint<ResultTag> {
+        let url = pathComponents.reduce(into: self.url) { $0.appendPathComponent($1) }
+        return Endpoint<ResultTag>(url: url, queryItems: [])
+    }
+
+    func replacingQueryItems(with queryItems: [QueryItem]) -> Self {
+        var endpoint = self
+        endpoint.queryItems = queryItems
+        return endpoint
     }
 }

@@ -6,6 +6,9 @@
 import Foundation
 
 extension Endpoints {
+    /// Returns a textual forecast for a 2.5km grid area.
+    ///
+    /// `/gridpoints/{wfo}/{x},{y}/forecast`
     public typealias Forecast = Endpoint<EndpointTags.Forecast>
 }
 

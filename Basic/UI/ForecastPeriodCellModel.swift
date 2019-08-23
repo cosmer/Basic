@@ -15,11 +15,8 @@ struct ForecastPeriodCellModel: Identifiable {
 }
 
 extension ForecastPeriodCellModel {
-    private static var iconMetrics: IconMetrics {
-        IconMetrics(
-            size: .large,
-            fontSize: 20
-        )
+    private static var iconMetrics: Endpoints.Icon.IconMetrics {
+        .init(size: .large, fontSize: 20)
     }
 
     init(period: ForecastModel.Period) {
