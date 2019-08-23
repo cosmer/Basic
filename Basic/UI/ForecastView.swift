@@ -21,7 +21,6 @@ struct ForecastView: View {
     }
 }
 
-#if DEBUG
 struct ForecastView_Previews: PreviewProvider {
     static var previews: some View {
         ForecastView(model: model)
@@ -46,4 +45,3 @@ struct ForecastView_Previews: PreviewProvider {
         ]
     )
 }
-#endif

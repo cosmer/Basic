@@ -26,10 +26,8 @@ struct WeatherView: View {
     }
 }
 
-#if DEBUG
 struct WeatherView_Previews: PreviewProvider {
     static var previews: some View {
         WeatherView(model: WeatherViewModel())
     }
 }
-#endif

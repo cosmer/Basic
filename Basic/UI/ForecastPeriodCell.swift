@@ -35,7 +35,6 @@ struct ForecastPeriodCell: View {
     }
 }
 
-#if DEBUG
 struct ForecastPeriodCell_Previews: PreviewProvider {
     static var previews: some View {
         List {
@@ -50,5 +49,3 @@ struct ForecastPeriodCell_Previews: PreviewProvider {
         detailedForecast: "Partly sunny, with a high near 84. Southeast wind 0 to 5 mph."
     )
 }
-#endif
-
