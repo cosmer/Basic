@@ -7,7 +7,7 @@ import Foundation
 
 /// https://api.weather.gov/stations/KPWM/observations/latest
 let observationModelData =
-"""
+#"""
 {
     "@context": [
         "https://raw.githubusercontent.com/geojson/geojson-ld/master/contexts/geojson-base.jsonld",
@@ -164,4 +164,4 @@ let observationModelData =
         ]
     }
 }
-"""
+"""#

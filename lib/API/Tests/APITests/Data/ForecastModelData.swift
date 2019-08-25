@@ -6,7 +6,7 @@
 import Foundation
 
 let forecastModelData =
-"""
+#"""
 {
     "@context": [
         "https://raw.githubusercontent.com/geojson/geojson-ld/master/contexts/geojson-base.jsonld",
@@ -282,4 +282,4 @@ let forecastModelData =
         ]
     }
 }
-"""
+"""#
