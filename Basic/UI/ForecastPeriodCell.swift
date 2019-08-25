@@ -43,7 +43,7 @@ struct ForecastPeriodCell_Previews: PreviewProvider {
     }
 
     static let model = ForecastPeriodCellModel(
-        id: 1,
+        id: .init(rawValue: 1),
         name: "Sunday",
         icon: .name("icons/day/bkn"),
         detailedForecast: "Partly sunny, with a high near 84. Southeast wind 0 to 5 mph."

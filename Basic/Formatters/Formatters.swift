@@ -22,4 +22,11 @@ enum Formatters {
         formatter.dateTimeStyle = .named
         return formatter
     }()
+
+    static let hour: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.formattingContext = .standalone
+        formatter.setLocalizedDateFormatFromTemplate("j")
+        return formatter
+    }()
 }

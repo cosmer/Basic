@@ -17,3 +17,9 @@ extension EndpointTags {
         public typealias Model = ForecastModel
     }
 }
+
+extension Endpoint where Tag == EndpointTags.Forecast {
+    public func hourly() -> Endpoints.HourlyForecast {
+        return appending(pathComponent: "hourly")
+    }
+}

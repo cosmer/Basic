@@ -47,29 +47,21 @@ final class WeatherViewModel: ObservableObject {
                     .materialize()
                     .eraseToAnyPublisher()
             }
-            .flatMapResult { [urlSession] (point) -> AnyResultPublisher<(PointsModel, ForecastModel), WeatherError> in
-                let endpoint = point.properties.forecast
+            .flatMapResult { [urlSession] (point) -> AnyResultPublisher<(PointsModel, StationsModel), WeatherError> in
+                let endpoint = point.properties.observationStations
                 return urlSession.dataTaskPublisher(for: endpoint)
                     .mapError { WeatherError.api($0) }
                     .map { (point, $0) }
                     .materialize()
                     .eraseToAnyPublisher()
             }
-            .flatMapResult { [urlSession] (point, forecast) -> AnyResultPublisher<(PointsModel, ForecastModel, StationsModel), WeatherError> in
-                let endpoint = point.properties.observationStations
-                return urlSession.dataTaskPublisher(for: endpoint)
-                    .mapError { WeatherError.api($0) }
-                    .map { (point, forecast, $0) }
-                    .materialize()
-                    .eraseToAnyPublisher()
-            }
-            .flatMapResult { [urlSession] (point, forecast, stations) -> AnyResultPublisher<(PointsModel, ForecastModel, CurrentConditionsModel?), WeatherError> in
+            .flatMapResult { [urlSession] (point, stations) -> AnyResultPublisher<(PointsModel, CurrentConditionsModel?), WeatherError> in
                 let stations = stations.features.sorted {
                     $0.geometry.distance(to: point.geometry) < $1.geometry.distance(to: point.geometry)
                 }
 
                 guard let station = stations.first else {
-                    return Just(.success((point, forecast, nil)))
+                    return Just(.success((point, nil)))
                         .eraseToAnyPublisher()
                 }
 
@@ -77,12 +69,21 @@ final class WeatherViewModel: ObservableObject {
                 return urlSession.dataTaskPublisher(for: endpoint)
                     .mapError { WeatherError.api($0) }
                     .map { CurrentConditionsModel(station: station, observation: $0) }
-                    .map { (point, forecast, $0) }
+                    .map { (point, $0) }
+                    .materialize()
+                    .eraseToAnyPublisher()
+            }
+            .flatMapResult { [urlSession] (point, conditions) -> AnyResultPublisher<ForecastViewModel, WeatherError> in
+                let forecast = urlSession.dataTaskPublisher(for: point.properties.forecast)
+                let hourlyForecast = urlSession.dataTaskPublisher(for: point.properties.forecast.hourly())
+
+                return Publishers.Zip(forecast, hourlyForecast)
+                    .mapError { WeatherError.api($0) }
+                    .map { ForecastViewModel(point: point, currentConditions: conditions, forecast: $0, hourlyForecast: $1) }
                     .materialize()
                     .eraseToAnyPublisher()
             }
             .receive(on: RunLoop.main)
-            .map { $0.map(ForecastViewModel.init) }
             .sink { [unowned self] in self.forecastResult = $0 }
     }
 

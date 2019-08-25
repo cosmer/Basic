@@ -8,7 +8,7 @@ import API
 import ImageLoading
 
 struct ForecastPeriodCellModel: Identifiable {
-    var id: Int
+    var id: Tagged<Int, Self>
     var name: String
     var icon: LoadableImageAsset
     var detailedForecast: String
@@ -20,7 +20,7 @@ extension ForecastPeriodCellModel {
     }
 
     init(period: ForecastModel.Period) {
-        id = period.number
+        id = ID(rawValue: period.number)
         name = period.name
         icon = .url(period.icon.with(Self.iconMetrics).buildURL())
         detailedForecast = period.detailedForecast
