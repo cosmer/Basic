@@ -12,6 +12,7 @@
 		EF2E767E23083BED008EB40D /* CurrentConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */; };
 		EF5CAE7E230C1B6900FCB423 /* IconModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5CAE7D230C1B6900FCB423 /* IconModifier.swift */; };
 		EF6BF6872311E07A00159436 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF6862311E07A00159436 /* Tagged.swift */; };
+		EF6BF68B2312D12B00159436 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF68A2312D12B00159436 /* ErrorView.swift */; };
 		EF737326230175200015FCA1 /* ImageLoading in Frameworks */ = {isa = PBXBuildFile; productRef = EF737325230175200015FCA1 /* ImageLoading */; };
 		EFBB2DC622FC2BA900AAF7EE /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB2DC522FC2BA900AAF7EE /* ForecastView.swift */; };
 		EFBB2DC822FC2BB500AAF7EE /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB2DC722FC2BB500AAF7EE /* ForecastViewModel.swift */; };
@@ -53,6 +54,7 @@
 		EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentConditionsView.swift; sourceTree = "<group>"; };
 		EF5CAE7D230C1B6900FCB423 /* IconModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconModifier.swift; sourceTree = "<group>"; };
 		EF6BF6862311E07A00159436 /* Tagged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tagged.swift; sourceTree = "<group>"; };
+		EF6BF68A2312D12B00159436 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		EF737324230175110015FCA1 /* ImageLoading */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ImageLoading; path = lib/ImageLoading; sourceTree = "<group>"; };
 		EFBB2DC522FC2BA900AAF7EE /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
 		EFBB2DC722FC2BB500AAF7EE /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				EF5CAE7C230C1B5A00FCB423 /* Modifiers */,
 				EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */,
 				EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */,
+				EF6BF68A2312D12B00159436 /* ErrorView.swift */,
 				EFEEE8B322F988E000A34E61 /* ForecastPeriodCell.swift */,
 				EFEEE8B522F9890900A34E61 /* ForecastPeriodCellModel.swift */,
 				EFBB2DC522FC2BA900AAF7EE /* ForecastView.swift */,
@@ -333,6 +336,7 @@
 				EFD5422D230D50A100059214 /* HumidityFormatter.swift in Sources */,
 				EFBB2DC622FC2BA900AAF7EE /* ForecastView.swift in Sources */,
 				EF5CAE7E230C1B6900FCB423 /* IconModifier.swift in Sources */,
+				EF6BF68B2312D12B00159436 /* ErrorView.swift in Sources */,
 				EFEE483C22F6EB5200F4C7B8 /* AppDelegate.swift in Sources */,
 				EFD354DA22FAF66100B98ECE /* Publisher+Operators.swift in Sources */,
 				EFDD5CDF2311493100261945 /* HourlyForecastPeriodCellModel.swift in Sources */,

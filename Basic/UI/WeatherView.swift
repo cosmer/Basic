@@ -17,7 +17,7 @@ struct WeatherView: View {
                 }
 
                 model.forecastResult.error.map { (error) in
-                    Text(error.localizedDescription)
+                    ErrorView(error: error)
                         .navigationBarTitle("Weather")
                 }
             }
