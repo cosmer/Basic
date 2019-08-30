@@ -20,7 +20,7 @@ public struct PointsModel: Decodable {
 
     public struct Properties: Decodable {
         public var cwa: String
-        public var forecastOffice: URL
+        public var forecastOffice: Endpoints.ForecastOffice
         public var gridX: Int
         public var gridY: Int
         public var forecast: Endpoints.Forecast

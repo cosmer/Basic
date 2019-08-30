@@ -30,4 +30,32 @@ final class EndpointsTests: XCTestCase {
         let url = endpoint.buildURL()
         XCTAssertEqual(url.absoluteString, "https://api.weather.gov/zones/forecast/KSZ009/observations?limit=1")
     }
+
+    func testProduct() {
+        let endpoint = Endpoints.product(id: ProductID(rawValue: "id"))
+        let url = endpoint.buildURL()
+        XCTAssertEqual(url.absoluteString, "https://api.weather.gov/products/id")
+    }
+
+    func testProducts() {
+        let endpoint = Endpoints.products(
+            officeId: OfficeID(rawValue: "officeId")!,
+            code: ProductCode(rawValue: "code")
+        )
+
+        let url = endpoint.buildURL()
+        XCTAssertEqual(url.absoluteString, "https://api.weather.gov/products/types/code/locations/officeId")
+    }
+
+    func testProductTypes() {
+        let endpoint = Endpoints.productTypes(officeId: OfficeID(rawValue: "officeId")!)
+        let url = endpoint.buildURL()
+        XCTAssertEqual(url.absoluteString, "https://api.weather.gov/products/locations/officeId/types")
+    }
+
+    func testExtractForecastOfficeId() {
+        let urlString = "https://api.weather.gov/offices/TOP"
+        let endpoint = Endpoints.ForecastOffice(url: URL(string: urlString)!)
+        XCTAssertEqual(endpoint.officeId()?.rawValue, "TOP")
+    }
 }

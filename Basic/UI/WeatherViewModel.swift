@@ -47,39 +47,23 @@ final class WeatherViewModel: ObservableObject {
                     .materialize()
                     .eraseToAnyPublisher()
             }
-            .flatMapResult { [urlSession] (point) -> AnyResultPublisher<(PointsModel, StationsModel), WeatherError> in
-                let endpoint = point.properties.observationStations
-                return urlSession.dataTaskPublisher(for: endpoint)
-                    .mapError { WeatherError.api($0) }
-                    .map { (point, $0) }
-                    .materialize()
-                    .eraseToAnyPublisher()
-            }
-            .flatMapResult { [urlSession] (point, stations) -> AnyResultPublisher<(PointsModel, CurrentConditionsModel?), WeatherError> in
-                let stations = stations.features.sorted {
-                    $0.geometry.distance(to: point.geometry) < $1.geometry.distance(to: point.geometry)
-                }
-
-                guard let station = stations.first else {
-                    return Just(.success((point, nil)))
-                        .eraseToAnyPublisher()
-                }
-
-                let endpoint = station.id.latestObservation()
-                return urlSession.dataTaskPublisher(for: endpoint)
-                    .mapError { WeatherError.api($0) }
-                    .map { CurrentConditionsModel(station: station, observation: $0) }
-                    .map { (point, $0) }
-                    .materialize()
-                    .eraseToAnyPublisher()
-            }
-            .flatMapResult { [urlSession] (point, conditions) -> AnyResultPublisher<ForecastViewModel, WeatherError> in
+            .flatMapResult { [urlSession] (point) -> AnyResultPublisher<ForecastViewModel, WeatherError> in
                 let forecast = urlSession.dataTaskPublisher(for: point.properties.forecast)
                 let hourlyForecast = urlSession.dataTaskPublisher(for: point.properties.forecast.hourly())
+                let conditions = CurrentConditionsModel.publisher(for: point, in: urlSession)
+                let discussion = ForecastDiscussionModel.publisher(for: point, in: urlSession)
 
-                return Publishers.Zip(forecast, hourlyForecast)
+                return Publishers.Zip4(conditions, forecast, hourlyForecast, discussion)
+                    .map {
+                        ForecastViewModel(
+                            point: point,
+                            currentConditions: $0,
+                            forecast: $1,
+                            hourlyForecast: $2,
+                            forecastDiscussion: $3
+                        )
+                    }
                     .mapError { WeatherError.api($0) }
-                    .map { ForecastViewModel(point: point, currentConditions: conditions, forecast: $0, hourlyForecast: $1) }
                     .materialize()
                     .eraseToAnyPublisher()
             }

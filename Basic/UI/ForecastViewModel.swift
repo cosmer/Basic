@@ -11,10 +11,17 @@ struct ForecastViewModel {
     var currentConditions: CurrentConditionsViewModel?
     var periods: [ForecastPeriodCellModel]
     var hourlyPeriods: [HourlyForecastPeriodCellModel]
+    var forecastDiscussion: ForecastDiscussionViewModel?
 }
 
 extension ForecastViewModel {
-    init(point: PointsModel, currentConditions: CurrentConditionsModel?, forecast: ForecastModel, hourlyForecast: HourlyForecastModel) {
+    init(
+        point: PointsModel,
+        currentConditions: CurrentConditionsModel?,
+        forecast: ForecastModel,
+        hourlyForecast: HourlyForecastModel,
+        forecastDiscussion: ForecastDiscussionModel?
+    ) {
         let location = point.properties.relativeLocation.properties
         locationName = "\(location.city), \(location.state)"
 
@@ -26,5 +33,7 @@ extension ForecastViewModel {
         hourlyPeriods = hourlyForecast.properties.periods
             .prefix(8)
             .map(HourlyForecastPeriodCellModel.init)
+
+        self.forecastDiscussion = forecastDiscussion.map(ForecastDiscussionViewModel.init)
     }
 }

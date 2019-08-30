@@ -18,6 +18,10 @@ struct ForecastView: View {
                 HourlyForecastPeriodCell(model: $0)
             }
 
+            self.model.forecastDiscussion.map {
+                NavigationLink("Forecast Discussion", destination: ForecastDiscussionView(model: $0))
+            }
+
             ForEach(self.model.periods) {
                 ForecastPeriodCell(model: $0)
             }
@@ -48,6 +52,7 @@ struct ForecastView_Previews: PreviewProvider {
             )
         ],
         hourlyPeriods: [
-        ]
+        ],
+        forecastDiscussion: nil
     )
 }
