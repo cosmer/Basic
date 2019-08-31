@@ -18,9 +18,7 @@ struct CurrentConditionsView: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            Image(uiImage: icon.image ?? UIImage())
-                .resizable()
-                .modifier(IconModifier(size: 67))
+            Icon(uiImage: icon.image, size: 70)
 
             VStack(alignment: .leading) {
                 Text(model.stationName)
