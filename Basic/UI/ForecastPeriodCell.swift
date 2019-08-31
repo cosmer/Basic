@@ -31,7 +31,6 @@ struct ForecastPeriodCell: View {
             }
         }
         .padding(.vertical)
-        .onAppear(perform: icon.load)
     }
 }
 

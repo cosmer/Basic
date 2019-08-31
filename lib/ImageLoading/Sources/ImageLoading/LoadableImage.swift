@@ -7,32 +7,42 @@ import UIKit
 import Combine
 
 public final class LoadableImage: ObservableObject {
-    @Published public var image: UIImage? = nil
+    @Published var _image: UIImage? = nil
 
     private let url: URL?
     private var cancellable: AnyCancellable?
 
-    public init(url: URL) {
-        self.url = url
+    public convenience init(url: URL) {
+        self.init(asset: .url(url))
     }
 
     public init(asset: LoadableImageAsset) {
         switch asset {
         case .url(let url):
             self.url = url
+            _image = ImageLoader.shared.cachedImage(at: url)
         case .image(let image):
-            self.image = image
+            self._image = image
             url = nil
         case .name(let name):
-            self.image = UIImage(named: name)
+            self._image = UIImage(named: name)
             url = nil
         }
     }
 
-    public func load() {
+    public var image: UIImage? {
+        if let image = _image {
+            return image
+        }
+
+        load()
+        return nil
+    }
+
+    private func load() {
         dispatchPrecondition(condition: .onQueue(.main))
 
-        if image != nil || cancellable != nil {
+        if _image != nil || cancellable != nil {
             return
         }
 
@@ -40,34 +50,15 @@ public final class LoadableImage: ObservableObject {
             return
         }
 
-        switch ImageLoader.shared.image(at: url) {
-        case .image(let image):
-            self.image = image
-        case .publisher(let publisher):
-            cancellable = publisher
-                .receive(on: RunLoop.main)
-                .sink(
-                    receiveCompletion: { [unowned self] in
-                        self.cancellable = nil
-
-                        if case let .failure(error) = $0 {
-                            Self.logError(error)
-                        }
-                    },
-                    receiveValue: { [unowned self] in
-                        self.image = $0
-                    }
-                )
-        }
-    }
-}
-
-extension LoadableImage {
-    public typealias ErrorLogger = (Error) -> Void
-
-    private static var logError: ErrorLogger = { _ in }
-
-    public static func setErrorLogger(_ logger: @escaping ErrorLogger) {
-        logError = logger
+        cancellable = ImageLoader.shared.image(at: url)
+            .receive(on: RunLoop.main)
+            .sink(
+                receiveCompletion: { [unowned self] _ in
+                    self.cancellable = nil
+                },
+                receiveValue: { [unowned self] in
+                    self._image = $0
+                }
+            )
     }
 }

@@ -12,7 +12,7 @@ import os.log
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         let imageLoadingLog = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "ImageLoading")
-        LoadableImage.setErrorLogger {
+        ImageLoader.shared.setErrorLogger {
             os_log(.error, log: imageLoadingLog, "%{public}@", $0.localizedDescription)
         }
 

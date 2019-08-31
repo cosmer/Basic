@@ -30,7 +30,6 @@ struct CurrentConditionsView: View {
                 model.humidity.map { Text("\($0, formatter: model.humidityFormatter)") }
             }
         }
-        .onAppear(perform: icon.load)
     }
 }
 

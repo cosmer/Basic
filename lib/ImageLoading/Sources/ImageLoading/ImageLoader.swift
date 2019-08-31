@@ -6,31 +6,38 @@
 import UIKit
 import Combine
 
-final class ImageLoader {
-    static let shared = ImageLoader()
+public final class ImageLoader {
+    public static let shared = ImageLoader()
 
-    typealias ImagePublisher = AnyPublisher<UIImage, Error>
+    public typealias ErrorLogger = (Error) -> Void
 
-    enum ImageToken {
-        case image(UIImage)
-        case publisher(ImagePublisher)
-    }
+    typealias ImagePublisher = AnyPublisher<UIImage, Never>
 
     private var images: [URL: UIImage] = [:]
     private var publishers: [URL: ImagePublisher] = [:]
     private var cancellables: [URL: AnyCancellable] = [:]
 
-    func image(at url: URL) -> ImageToken {
-        if let image = images[url] {
-            return .image(image)
-        }
+    private var logError: ErrorLogger = { _ in }
 
+    public init() { }
+
+    public func setErrorLogger(_ logger: @escaping ErrorLogger) {
+        logError = logger
+    }
+
+    func cachedImage(at url: URL) -> UIImage? {
+        return images[url]
+    }
+
+    func image(at url: URL) -> ImagePublisher {
         if let publisher = publishers[url] {
-            return .publisher(publisher)
+            return publisher
         }
 
-        let resultSubject = PassthroughSubject<UIImage, Error>()
-        let resultPublisher = resultSubject.eraseToAnyPublisher()
+        let resultSubject = CurrentValueSubject<UIImage?, Never>(nil)
+        let resultPublisher = resultSubject
+            .compactMap { $0 }
+            .eraseToAnyPublisher()
 
         publishers[url] = resultPublisher
 
@@ -54,7 +61,10 @@ final class ImageLoader {
                 receiveCompletion: { (completion) in
                     self.publishers.removeValue(forKey: url)
                     self.cancellables.removeValue(forKey: url)
-                    resultSubject.send(completion: completion)
+
+                    if case let .failure(error) = completion {
+                        self.logError(error)
+                    }
                 },
                 receiveValue: { (image) in
                     self.images[url] = image
@@ -63,17 +73,10 @@ final class ImageLoader {
             )
 
         // Handle synchronous data task completion.
-        do {
-            if let image = images[url] {
-                return .image(image)
-            }
-
-            if publishers[url] == nil {
-                return .publisher(resultPublisher)
-            }
+        if publishers[url] != nil {
+            cancellables[url] = cancellable
         }
 
-        cancellables[url] = cancellable
-        return .publisher(resultPublisher)
+        return resultPublisher
     }
 }
