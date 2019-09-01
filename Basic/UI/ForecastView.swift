@@ -7,6 +7,15 @@ import SwiftUI
 
 struct ForecastView: View {
     let model: ForecastViewModel
+    private let hourlyCellMetricsCache: HourlyForecastPeriodCell.Metrics.Cache
+
+    @Environment(\.sizeCategory) private var sizeCategory
+    @Environment(\.legibilityWeight) private var legibilityWeight
+
+    init(model: ForecastViewModel) {
+        self.model = model
+        hourlyCellMetricsCache = .init(models: model.hourlyPeriods)
+    }
 
     var body: some View {
         List {
@@ -15,7 +24,7 @@ struct ForecastView: View {
             }
 
             ForEach(self.model.hourlyPeriods) {
-                HourlyForecastPeriodCell(model: $0)
+                HourlyForecastPeriodCell(model: $0, metrics: self.hourlyCellMetrics)
             }
 
             self.model.forecastDiscussion.map {
@@ -26,6 +35,10 @@ struct ForecastView: View {
                 ForecastPeriodCell(model: $0)
             }
         }
+    }
+
+    private var hourlyCellMetrics: HourlyForecastPeriodCell.Metrics {
+        hourlyCellMetricsCache.metrics(sizeCategory: sizeCategory, weight: legibilityWeight)
     }
 }
 

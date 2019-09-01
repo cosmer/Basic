@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF0CF557231C1BC500DD6553 /* UIContentSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF556231C1BC500DD6553 /* UIContentSizeCategory.swift */; };
+		EF0CF559231C46BF00DD6553 /* UILegibilityWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF558231C46BF00DD6553 /* UILegibilityWeight.swift */; };
 		EF0D399B231A8ADB0067359E /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0D399A231A8ADB0067359E /* Icon.swift */; };
 		EF28080B230C013400FF018E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF28080A230C013400FF018E /* Formatters.swift */; };
 		EF2E767C23083BE0008EB40D /* CurrentConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */; };
@@ -53,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF0CF556231C1BC500DD6553 /* UIContentSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIContentSizeCategory.swift; sourceTree = "<group>"; };
+		EF0CF558231C46BF00DD6553 /* UILegibilityWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILegibilityWeight.swift; sourceTree = "<group>"; };
 		EF0D399A231A8ADB0067359E /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		EF28080A230C013400FF018E /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentConditionsViewModel.swift; sourceTree = "<group>"; };
@@ -117,6 +121,8 @@
 			children = (
 				EF0D399A231A8ADB0067359E /* Icon.swift */,
 				EFD202622315E5E900A0ED6B /* ScrollableText.swift */,
+				EF0CF556231C1BC500DD6553 /* UIContentSizeCategory.swift */,
+				EF0CF558231C46BF00DD6553 /* UILegibilityWeight.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -344,6 +350,7 @@
 				EFEEE8AC22F8EA9F00A34E61 /* WeatherViewModel.swift in Sources */,
 				EF0D399B231A8ADB0067359E /* Icon.swift in Sources */,
 				EFD202632315E5E900A0ED6B /* ScrollableText.swift in Sources */,
+				EF0CF559231C46BF00DD6553 /* UILegibilityWeight.swift in Sources */,
 				EFDD5CDD2311492200261945 /* HourlyForecastPeriodCell.swift in Sources */,
 				EFBB2DCA22FC2F4E00AAF7EE /* Result+Properties.swift in Sources */,
 				EF28080B230C013400FF018E /* Formatters.swift in Sources */,
@@ -364,6 +371,7 @@
 				EFEEE8B422F988E000A34E61 /* ForecastPeriodCell.swift in Sources */,
 				EF6BF68D2313F2C300159436 /* ForecastDiscussionModel.swift in Sources */,
 				EFD54230230EA0D800059214 /* Geometry+Distance.swift in Sources */,
+				EF0CF557231C1BC500DD6553 /* UIContentSizeCategory.swift in Sources */,
 				EFEEE8B022F909D200A34E61 /* LocationUpdater.swift in Sources */,
 				EF2E767C23083BE0008EB40D /* CurrentConditionsViewModel.swift in Sources */,
 				EFEE484122F6EB5200F4C7B8 /* Basic.xcdatamodeld in Sources */,
