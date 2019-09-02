@@ -6,8 +6,20 @@
 import SwiftUI
 
 struct ScrollableText: UIViewRepresentable {
-    var text: String
-    var font: UIFont = .preferredFont(forTextStyle: .body)
+    private enum Content {
+        case text(String, UIFont)
+        case attributedText(NSAttributedString)
+    }
+
+    private var content: Content
+
+    init(text: String, font: UIFont = .preferredFont(forTextStyle: .body)) {
+        content = .text(text, font)
+    }
+
+    init(text: NSAttributedString) {
+        content = .attributedText(text)
+    }
 
     func makeUIView(context: Context) -> UITextView {
         let view = UITextView()
@@ -16,7 +28,12 @@ struct ScrollableText: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.text = text
-        uiView.font = font
+        switch content {
+        case let .text(text, font):
+            uiView.text = text
+            uiView.font = font
+        case let .attributedText(text):
+            uiView.attributedText = text
+        }
     }
 }

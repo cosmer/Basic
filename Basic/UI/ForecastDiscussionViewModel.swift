@@ -3,12 +3,12 @@
 //  Copyright © 2019 Charlie Osmer. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 import Combine
 import API
 
 final class ForecastDiscussionViewModel: ObservableObject {
-    @Published var text: Result<String, Error> = .success("")
+    @Published var text: Result<NSAttributedString, Error> = .success(.init())
 
     private let model: ForecastDiscussionModel
 
@@ -22,7 +22,7 @@ final class ForecastDiscussionViewModel: ObservableObject {
     convenience init(model: ForecastDiscussionModel, text: Result<String, Error>) {
         self.init(model: model)
 
-        self.text = text
+        self.text = text.map { NSAttributedString(string: $0, attributes: Self.bodyAttributes) }
         cancellable = AnyCancellable({ })
     }
 
@@ -31,6 +31,18 @@ final class ForecastDiscussionViewModel: ObservableObject {
             NSLocalizedString("Forecast discussions are not currently available at this location.", comment: "")
         }
     }
+
+    private static var bodyAttributes: [NSAttributedString.Key: Any] = [
+        .font: UIFont.preferredFont(forTextStyle: .body)
+    ]
+
+    private static var preambleAttributes: [NSAttributedString.Key: Any] = [
+        .font: UIFont.preferredFont(forTextStyle: .callout)
+    ]
+
+    private static var headerAttributes: [NSAttributedString.Key: Any] = [
+        .font: UIFont.preferredFont(forTextStyle: .headline)
+    ]
 
     func load() {
         if cancellable != nil {
@@ -49,7 +61,28 @@ final class ForecastDiscussionViewModel: ObservableObject {
                 let endpoint = Endpoints.product(id: product.id)
                 return URLSession.shared.dataTaskPublisher(for: endpoint)
             }
-            .map(\.productText)
+            .map { (product) -> NSAttributedString in
+                let defaultAttributes = Self.bodyAttributes
+                let preambleAttributes = Self.preambleAttributes
+                let headerAttributes = Self.headerAttributes
+
+                let text = NSMutableAttributedString()
+                ForecastDiscussionParser.shared.parse(product.productText) { (type, segment) in
+                    switch type {
+                    case .preamble:
+                        text.append(NSAttributedString(string: segment, attributes: preambleAttributes))
+                    case .sectionHeader:
+                        let content = segment + "\n"
+                        text.append(NSAttributedString(string: content, attributes: headerAttributes))
+                    case .sectionSeparator:
+                        let content = "\n\n"
+                        text.append(NSAttributedString(string: content, attributes: defaultAttributes))
+                    case .body:
+                        text.append(NSAttributedString(string: segment, attributes: defaultAttributes))
+                    }
+                }
+                return text
+            }
             .materialize()
             .receive(on: RunLoop.main)
             .sink { [unowned self] in self.text = $0 }
