@@ -26,7 +26,7 @@ struct Icon: View {
     }
 
     private var shape: RoundedRectangle {
-        RoundedRectangle(cornerRadius: 6, style: .continuous)
+        RoundedRectangle(cornerRadius: 4, style: .continuous)
     }
 
     private var borderWidth: CGFloat { 2 }
