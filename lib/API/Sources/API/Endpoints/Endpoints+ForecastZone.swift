@@ -19,6 +19,10 @@ extension EndpointTags {
 }
 
 extension Endpoint where Tag == EndpointTags.ForecastZone {
+    public func zoneId() -> ZoneID {
+        return ZoneID(rawValue: buildURL().lastPathComponent)
+    }
+
     public func observations() -> Endpoints.Observations {
         return appending(pathComponent: "observations")
     }

@@ -13,12 +13,7 @@ struct ForecastDiscussionModel {
 
 extension ForecastDiscussionModel {
     static func publisher(for point: PointsModel, in urlSession: URLSession) -> AnyPublisher<ForecastDiscussionModel?, Error> {
-        guard let officeId = point.properties.forecastOffice.officeId() else {
-            return Just(nil)
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        }
-
+        let officeId = point.properties.forecastOffice.officeId()
         let endpoint = Endpoints.productTypes(officeId: officeId)
         return urlSession.dataTaskPublisher(for: endpoint)
             .map { (productTypes) in

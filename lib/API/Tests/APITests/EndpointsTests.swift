@@ -39,7 +39,7 @@ final class EndpointsTests: XCTestCase {
 
     func testProducts() {
         let endpoint = Endpoints.products(
-            officeId: OfficeID(rawValue: "officeId")!,
+            officeId: OfficeID(rawValue: "officeId"),
             code: ProductCode(rawValue: "code")
         )
 
@@ -48,14 +48,26 @@ final class EndpointsTests: XCTestCase {
     }
 
     func testProductTypes() {
-        let endpoint = Endpoints.productTypes(officeId: OfficeID(rawValue: "officeId")!)
+        let endpoint = Endpoints.productTypes(officeId: OfficeID(rawValue: "officeId"))
         let url = endpoint.buildURL()
         XCTAssertEqual(url.absoluteString, "https://api.weather.gov/products/locations/officeId/types")
+    }
+
+    func testActiveAlerts() {
+        let endpoint = Endpoints.activeAlerts(zoneId: ZoneID(rawValue: "zoneId"))
+        let url = endpoint.buildURL()
+        XCTAssertEqual(url.absoluteString, "https://api.weather.gov/alerts/active/zone/zoneId")
     }
 
     func testExtractForecastOfficeId() {
         let urlString = "https://api.weather.gov/offices/TOP"
         let endpoint = Endpoints.ForecastOffice(url: URL(string: urlString)!)
-        XCTAssertEqual(endpoint.officeId()?.rawValue, "TOP")
+        XCTAssertEqual(endpoint.officeId().rawValue, "TOP")
+    }
+
+    func testExtractZoneId() {
+        let urlString = "https://api.weather.gov/zones/forecast/KSZ009"
+        let endpoint = Endpoints.ForecastZone(url: URL(string: urlString)!)
+        XCTAssertEqual(endpoint.zoneId().rawValue, "KSZ009")
     }
 }

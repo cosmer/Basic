@@ -27,6 +27,10 @@ struct ForecastView: View {
                 HourlyForecastPeriodCell(model: $0, metrics: self.hourlyCellMetrics)
             }
 
+            self.model.alerts.map {
+                Self.navigationLink(for: $0)
+            }
+
             self.model.forecastDiscussion.map {
                 NavigationLink("Forecast Discussion", destination: ForecastDiscussionView(model: $0))
             }
@@ -40,11 +44,31 @@ struct ForecastView: View {
     private var hourlyCellMetrics: HourlyForecastPeriodCell.Metrics {
         hourlyCellMetricsCache.metrics(sizeCategory: sizeCategory, weight: legibilityWeight)
     }
+
+    private static func navigationLink(for model: ForecastAlertsNavigationModel) -> some View {
+        model.value.buildView(
+            left: { (one) in
+                NavigationLink(destination: WeatherAlertView(model: one.model)) {
+                    VStack(alignment: .leading) {
+                        Text("Severe Weather Alert")
+                        Text(one.label)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            },
+            right: { (many) in
+                NavigationLink("Severe Weather Alerts", destination: WeatherAlertList(model: many.model))
+            }
+        )
+    }
 }
 
 struct ForecastView_Previews: PreviewProvider {
     static var previews: some View {
-        ForecastView(model: model)
+        NavigationView {
+            ForecastView(model: model)
+        }
     }
 
     static let model = ForecastViewModel(
@@ -66,6 +90,11 @@ struct ForecastView_Previews: PreviewProvider {
         ],
         hourlyPeriods: [
         ],
-        forecastDiscussion: nil
+        forecastDiscussion: ForecastDiscussionViewModel(
+            model: ForecastDiscussionModel(officeId: .grayME)
+        ),
+        alerts: ForecastAlertsNavigationModel(
+            model: WeatherAlertListModel(alerts: WeatherAlertViewModel.previews)
+        )
     )
 }

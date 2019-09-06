@@ -19,7 +19,7 @@ extension EndpointTags {
 }
 
 extension Endpoint where Tag == EndpointTags.ForecastOffice {
-    public func officeId() -> OfficeID? {
+    public func officeId() -> OfficeID {
         return OfficeID(rawValue: buildURL().lastPathComponent)
     }
 }

@@ -29,21 +29,6 @@ public final class ForecastDiscussionParser {
 
     public init() { }
 
-    private static func prettyPrintBody(_ body: Substring) -> String {
-        return body
-            .components(separatedBy: "\n\n")
-            .map { (paragraph) -> String in
-                var lines: [String] = []
-                paragraph.enumerateLines { (line, _) in
-                    if !line.isEmpty {
-                        lines.append(line.trimmingCharacters(in: .whitespacesAndNewlines))
-                    }
-                }
-                return lines.joined(separator: " ")
-            }
-            .joined(separator: "\n\n")
-    }
-
     public func parse(_ discussion: String, callback: (SegmentType, String) -> Void) {
         let discussion = discussion.trimmingCharacters(in: .whitespacesAndNewlines)
         let discussionRange = NSRange(location: 0, length: discussion.utf16.count)
@@ -94,7 +79,7 @@ public final class ForecastDiscussionParser {
 
             let body = discussion[match1.range.upperBound..<match2.range.lowerBound]
             if !body.isEmpty {
-                callback(.body, Self.prettyPrintBody(body))
+                callback(.body, body.removingManualLineBreaks())
             }
         }
 
@@ -103,7 +88,7 @@ public final class ForecastDiscussionParser {
 
         let footer = discussion[lastMatch.range.upperBound...]
         if !footer.isEmpty {
-            callback(.body, Self.prettyPrintBody(footer))
+            callback(.body, footer.removingManualLineBreaks())
         }
     }
 }

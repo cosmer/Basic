@@ -54,6 +54,11 @@ final class TopLevelModelTests: XCTestCase {
         XCTAssertNoThrow(try decoder.decode(ProductTypesModel.self, from: data))
     }
 
+    func testAlertsModel() {
+        let data = alertsModelData.data(using: .utf8)!
+        XCTAssertNoThrow(try decoder.decode(AlertsModel.self, from: data))
+    }
+
     func testDecodeProblemModel() {
         let data = problemModelData.data(using: .utf8)!
         XCTAssertNoThrow(try decoder.decode(ProblemModel.self, from: data))

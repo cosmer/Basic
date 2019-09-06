@@ -7,15 +7,8 @@ import Foundation
 
 public struct OfficeID {
     var rawValue: String
-
-    init?(rawValue: String) {
-        guard !rawValue.isEmpty else {
-            return nil
-        }
-        self.rawValue = rawValue
-    }
 }
 
 public extension OfficeID {
-    static let grayME = OfficeID(rawValue: "GYX")!
+    static let grayME = OfficeID(rawValue: "GYX")
 }
