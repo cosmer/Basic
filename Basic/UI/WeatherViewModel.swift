@@ -14,7 +14,7 @@ final class WeatherViewModel: ObservableObject {
         case api(Error)
     }
 
-    @Published var forecastResult: Result<ForecastViewModel, WeatherError> = .failure(.waitingForLocation)
+    @Published var forecast: Result<ForecastViewModel, WeatherError> = .failure(.waitingForLocation)
 
     private let locationUpdater = LocationUpdater()
     private lazy var location = locationUpdater.didUpdateLocation
@@ -74,7 +74,7 @@ final class WeatherViewModel: ObservableObject {
                     .eraseToAnyPublisher()
             }
             .receive(on: RunLoop.main)
-            .sink { [unowned self] in self.forecastResult = $0 }
+            .sink { [unowned self] in self.forecast = $0 }
     }
 
     func deactivate() {
