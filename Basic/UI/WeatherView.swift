@@ -10,17 +10,16 @@ struct WeatherView: View {
 
     var body: some View {
         NavigationView {
-            Group {
-                model.forecastResult.value.map { (forecast) in
-                    ForecastView(model: forecast)
-                        .navigationBarTitle(forecast.locationName)
-                }
-
-                model.forecastResult.error.map { (error) in
-                    ErrorView(error: error)
+            model.forecastResult.buildView(
+                success: {
+                    ForecastView(model: $0)
+                        .navigationBarTitle($0.locationName)
+                },
+                failure: {
+                    ErrorView(error: $0)
                         .navigationBarTitle("Weather")
                 }
-            }
+            )
         }
         .onAppear { self.model.requestAuthorizationIfNeeded() }
     }

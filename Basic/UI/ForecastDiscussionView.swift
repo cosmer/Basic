@@ -9,18 +9,17 @@ struct ForecastDiscussionView: View {
     @ObservedObject var model: ForecastDiscussionViewModel
 
     var body: some View {
-        Group {
-            model.text.value.map { (text) in
-                ScrollableText(text: text)
+        model.text.buildView(
+            success: {
+                ScrollableText(text: $0)
                     .padding(.horizontal)
                     .navigationBarTitle("Forecast Discussion", displayMode: .inline)
                     .onAppear(perform: model.load)
-            }
-
-            model.text.error.map {
+            },
+            failure: {
                 ErrorView(error: $0)
             }
-        }
+        )
     }
 }
 
