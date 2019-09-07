@@ -40,8 +40,8 @@ final class WeatherViewModel: ObservableObject {
 
         cancellable = location
             .autoconnect()
+            .removeDuplicates(by: Result.compareSuccess(by: \.timestamp))
             .map { $0.map(\.coordinate) }
-            .removeDuplicates(by: Result.equalValues)
             .flatMapResult { [urlSession] (coordinate) -> AnyResultPublisher<PointsModel, WeatherError> in
                 let endpoint = Endpoints.points(latitude: coordinate.latitude, longitude: coordinate.longitude)
                 return urlSession.dataTaskPublisher(for: endpoint)

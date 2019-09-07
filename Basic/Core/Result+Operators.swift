@@ -17,12 +17,25 @@ extension Result {
 }
 
 extension Result where Success: Equatable {
-    static func equalValues(_ lhs: Self, _ rhs: Self) -> Bool {
+    static func compareSuccess(_ lhs: Self, _ rhs: Self) -> Bool {
         switch (lhs, rhs) {
         case let (.success(lhs), .success(rhs)):
             return lhs == rhs
         default:
             return false
+        }
+    }
+}
+
+extension Result {
+    static func compareSuccess<T>(by keyPath: KeyPath<Success, T>) -> (Self, Self) -> Bool where T: Equatable {
+        return { (lhs, rhs) in
+            switch (lhs, rhs) {
+            case let (.success(lhs), .success(rhs)):
+                return lhs[keyPath: keyPath] == rhs[keyPath: keyPath]
+            default:
+                return false
+            }
         }
     }
 }
