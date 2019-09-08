@@ -134,6 +134,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF09144823250EE3008544C3 /* Forecast */ = {
+			isa = PBXGroup;
+			children = (
+				EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */,
+				EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */,
+				EFC0CBF22322850200EFF256 /* ForecastAlertsNavigationModel.swift */,
+				EFEEE8B322F988E000A34E61 /* ForecastPeriodCell.swift */,
+				EFEEE8B522F9890900A34E61 /* ForecastPeriodCellModel.swift */,
+				EFBB2DC522FC2BA900AAF7EE /* ForecastView.swift */,
+				EFBB2DC722FC2BB500AAF7EE /* ForecastViewModel.swift */,
+				EFDD5CDC2311492200261945 /* HourlyForecastPeriodCell.swift */,
+				EFDD5CDE2311493100261945 /* HourlyForecastPeriodCellModel.swift */,
+			);
+			path = Forecast;
+			sourceTree = "<group>";
+		};
+		EF09144923250EF6008544C3 /* ForecastDiscussion */ = {
+			isa = PBXGroup;
+			children = (
+				EFD2025D2315392400A0ED6B /* ForecastDiscussionView.swift */,
+				EFD2025B2315390B00A0ED6B /* ForecastDiscussionViewModel.swift */,
+			);
+			path = ForecastDiscussion;
+			sourceTree = "<group>";
+		};
+		EF09144A23250F02008544C3 /* WeatherAlerts */ = {
+			isa = PBXGroup;
+			children = (
+				EFAC52EB232118810080AFB3 /* WeatherAlertList.swift */,
+				EFAC52E9232118740080AFB3 /* WeatherAlertListModel.swift */,
+				EFAC52EF2321189D0080AFB3 /* WeatherAlertView.swift */,
+				EFAC52F1232118A60080AFB3 /* WeatherAlertViewModel.swift */,
+			);
+			path = WeatherAlerts;
+			sourceTree = "<group>";
+		};
 		EFD2025F2315434600A0ED6B /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,22 +269,10 @@
 			isa = PBXGroup;
 			children = (
 				EFD2025F2315434600A0ED6B /* Components */,
-				EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */,
-				EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */,
+				EF09144823250EE3008544C3 /* Forecast */,
+				EF09144923250EF6008544C3 /* ForecastDiscussion */,
+				EF09144A23250F02008544C3 /* WeatherAlerts */,
 				EF6BF68A2312D12B00159436 /* ErrorView.swift */,
-				EFC0CBF22322850200EFF256 /* ForecastAlertsNavigationModel.swift */,
-				EFD2025D2315392400A0ED6B /* ForecastDiscussionView.swift */,
-				EFD2025B2315390B00A0ED6B /* ForecastDiscussionViewModel.swift */,
-				EFEEE8B322F988E000A34E61 /* ForecastPeriodCell.swift */,
-				EFEEE8B522F9890900A34E61 /* ForecastPeriodCellModel.swift */,
-				EFBB2DC522FC2BA900AAF7EE /* ForecastView.swift */,
-				EFBB2DC722FC2BB500AAF7EE /* ForecastViewModel.swift */,
-				EFDD5CDC2311492200261945 /* HourlyForecastPeriodCell.swift */,
-				EFDD5CDE2311493100261945 /* HourlyForecastPeriodCellModel.swift */,
-				EFAC52EB232118810080AFB3 /* WeatherAlertList.swift */,
-				EFAC52E9232118740080AFB3 /* WeatherAlertListModel.swift */,
-				EFAC52EF2321189D0080AFB3 /* WeatherAlertView.swift */,
-				EFAC52F1232118A60080AFB3 /* WeatherAlertViewModel.swift */,
 				EFEE484222F6EB5200F4C7B8 /* WeatherView.swift */,
 				EFEEE8AB22F8EA9F00A34E61 /* WeatherViewModel.swift */,
 			);
