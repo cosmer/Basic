@@ -9,17 +9,23 @@ struct ForecastDiscussionView: View {
     @ObservedObject var model: ForecastDiscussionViewModel
 
     var body: some View {
-        model.text.buildView(
-            success: {
-                ScrollableText(text: $0)
-                    .padding(.horizontal)
-                    .navigationBarTitle("Forecast Discussion", displayMode: .inline)
-                    .onAppear(perform: model.load)
-            },
-            failure: {
-                ErrorView(error: $0)
+        Group {
+            if model.isLoading {
+                LoadingView()
+            } else {
+                model.text.buildView(
+                    success: {
+                        ScrollableText(text: $0)
+                            .padding(.horizontal)
+                    },
+                    failure: {
+                        ErrorView(error: $0)
+                    }
+                )
             }
-        )
+        }
+        .navigationBarTitle("Forecast Discussion", displayMode: .inline)
+        .onAppear(perform: model.load)
     }
 }
 

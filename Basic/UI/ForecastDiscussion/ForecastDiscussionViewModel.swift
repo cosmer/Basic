@@ -9,6 +9,7 @@ import API
 
 final class ForecastDiscussionViewModel: ObservableObject {
     @Published var text: Result<NSAttributedString, Error> = .success(.init())
+    @Published var isLoading = false
 
     private let model: ForecastDiscussionModel
 
@@ -49,6 +50,8 @@ final class ForecastDiscussionViewModel: ObservableObject {
             return
         }
 
+        isLoading = true
+
         let endpoint = Endpoints.products(officeId: model.officeId, code: .forecastDiscussion)
         cancellable = URLSession.shared.dataTaskPublisher(for: endpoint)
             .tryMap { (products) -> ProductsModel.Product in
@@ -85,6 +88,9 @@ final class ForecastDiscussionViewModel: ObservableObject {
             }
             .materialize()
             .receive(on: RunLoop.main)
-            .sink { [unowned self] in self.text = $0 }
+            .sink { [unowned self] (text) in
+                self.isLoading = false
+                self.text = text
+            }
     }
 }
