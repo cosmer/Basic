@@ -24,6 +24,7 @@ struct ScrollableText: UIViewRepresentable {
     func makeUIView(context: Context) -> UITextView {
         let view = UITextView()
         view.isEditable = false
+        view.contentInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         return view
     }
 

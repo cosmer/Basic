@@ -16,7 +16,6 @@ struct ForecastDiscussionView: View {
                 model.text.buildView(
                     success: {
                         ScrollableText(text: $0)
-                            .padding(.horizontal)
                     },
                     failure: {
                         ErrorView(error: $0)
