@@ -11,7 +11,7 @@ public struct ObservationPropertiesModel: Decodable {
     public var timestamp: Date
     public var textDescription: String
     public var icon: Endpoints.Icon
-    public var temperature: QuantitativeValueModel<Double, UnitTemperature>
+    public var temperature: QuantitativeValueModel<Double?, UnitTemperature>
     public var windChill: QuantitativeValueModel<Double?, UnitTemperature>
     public var heatIndex: QuantitativeValueModel<Double?, UnitTemperature>
     public var dewpoint: QuantitativeValueModel<Double?, UnitTemperature>

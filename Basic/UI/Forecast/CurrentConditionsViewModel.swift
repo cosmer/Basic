@@ -13,7 +13,7 @@ struct CurrentConditionsViewModel {
     var timestamp: Date
     var icon: LoadableImageAsset
     var description: String
-    var temperature: Measurement<UnitTemperature>
+    var temperature: Measurement<UnitTemperature>?
     var windChill: Measurement<UnitTemperature>?
     var heatIndex: Measurement<UnitTemperature>?
     var dewpoint: Measurement<UnitTemperature>?
@@ -35,7 +35,7 @@ extension CurrentConditionsViewModel {
         timestamp = conditions.observation.timestamp
         icon = .url(conditions.observation.icon.with(Self.iconMetrics).buildURL())
         description = conditions.observation.textDescription
-        temperature = Measurement(model: conditions.observation.temperature)
+        temperature = conditions.observation.temperature.map { Measurement(model: $0) }
         windChill = conditions.observation.windChill.map { Measurement(model: $0) }
         heatIndex = conditions.observation.heatIndex.map { Measurement(model: $0) }
         dewpoint = conditions.observation.dewpoint.map { Measurement(model: $0) }

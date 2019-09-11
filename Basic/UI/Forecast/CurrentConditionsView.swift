@@ -24,7 +24,7 @@ struct CurrentConditionsView: View {
                 Text(model.stationName)
                 Text("\(model.timestamp, formatter: model.timestampFormatter)")
                 Text(model.description)
-                Text("\(model.temperature, formatter: model.temperatureFormatter)")
+                model.temperature.map { Text("\($0, formatter: model.temperatureFormatter)") }
                 model.humidity.map { Text("\($0, formatter: model.humidityFormatter)") }
             }
         }
