@@ -9,24 +9,36 @@ import ImageLoading
 struct CurrentConditionsView: View {
     let model: CurrentConditionsViewModel
 
+    @State var referenceDate: Date = Date()
     @ObservedObject var icon: LoadableImage
 
     init(model: CurrentConditionsViewModel) {
         self.model = model
         icon = LoadableImage(asset: model.icon)
     }
-    
-    var body: some View {
-        HStack(alignment: .top) {
-            Icon(uiImage: icon.image, size: 70)
 
-            VStack(alignment: .leading) {
-                Text(model.stationName)
-                Text("\(model.timestamp, formatter: model.timestampFormatter)")
-                Text(model.description)
-                model.temperature.map { Text("\($0, formatter: model.temperatureFormatter)") }
-                model.humidity.map { Text("\($0, formatter: model.humidityFormatter)") }
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack(alignment: .top) {
+                Icon(uiImage: icon.image, size: 70)
+
+                VStack(alignment: .leading) {
+                    model.temperature.map { Text("\($0, formatter: model.temperatureFormatter)") }
+                    Text(model.description)
+                    model.humidity.map { Text("Humidity: \($0, formatter: model.humidityFormatter)") }
+                    model.dewpoint.map { Text("Dewpoint: \($0, formatter: model.temperatureFormatter)") }
+                }
+                .font(.body)
             }
+
+            Group {
+                Text(model.stationName)
+                Text("\(model.timestamp, formatter: model.timestampFormatter(for: referenceDate))")
+            }
+            .font(.footnote)
+        }
+        .onReceive(model.referenceDatePublisher()) {
+            self.referenceDate = $0
         }
     }
 }
@@ -40,6 +52,7 @@ struct CurrentConditionsView_Previews: PreviewProvider {
             description: "Thunderstorms and Heavy Rain and Fog/Mist",
             temperature: Measurement(value: 68, unit: .fahrenheit),
             windChill: Measurement(value: 62, unit: .fahrenheit),
+            dewpoint: Measurement(value: 58, unit: .fahrenheit),
             humidity: Measurement(value: 72, unit: .percent)
         ))
     }

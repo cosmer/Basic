@@ -41,6 +41,8 @@
 		EFDD5CDD2311492200261945 /* HourlyForecastPeriodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDD5CDC2311492200261945 /* HourlyForecastPeriodCell.swift */; };
 		EFDD5CDF2311493100261945 /* HourlyForecastPeriodCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDD5CDE2311493100261945 /* HourlyForecastPeriodCellModel.swift */; };
 		EFDF4A042325165000C95B69 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDF4A032325165000C95B69 /* ActivityIndicatorView.swift */; };
+		EFDF4A062327B6DA00C95B69 /* TimeInterval+Durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDF4A052327B6DA00C95B69 /* TimeInterval+Durations.swift */; };
+		EFDF4A082327C6E400C95B69 /* PartialRelativeDateTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDF4A072327C6E400C95B69 /* PartialRelativeDateTimeFormatter.swift */; };
 		EFEE483C22F6EB5200F4C7B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE483B22F6EB5200F4C7B8 /* AppDelegate.swift */; };
 		EFEE483E22F6EB5200F4C7B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE483D22F6EB5200F4C7B8 /* SceneDelegate.swift */; };
 		EFEE484122F6EB5200F4C7B8 /* Basic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EFEE483F22F6EB5200F4C7B8 /* Basic.xcdatamodeld */; };
@@ -99,6 +101,8 @@
 		EFDD5CDC2311492200261945 /* HourlyForecastPeriodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastPeriodCell.swift; sourceTree = "<group>"; };
 		EFDD5CDE2311493100261945 /* HourlyForecastPeriodCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastPeriodCellModel.swift; sourceTree = "<group>"; };
 		EFDF4A032325165000C95B69 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		EFDF4A052327B6DA00C95B69 /* TimeInterval+Durations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Durations.swift"; sourceTree = "<group>"; };
+		EFDF4A072327C6E400C95B69 /* PartialRelativeDateTimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialRelativeDateTimeFormatter.swift; sourceTree = "<group>"; };
 		EFEE483822F6EB5200F4C7B8 /* Basic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Basic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFEE483B22F6EB5200F4C7B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFEE483D22F6EB5200F4C7B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 			children = (
 				EF28080A230C013400FF018E /* Formatters.swift */,
 				EFD5422C230D50A100059214 /* HumidityFormatter.swift */,
+				EFDF4A072327C6E400C95B69 /* PartialRelativeDateTimeFormatter.swift */,
 				EFAC52F52321D8460080AFB3 /* PrettyPrintParagraphs.swift */,
 			);
 			path = Formatters;
@@ -294,6 +299,7 @@
 				EFD354D922FAF66100B98ECE /* Publisher+Operators.swift */,
 				EFAC52E7231FCFA40080AFB3 /* Result+Operators.swift */,
 				EF6BF6862311E07A00159436 /* Tagged.swift */,
+				EFDF4A052327B6DA00C95B69 /* TimeInterval+Durations.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -426,6 +432,7 @@
 				EFC4F1EF232323C80086F82D /* ViewBuilder+Either.swift in Sources */,
 				EFEEE8B622F9890900A34E61 /* ForecastPeriodCellModel.swift in Sources */,
 				EF6BF6872311E07A00159436 /* Tagged.swift in Sources */,
+				EFDF4A082327C6E400C95B69 /* PartialRelativeDateTimeFormatter.swift in Sources */,
 				EFEE483E22F6EB5200F4C7B8 /* SceneDelegate.swift in Sources */,
 				EFAC52EA232118740080AFB3 /* WeatherAlertListModel.swift in Sources */,
 				EFBB2DC822FC2BB500AAF7EE /* ForecastViewModel.swift in Sources */,
@@ -440,6 +447,7 @@
 				EFAC52F62321D8460080AFB3 /* PrettyPrintParagraphs.swift in Sources */,
 				EFEEE8B022F909D200A34E61 /* LocationUpdater.swift in Sources */,
 				EF2E767C23083BE0008EB40D /* CurrentConditionsViewModel.swift in Sources */,
+				EFDF4A062327B6DA00C95B69 /* TimeInterval+Durations.swift in Sources */,
 				EFAC52EC232118810080AFB3 /* WeatherAlertList.swift in Sources */,
 				EFEE484122F6EB5200F4C7B8 /* Basic.xcdatamodeld in Sources */,
 				EFAC52F02321189D0080AFB3 /* WeatherAlertView.swift in Sources */,

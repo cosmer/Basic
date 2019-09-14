@@ -6,6 +6,7 @@
 import Foundation
 import API
 import ImageLoading
+import Combine
 
 struct CurrentConditionsViewModel {
     var stationName: String
@@ -19,14 +20,22 @@ struct CurrentConditionsViewModel {
     var dewpoint: Measurement<UnitTemperature>?
     var humidity: Measurement<UnitHumidity>?
 
-    var timestampFormatter: Formatter { Formatters.timestamp }
     var temperatureFormatter: Formatter { Formatters.temperature }
     var humidityFormatter: Formatter { Formatters.humidity }
+
+    func timestampFormatter(for referenceDate: Date) -> Formatter {
+        return PartialRelativeDateTimeFormatter(referenceDate: referenceDate, formatter: Formatters.timestamp)
+    }
+
+    func referenceDatePublisher() -> Publishers.Autoconnect<Timer.TimerPublisher> {
+        return Timer.publish(every: .minutes(1), on: .main, in: .common)
+            .autoconnect()
+    }
 }
 
 extension CurrentConditionsViewModel {
     private static var iconMetrics: Endpoints.Icon.IconMetrics {
-        .init(size: .large, fontSize: 20 )
+        .init(size: .large, fontSize: 20)
     }
 
     init(conditions: CurrentConditionsModel) {
