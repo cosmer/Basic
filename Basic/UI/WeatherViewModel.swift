@@ -6,6 +6,7 @@
 import Foundation
 import Combine
 import API
+import ImageLoading
 
 final class WeatherViewModel: ObservableObject {
     enum WeatherError: Error {
@@ -82,7 +83,13 @@ final class WeatherViewModel: ObservableObject {
                     .eraseToAnyPublisher()
             }
             .receive(on: RunLoop.main)
-            .sink { [unowned self] in self.forecast = $0 }
+            .sink { [unowned self] (forecast) in
+                if case let .success(forecast) = forecast {
+                    ImageLoader.shared.preloadAssets(forecast.assetsForImagePreloading())
+                }
+
+                self.forecast = forecast
+            }
     }
 
     func deactivate() {

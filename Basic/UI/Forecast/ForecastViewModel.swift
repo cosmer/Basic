@@ -6,6 +6,7 @@
 import Foundation
 import API
 import Combine
+import ImageLoading
 
 struct ForecastViewModel {
     var locationName: String
@@ -66,6 +67,14 @@ extension ForecastViewModel {
         init(forecastDiscussion: ForecastDiscussionViewModel?, alerts: ForecastAlertsNavigationModel?) {
             self.forecastDiscussion = forecastDiscussion
             self.alerts = alerts
+        }
+    }
+}
+
+extension ForecastViewModel {
+    func assetsForImagePreloading() -> Set<LoadableImageAsset> {
+        return periods.reduce(into: Set<LoadableImageAsset>()) {
+            $0.insert($1.icon)
         }
     }
 }

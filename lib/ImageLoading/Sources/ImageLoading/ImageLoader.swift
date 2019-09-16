@@ -25,6 +25,17 @@ public final class ImageLoader {
         logError = logger
     }
 
+    public func preloadAssets(_ assets: Set<LoadableImageAsset>) {
+        for asset in assets {
+            switch asset {
+            case let .url(url):
+                _ = image(at: url)
+            case .image, .name:
+                break
+            }
+        }
+    }
+
     func cachedImage(at url: URL) -> UIImage? {
         return images[url]
     }

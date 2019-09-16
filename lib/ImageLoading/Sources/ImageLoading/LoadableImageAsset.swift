@@ -5,7 +5,7 @@
 
 import UIKit
 
-public enum LoadableImageAsset {
+public enum LoadableImageAsset: Hashable {
     case url(URL)
     case image(UIImage)
     case name(String)
