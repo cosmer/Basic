@@ -53,20 +53,28 @@ final class WeatherViewModel: ObservableObject {
                 let forecast = urlSession.dataTaskPublisher(for: point.properties.forecast)
                 let hourlyForecast = urlSession.dataTaskPublisher(for: point.properties.forecast.hourly())
                 let conditions = CurrentConditionsModel.publisher(for: point, in: urlSession)
+
                 let discussion = ForecastDiscussionModel.publisher(for: point, in: urlSession)
+                    .replaceError(with: nil) // TODO: Log error
+                    .eraseToAnyPublisher()
 
                 let alertsEndpoint = Endpoints.activeAlerts(zoneId: point.properties.forecastZone.zoneId())
                 let alerts = urlSession.dataTaskPublisher(for: alertsEndpoint)
+                    .map { Optional.some($0) }
+                    .replaceError(with: nil) // TODO: Log error
+                    .eraseToAnyPublisher()
 
                 return Publishers.Zip3(conditions, forecast, hourlyForecast)
-                    .zip(discussion, alerts) {
+                    .map {
                         ForecastViewModel(
                             point: point,
-                            currentConditions: $0.0,
-                            forecast: $0.1,
-                            hourlyForecast: $0.2,
-                            forecastDiscussion: $1,
-                            alerts: $2
+                            currentConditions: $0,
+                            forecast: $1,
+                            hourlyForecast: $2,
+                            delayedContent: .init(
+                                forecastDiscussion: discussion,
+                                alerts: alerts
+                            )
                         )
                     }
                     .mapError { WeatherError.api($0) }

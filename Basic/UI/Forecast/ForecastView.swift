@@ -7,6 +7,8 @@ import SwiftUI
 
 struct ForecastView: View {
     let model: ForecastViewModel
+    @ObservedObject var delayed: ForecastViewModel.DelayedContent
+
     private let hourlyCellMetricsCache: HourlyForecastPeriodCell.Metrics.Cache
 
     @Environment(\.sizeCategory) private var sizeCategory
@@ -14,6 +16,7 @@ struct ForecastView: View {
 
     init(model: ForecastViewModel) {
         self.model = model
+        self.delayed = model.delayedContent
         hourlyCellMetricsCache = .init(models: model.hourlyPeriods)
     }
 
@@ -27,11 +30,11 @@ struct ForecastView: View {
                 HourlyForecastPeriodCell(model: $0, metrics: self.hourlyCellMetrics)
             }
 
-            self.model.alerts.map {
+            self.delayed.alerts.map {
                 Self.navigationLink(for: $0)
             }
 
-            self.model.forecastDiscussion.map {
+            self.delayed.forecastDiscussion.map {
                 NavigationLink("Forecast Discussion", destination: ForecastDiscussionView(model: $0))
             }
 
@@ -90,11 +93,13 @@ struct ForecastView_Previews: PreviewProvider {
         ],
         hourlyPeriods: [
         ],
-        forecastDiscussion: ForecastDiscussionViewModel(
-            model: ForecastDiscussionModel(officeId: .grayME)
-        ),
-        alerts: ForecastAlertsNavigationModel(
-            model: WeatherAlertListModel(alerts: WeatherAlertViewModel.previews)
+        delayedContent: .init(
+            forecastDiscussion: ForecastDiscussionViewModel(
+                model: ForecastDiscussionModel(officeId: .grayME)
+            ),
+            alerts: ForecastAlertsNavigationModel(
+                model: WeatherAlertListModel(alerts: WeatherAlertViewModel.previews)
+            )
         )
     )
 }
