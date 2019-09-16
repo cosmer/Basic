@@ -54,12 +54,12 @@ extension ForecastViewModel {
                 forecastDiscussion
                     .map { $0.map(ForecastDiscussionViewModel.init) }
                     .receive(on: RunLoop.main)
-                    .sink { [unowned self] in self.forecastDiscussion = $0 },
+                    .sink { [weak self] in self?.forecastDiscussion = $0 },
 
                 alerts
                     .map { $0.flatMap(ForecastAlertsNavigationModel.init) }
                     .receive(on: RunLoop.main)
-                    .sink { [unowned self] in self.alerts = $0 },
+                    .sink { [weak self] in self?.alerts = $0 },
             ]
         }
 
