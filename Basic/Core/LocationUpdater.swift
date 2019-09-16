@@ -8,7 +8,7 @@ import CoreLocation
 import Combine
 
 final class LocationUpdater: NSObject {
-    let didUpdateLocation = PassthroughSubject<Result<CLLocation, Error>, Never>()
+    let didUpdateLocation = PassthroughSubject<Result<CLLocation, LocationUpdateError>, Never>()
 
     private let locationManager = CLLocationManager()
     private var needsRequestLocationWhenAuthorized = false
@@ -42,6 +42,7 @@ extension LocationUpdater: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        let error = LocationUpdateError(error: error)
         didUpdateLocation.send(.failure(error))
     }
 

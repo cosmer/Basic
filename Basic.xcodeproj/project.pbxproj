@@ -15,6 +15,7 @@
 		EF28080B230C013400FF018E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF28080A230C013400FF018E /* Formatters.swift */; };
 		EF2E767C23083BE0008EB40D /* CurrentConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */; };
 		EF2E767E23083BED008EB40D /* CurrentConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */; };
+		EF409DE5232F9B8B00877B6E /* LocationUpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */; };
 		EF6BF6872311E07A00159436 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF6862311E07A00159436 /* Tagged.swift */; };
 		EF6BF68B2312D12B00159436 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF68A2312D12B00159436 /* ErrorView.swift */; };
 		EF6BF68D2313F2C300159436 /* ForecastDiscussionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF68C2313F2C300159436 /* ForecastDiscussionModel.swift */; };
@@ -76,6 +77,7 @@
 		EF28080A230C013400FF018E /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentConditionsViewModel.swift; sourceTree = "<group>"; };
 		EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentConditionsView.swift; sourceTree = "<group>"; };
+		EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUpdateError.swift; sourceTree = "<group>"; };
 		EF6BF6862311E07A00159436 /* Tagged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tagged.swift; sourceTree = "<group>"; };
 		EF6BF68A2312D12B00159436 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		EF6BF68C2313F2C300159436 /* ForecastDiscussionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDiscussionModel.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 			children = (
 				EFC0CBF42322864000EFF256 /* Either.swift */,
 				EFD5422F230EA0D800059214 /* Geometry+Distance.swift */,
+				EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */,
 				EFEEE8AF22F909D200A34E61 /* LocationUpdater.swift */,
 				EFD354D922FAF66100B98ECE /* Publisher+Operators.swift */,
 				EFAC52E7231FCFA40080AFB3 /* Result+Operators.swift */,
@@ -437,6 +440,7 @@
 				EFAC52EA232118740080AFB3 /* WeatherAlertListModel.swift in Sources */,
 				EFBB2DC822FC2BB500AAF7EE /* ForecastViewModel.swift in Sources */,
 				EFD2025E2315392400A0ED6B /* ForecastDiscussionView.swift in Sources */,
+				EF409DE5232F9B8B00877B6E /* LocationUpdateError.swift in Sources */,
 				EFD54233230EA8F700059214 /* CurrentConditionsModel.swift in Sources */,
 				EFEE484322F6EB5200F4C7B8 /* WeatherView.swift in Sources */,
 				EFEEE8B422F988E000A34E61 /* ForecastPeriodCell.swift in Sources */,

@@ -10,7 +10,7 @@ import API
 final class WeatherViewModel: ObservableObject {
     enum WeatherError: Error {
         case waitingForLocation
-        case location(Error)
+        case location(LocationUpdateError)
         case api(Error)
     }
 
