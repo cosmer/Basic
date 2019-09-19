@@ -24,8 +24,7 @@ extension ForecastViewModel {
         hourlyForecast: HourlyForecastModel,
         delayedContent: DelayedContent
     ) {
-        let location = point.properties.relativeLocation.properties
-        locationName = "\(location.city), \(location.state)"
+        locationName = point.properties.relativeLocation.properties.city
 
         self.currentConditions = currentConditions.map(CurrentConditionsViewModel.init)
 
