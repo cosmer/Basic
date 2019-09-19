@@ -7,6 +7,7 @@ import Foundation
 import Combine
 import API
 import ImageLoading
+import OhNo
 
 final class WeatherViewModel: ObservableObject {
     enum WeatherError: Error {
@@ -23,6 +24,7 @@ final class WeatherViewModel: ObservableObject {
         .multicast(subject: CurrentValueSubject(.failure(.waitingForLocation)))
 
     private let urlSession = URLSession.shared
+    private let errorLog = ErrorLog.default.scoped(to: "WeatherViewModel")
 
     private var cancellable: AnyCancellable?
 
@@ -50,19 +52,21 @@ final class WeatherViewModel: ObservableObject {
                     .materialize()
                     .eraseToAnyPublisher()
             }
-            .flatMapResult { [urlSession] (point) -> AnyResultPublisher<ForecastViewModel, WeatherError> in
+            .flatMapResult { [urlSession, errorLog] (point) -> AnyResultPublisher<ForecastViewModel, WeatherError> in
                 let forecast = urlSession.dataTaskPublisher(for: point.properties.forecast)
                 let hourlyForecast = urlSession.dataTaskPublisher(for: point.properties.forecast.hourly())
                 let conditions = CurrentConditionsModel.publisher(for: point, in: urlSession)
 
                 let discussion = ForecastDiscussionModel.publisher(for: point, in: urlSession)
-                    .replaceError(with: nil) // TODO: Log error
+                    .handleError { errorLog.log($0) }
+                    .replaceError(with: nil)
                     .eraseToAnyPublisher()
 
                 let alertsEndpoint = Endpoints.activeAlerts(zoneId: point.properties.forecastZone.zoneId())
                 let alerts = urlSession.dataTaskPublisher(for: alertsEndpoint)
+                    .handleError { errorLog.log($0) }
                     .map { Optional.some($0) }
-                    .replaceError(with: nil) // TODO: Log error
+                    .replaceError(with: nil)
                     .eraseToAnyPublisher()
 
                 return Publishers.Zip3(conditions, forecast, hourlyForecast)
@@ -81,6 +85,18 @@ final class WeatherViewModel: ObservableObject {
                     .mapError { WeatherError.api($0) }
                     .materialize()
                     .eraseToAnyPublisher()
+            }
+            .handleError { [errorLog] (error) in
+                switch error {
+                case WeatherError.waitingForLocation:
+                    break
+                case WeatherError.api(let error):
+                    errorLog.log(error)
+                case WeatherError.location(let error):
+                    errorLog.log(error)
+                case let error:
+                    errorLog.log(error)
+                }
             }
             .receive(on: RunLoop.main)
             .sink { [unowned self] (forecast) in

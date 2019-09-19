@@ -30,4 +30,15 @@ public extension Publisher {
             }
         }
     }
+
+    @inlinable func handleError(_ receiveError: @escaping (Error) -> Void) -> Publishers.HandleEvents<Self> {
+        return handleEvents(receiveCompletion: { (completion) in
+            switch completion {
+            case .finished:
+                break
+            case .failure(let error):
+                receiveError(error)
+            }
+        })
+    }
 }

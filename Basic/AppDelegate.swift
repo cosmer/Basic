@@ -6,14 +6,14 @@
 import UIKit
 import CoreData
 import ImageLoading
-import os.log
+import OhNo
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        let imageLoadingLog = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "ImageLoading")
+        let imageLoadingLog = ErrorLog.default.scoped(to: "ImageLoading")
         ImageLoader.shared.setErrorLogger {
-            os_log(.error, log: imageLoadingLog, "%{public}@", $0.localizedDescription)
+            imageLoadingLog.log($0)
         }
 
         return true

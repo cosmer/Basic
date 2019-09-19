@@ -26,11 +26,13 @@
 		EFAC52F02321189D0080AFB3 /* WeatherAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAC52EF2321189D0080AFB3 /* WeatherAlertView.swift */; };
 		EFAC52F2232118A60080AFB3 /* WeatherAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAC52F1232118A60080AFB3 /* WeatherAlertViewModel.swift */; };
 		EFAC52F62321D8460080AFB3 /* PrettyPrintParagraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAC52F52321D8460080AFB3 /* PrettyPrintParagraphs.swift */; };
+		EFAFA7882333944300DAB9F7 /* ErrorLog+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAFA7872333944300DAB9F7 /* ErrorLog+Default.swift */; };
 		EFBB2DC622FC2BA900AAF7EE /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB2DC522FC2BA900AAF7EE /* ForecastView.swift */; };
 		EFBB2DC822FC2BB500AAF7EE /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB2DC722FC2BB500AAF7EE /* ForecastViewModel.swift */; };
 		EFC0CBF32322850200EFF256 /* ForecastAlertsNavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC0CBF22322850200EFF256 /* ForecastAlertsNavigationModel.swift */; };
 		EFC0CBF52322864000EFF256 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC0CBF42322864000EFF256 /* Either.swift */; };
 		EFC4F1EF232323C80086F82D /* ViewBuilder+Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC4F1EE232323C80086F82D /* ViewBuilder+Either.swift */; };
+		EFD04B4223339104006B6748 /* OhNo in Frameworks */ = {isa = PBXBuildFile; productRef = EFD04B4123339104006B6748 /* OhNo */; };
 		EFD2025C2315390B00A0ED6B /* ForecastDiscussionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD2025B2315390B00A0ED6B /* ForecastDiscussionViewModel.swift */; };
 		EFD2025E2315392400A0ED6B /* ForecastDiscussionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD2025D2315392400A0ED6B /* ForecastDiscussionView.swift */; };
 		EFD202632315E5E900A0ED6B /* ScrollableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD202622315E5E900A0ED6B /* ScrollableText.swift */; };
@@ -88,11 +90,13 @@
 		EFAC52EF2321189D0080AFB3 /* WeatherAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAlertView.swift; sourceTree = "<group>"; };
 		EFAC52F1232118A60080AFB3 /* WeatherAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAlertViewModel.swift; sourceTree = "<group>"; };
 		EFAC52F52321D8460080AFB3 /* PrettyPrintParagraphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyPrintParagraphs.swift; sourceTree = "<group>"; };
+		EFAFA7872333944300DAB9F7 /* ErrorLog+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ErrorLog+Default.swift"; sourceTree = "<group>"; };
 		EFBB2DC522FC2BA900AAF7EE /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
 		EFBB2DC722FC2BB500AAF7EE /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		EFC0CBF22322850200EFF256 /* ForecastAlertsNavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAlertsNavigationModel.swift; sourceTree = "<group>"; };
 		EFC0CBF42322864000EFF256 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 		EFC4F1EE232323C80086F82D /* ViewBuilder+Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewBuilder+Either.swift"; sourceTree = "<group>"; };
+		EFD04B4023338F1F006B6748 /* OhNo */ = {isa = PBXFileReference; lastKnownFileType = folder; name = OhNo; path = lib/OhNo; sourceTree = "<group>"; };
 		EFD2025B2315390B00A0ED6B /* ForecastDiscussionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDiscussionViewModel.swift; sourceTree = "<group>"; };
 		EFD2025D2315392400A0ED6B /* ForecastDiscussionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDiscussionView.swift; sourceTree = "<group>"; };
 		EFD202622315E5E900A0ED6B /* ScrollableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableText.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 			files = (
 				EFD354D822FAD8F000B98ECE /* API in Frameworks */,
 				EF737326230175200015FCA1 /* ImageLoading in Frameworks */,
+				EFD04B4223339104006B6748 /* OhNo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +231,7 @@
 			children = (
 				EFEE486722F6EF7A00F4C7B8 /* API */,
 				EF737324230175110015FCA1 /* ImageLoading */,
+				EFD04B4023338F1F006B6748 /* OhNo */,
 				EFEE483A22F6EB5200F4C7B8 /* Basic */,
 				EFEE485422F6EB5300F4C7B8 /* BasicTests */,
 				EFEE483922F6EB5200F4C7B8 /* Products */,
@@ -296,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				EFC0CBF42322864000EFF256 /* Either.swift */,
+				EFAFA7872333944300DAB9F7 /* ErrorLog+Default.swift */,
 				EFD5422F230EA0D800059214 /* Geometry+Distance.swift */,
 				EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */,
 				EFEEE8AF22F909D200A34E61 /* LocationUpdater.swift */,
@@ -326,6 +333,7 @@
 			packageProductDependencies = (
 				EFD354D722FAD8F000B98ECE /* API */,
 				EF737325230175200015FCA1 /* ImageLoading */,
+				EFD04B4123339104006B6748 /* OhNo */,
 			);
 			productName = Basic;
 			productReference = EFEE483822F6EB5200F4C7B8 /* Basic.app */;
@@ -445,6 +453,7 @@
 				EFEE484322F6EB5200F4C7B8 /* WeatherView.swift in Sources */,
 				EFEEE8B422F988E000A34E61 /* ForecastPeriodCell.swift in Sources */,
 				EFC0CBF52322864000EFF256 /* Either.swift in Sources */,
+				EFAFA7882333944300DAB9F7 /* ErrorLog+Default.swift in Sources */,
 				EF6BF68D2313F2C300159436 /* ForecastDiscussionModel.swift in Sources */,
 				EFD54230230EA0D800059214 /* Geometry+Distance.swift in Sources */,
 				EF0CF557231C1BC500DD6553 /* UIContentSizeCategory.swift in Sources */,
@@ -720,6 +729,10 @@
 		EF737325230175200015FCA1 /* ImageLoading */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ImageLoading;
+		};
+		EFD04B4123339104006B6748 /* OhNo */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OhNo;
 		};
 		EFD354D722FAD8F000B98ECE /* API */ = {
 			isa = XCSwiftPackageProductDependency;
