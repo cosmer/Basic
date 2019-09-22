@@ -12,16 +12,36 @@ struct WeatherView: View {
         NavigationView {
             model.forecast.buildView(
                 success: {
-                    ForecastView(model: $0)
-                        .navigationBarTitle($0.locationName)
+                    $0.buildView(
+                        some: {
+                            ForecastView(model: $0)
+                                .navigationBarTitle($0.locationName)
+                                .navigationBarItems(leading: self.leadingForecastNavigationBarItems)
+                        },
+                        none: {
+                            LoadingView()
+                                .navigationBarTitle("Weather")
+                        }
+                    )
                 },
                 failure: {
-                    ErrorView(error: $0)
-                        .navigationBarTitle("Weather")
+                    if model.isLoading {
+                        LoadingView()
+                            .navigationBarTitle("Weather")
+                    } else {
+                        ErrorView(error: $0)
+                            .navigationBarTitle("Weather")
+                    }
                 }
             )
         }
         .onAppear { self.model.requestAuthorizationIfNeeded() }
+    }
+
+    var leadingForecastNavigationBarItems: some View {
+        model.isLoading
+            ? ActivityIndicatorView(style: .medium)
+            : nil
     }
 }
 

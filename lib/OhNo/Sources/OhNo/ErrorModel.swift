@@ -23,6 +23,8 @@ extension ErrorModel: PersistableRecord, FetchableRecord {
 
 extension ErrorModel {
     init(date: Date, scope: Scope?, error: Error) {
+        let error = loggedError(from: error)
+
         self.date = date
         self.scope = scope?.name
 

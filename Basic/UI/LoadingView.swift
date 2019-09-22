@@ -8,7 +8,7 @@ import SwiftUI
 struct LoadingView: View {
     var body: some View {
         ZStack(alignment: .center) {
-            ActivityIndicatorView()
+            ActivityIndicatorView(style: .large)
         }
     }
 }

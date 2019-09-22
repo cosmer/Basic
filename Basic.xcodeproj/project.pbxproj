@@ -15,6 +15,7 @@
 		EF28080B230C013400FF018E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF28080A230C013400FF018E /* Formatters.swift */; };
 		EF2E767C23083BE0008EB40D /* CurrentConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */; };
 		EF2E767E23083BED008EB40D /* CurrentConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */; };
+		EF3646F72334F69300A3A70A /* ViewBuilder+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3646F62334F69300A3A70A /* ViewBuilder+Optional.swift */; };
 		EF409DE5232F9B8B00877B6E /* LocationUpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */; };
 		EF6BF6872311E07A00159436 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF6862311E07A00159436 /* Tagged.swift */; };
 		EF6BF68B2312D12B00159436 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF68A2312D12B00159436 /* ErrorView.swift */; };
@@ -79,6 +80,7 @@
 		EF28080A230C013400FF018E /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentConditionsViewModel.swift; sourceTree = "<group>"; };
 		EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentConditionsView.swift; sourceTree = "<group>"; };
+		EF3646F62334F69300A3A70A /* ViewBuilder+Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewBuilder+Optional.swift"; sourceTree = "<group>"; };
 		EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUpdateError.swift; sourceTree = "<group>"; };
 		EF6BF6862311E07A00159436 /* Tagged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tagged.swift; sourceTree = "<group>"; };
 		EF6BF68A2312D12B00159436 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				EF0CF556231C1BC500DD6553 /* UIContentSizeCategory.swift */,
 				EF0CF558231C46BF00DD6553 /* UILegibilityWeight.swift */,
 				EFC4F1EE232323C80086F82D /* ViewBuilder+Either.swift */,
+				EF3646F62334F69300A3A70A /* ViewBuilder+Optional.swift */,
 				EF136FBD2323D3B2001D2524 /* ViewBuilder+Result.swift */,
 			);
 			path = Components;
@@ -456,6 +459,7 @@
 				EFAFA7882333944300DAB9F7 /* ErrorLog+Default.swift in Sources */,
 				EF6BF68D2313F2C300159436 /* ForecastDiscussionModel.swift in Sources */,
 				EFD54230230EA0D800059214 /* Geometry+Distance.swift in Sources */,
+				EF3646F72334F69300A3A70A /* ViewBuilder+Optional.swift in Sources */,
 				EF0CF557231C1BC500DD6553 /* UIContentSizeCategory.swift in Sources */,
 				EFAC52F62321D8460080AFB3 /* PrettyPrintParagraphs.swift in Sources */,
 				EFEEE8B022F909D200A34E61 /* LocationUpdater.swift in Sources */,

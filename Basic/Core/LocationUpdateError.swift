@@ -5,31 +5,43 @@
 
 import Foundation
 import CoreLocation
+import OhNo
 
 struct LocationUpdateError: Error {
-    enum UnderlyingError {
+    enum WrappedError {
         case cl(CLError)
         case other(Error)
     }
 
-    var underlyingError: UnderlyingError
+    let wrapped: WrappedError
 
     init(error: Error) {
         if let error = error as? CLError {
-            self.underlyingError = .cl(error)
+            self.wrapped = .cl(error)
         } else {
-            self.underlyingError = .other(error)
+            self.wrapped = .other(error)
         }
     }
 }
 
 extension LocationUpdateError: LocalizedError {
     var errorDescription: String? {
-        switch underlyingError {
+        switch wrapped {
         case let .cl(error):
             return "Location update failed (\(error.code.errorDescription))."
         case let .other(error):
             return "Location update failed (\(error.localizedDescription))."
+        }
+    }
+}
+
+extension LocationUpdateError: CustomLoggedError {
+    var loggedError: Error {
+        switch wrapped {
+        case let .cl(error):
+            return error
+        case let .other(error):
+            return error
         }
     }
 }

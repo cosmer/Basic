@@ -6,8 +6,10 @@
 import SwiftUI
 
 struct ActivityIndicatorView: UIViewRepresentable {
+    let style: UIActivityIndicatorView.Style
+
     func makeUIView(context: Self.Context) -> UIActivityIndicatorView {
-        return UIActivityIndicatorView(style: .large)
+        return UIActivityIndicatorView(style: style)
     }
 
     func updateUIView(_ uiView: UIActivityIndicatorView, context: Context) {
@@ -17,6 +19,6 @@ struct ActivityIndicatorView: UIViewRepresentable {
 
 struct ActivityIndicatorView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityIndicatorView()
+        ActivityIndicatorView(style: .large)
     }
 }

@@ -11,39 +11,28 @@ import OhNo
 
 final class WeatherViewModel: ObservableObject {
     enum WeatherError: Error {
-        case waitingForLocation
         case location(LocationUpdateError)
         case api(Error)
     }
 
-    @Published var forecast: Result<ForecastViewModel, WeatherError> = .failure(.waitingForLocation)
+    @Published var forecast: Result<ForecastViewModel?, WeatherError> = .success(nil)
+    @Published var isLoading = false
 
     private let locationUpdater = LocationUpdater()
-    private lazy var location = locationUpdater.didUpdateLocation
-        .map { $0.mapError { WeatherError.location($0) } }
-        .multicast(subject: CurrentValueSubject(.failure(.waitingForLocation)))
-
     private let urlSession = URLSession.shared
     private let errorLog = ErrorLog.default.scoped(to: "WeatherViewModel")
 
     private var cancellable: AnyCancellable?
 
-    func updateLocation() {
-        locationUpdater.requestLocation()
-    }
-
     func requestAuthorizationIfNeeded() {
         locationUpdater.requestAuthorizationIfNeeded()
     }
 
-    func activate() {
-        guard cancellable == nil else {
-            return
-        }
-
-        cancellable = location
-            .autoconnect()
-            .removeDuplicates(by: Result.compareSuccess(by: \.timestamp))
+    func update() {
+        cancellable?.cancel()
+        cancellable = locationUpdater.didUpdateLocation
+            .first()
+            .map { $0.mapError { WeatherError.location($0) } }
             .map { $0.map(\.coordinate) }
             .flatMapResult { [urlSession] (coordinate) -> AnyResultPublisher<PointsModel, WeatherError> in
                 let endpoint = Endpoints.points(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -86,42 +75,50 @@ final class WeatherViewModel: ObservableObject {
                     .materialize()
                     .eraseToAnyPublisher()
             }
-            .handleError { [errorLog] (error) in
-                switch error {
-                case WeatherError.waitingForLocation:
-                    break
-                case WeatherError.api(let error):
-                    errorLog.log(error)
-                case WeatherError.location(let error):
-                    errorLog.log(error)
-                case let error:
-                    errorLog.log(error)
-                }
-            }
             .receive(on: RunLoop.main)
+            .handleEvents(
+                receiveSubscription: { _ in
+                    self.isLoading = true
+                    self.locationUpdater.requestLocation()
+                },
+                receiveCompletion: { _ in
+                    self.isLoading = false
+                },
+                receiveCancel: {
+                    self.isLoading = false
+                }
+            )
             .sink { [unowned self] (forecast) in
-                if case let .success(forecast) = forecast {
+                switch forecast {
+                case let .success(forecast):
                     ImageLoader.shared.preloadAssets(forecast.assetsForImagePreloading())
+                case let .failure(error):
+                    self.errorLog.log(error)
                 }
 
-                self.forecast = forecast
+                self.isLoading = false
+                self.forecast = forecast.map { $0 }
             }
     }
+}
 
-    func deactivate() {
-        cancellable?.cancel()
-        cancellable = nil
+extension WeatherViewModel.WeatherError: CustomLoggedError {
+    var loggedError: Error {
+        switch self {
+        case let .location(error):
+            return error
+        case let .api(error):
+            return error
+        }
     }
 }
 
 extension WeatherViewModel.WeatherError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .waitingForLocation:
-            return "Waiting for location."
-        case .location(let error):
-            return "Failed to update location '\(error.localizedDescription)'."
-        case .api(let error):
+        case let .location(error):
+            return error.localizedDescription
+        case let .api(error):
             return error.localizedDescription
         }
     }
