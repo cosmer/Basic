@@ -84,6 +84,10 @@ final class ForecastDiscussionViewModel: ObservableObject {
                         text.append(NSAttributedString(string: segment, attributes: defaultAttributes))
                     }
                 }
+
+                let textRange = NSRange(location: 0, length: text.length)
+                text.addAttribute(.foregroundColor, value: UIColor.label, range: textRange)
+
                 return text
             }
             .materialize()
