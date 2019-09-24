@@ -33,17 +33,17 @@ final class ForecastDiscussionViewModel: ObservableObject {
         }
     }
 
-    private static var bodyAttributes: [NSAttributedString.Key: Any] = [
-        .font: UIFont.preferredFont(forTextStyle: .body)
-    ]
+    private static var bodyAttributes: [NSAttributedString.Key: Any] {
+        [.font: UIFont.preferredFont(forTextStyle: .body)]
+    }
 
-    private static var preambleAttributes: [NSAttributedString.Key: Any] = [
-        .font: UIFont.preferredFont(forTextStyle: .callout)
-    ]
+    private static var preambleAttributes: [NSAttributedString.Key: Any] {
+        [.font: UIFont.preferredFont(forTextStyle: .callout)]
+    }
 
-    private static var headerAttributes: [NSAttributedString.Key: Any] = [
-        .font: UIFont.preferredFont(forTextStyle: .headline)
-    ]
+    private static var headerAttributes: [NSAttributedString.Key: Any] {
+        [.font: UIFont.preferredFont(forTextStyle: .headline)]
+    }
 
     func load() {
         if cancellable != nil {
