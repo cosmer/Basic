@@ -17,14 +17,18 @@ struct HourlyForecastPeriodCell: View {
     var body: some View {
         HStack(spacing: 20) {
             Text("\(model.time, formatter: model.timeFormatter)")
+                .fontWeight(.medium)
                 .frame(width: metrics.time, alignment: .leading)
 
             Text("\(model.temperature, formatter: model.temperatureFormatter)")
                 .frame(width: metrics.temperature, alignment: .leading)
 
-            Text(model.shortForecast)
+            model.shortForecast.map {
+                Text($0)
+                    .lineLimit(2)
+            }
         }
-        .font(.body)
+        .font(.subheadline)
     }
 }
 
@@ -70,18 +74,23 @@ extension HourlyForecastPeriodCell.Metrics {
         }
 
         let traits = UITraitCollection(traitsFrom: traitCollections)
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.preferredFont(forTextStyle: .body, compatibleWith: traits)
+
+        let timeAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.preferredFont(forTextStyle: .subheadline, compatibleWith: traits).withWeight(.medium)
+        ]
+
+        let temperatureAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.preferredFont(forTextStyle: .subheadline, compatibleWith: traits)
         ]
 
         time = models
             .compactMap { $0.timeFormatter.string(for: $0.time) as NSString? }
-            .map { $0.size(withAttributes: attributes).width.rounded(.up) }
+            .map { $0.size(withAttributes: timeAttributes).width.rounded(.up) }
             .max() ?? 0
 
         temperature = models
             .compactMap { $0.temperatureFormatter.string(for: $0.temperature) as NSString? }
-            .map { $0.size(withAttributes: attributes).width.rounded(.up) }
+            .map { $0.size(withAttributes: temperatureAttributes).width.rounded(.up) }
             .max() ?? 0
     }
 }
@@ -105,4 +114,11 @@ struct HourlyForecastPeriodCell_Previews: PreviewProvider {
         sizeCategory: .large,
         weight: nil
     )
+}
+
+private extension UIFont {
+    func withWeight(_ weight: UIFont.Weight) -> UIFont {
+        let descriptor = fontDescriptor.addingAttributes([.traits: [UIFontDescriptor.TraitKey.weight: weight]])
+        return UIFont(descriptor: descriptor, size: 0)
+    }
 }

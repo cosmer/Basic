@@ -15,6 +15,7 @@
 		EF28080B230C013400FF018E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF28080A230C013400FF018E /* Formatters.swift */; };
 		EF2E767C23083BE0008EB40D /* CurrentConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */; };
 		EF2E767E23083BED008EB40D /* CurrentConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */; };
+		EF363E08233F742C0087F494 /* OhNo in Frameworks */ = {isa = PBXBuildFile; productRef = EF363E07233F742C0087F494 /* OhNo */; };
 		EF3646F72334F69300A3A70A /* ViewBuilder+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3646F62334F69300A3A70A /* ViewBuilder+Optional.swift */; };
 		EF409DE5232F9B8B00877B6E /* LocationUpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */; };
 		EF6BF6872311E07A00159436 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF6862311E07A00159436 /* Tagged.swift */; };
@@ -59,6 +60,7 @@
 		EFEEE8B022F909D200A34E61 /* LocationUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEEE8AF22F909D200A34E61 /* LocationUpdater.swift */; };
 		EFEEE8B422F988E000A34E61 /* ForecastPeriodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEEE8B322F988E000A34E61 /* ForecastPeriodCell.swift */; };
 		EFEEE8B622F9890900A34E61 /* ForecastPeriodCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEEE8B522F9890900A34E61 /* ForecastPeriodCellModel.swift */; };
+		EFF10F09233F8209009AEEF3 /* Pipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF10F08233F8209009AEEF3 /* Pipe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,7 @@
 		EFEEE8AF22F909D200A34E61 /* LocationUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUpdater.swift; sourceTree = "<group>"; };
 		EFEEE8B322F988E000A34E61 /* ForecastPeriodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastPeriodCell.swift; sourceTree = "<group>"; };
 		EFEEE8B522F9890900A34E61 /* ForecastPeriodCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastPeriodCellModel.swift; sourceTree = "<group>"; };
+		EFF10F08233F8209009AEEF3 /* Pipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF363E08233F742C0087F494 /* OhNo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +313,7 @@
 				EFD5422F230EA0D800059214 /* Geometry+Distance.swift */,
 				EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */,
 				EFEEE8AF22F909D200A34E61 /* LocationUpdater.swift */,
+				EFF10F08233F8209009AEEF3 /* Pipe.swift */,
 				EFD354D922FAF66100B98ECE /* Publisher+Operators.swift */,
 				EFAC52E7231FCFA40080AFB3 /* Result+Operators.swift */,
 				EF6BF6862311E07A00159436 /* Tagged.swift */,
@@ -356,6 +361,9 @@
 				EFEE485322F6EB5300F4C7B8 /* PBXTargetDependency */,
 			);
 			name = BasicTests;
+			packageProductDependencies = (
+				EF363E07233F742C0087F494 /* OhNo */,
+			);
 			productName = BasicTests;
 			productReference = EFEE485122F6EB5300F4C7B8 /* BasicTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -434,6 +442,7 @@
 				EF28080B230C013400FF018E /* Formatters.swift in Sources */,
 				EFD5422D230D50A100059214 /* HumidityFormatter.swift in Sources */,
 				EFBB2DC622FC2BA900AAF7EE /* ForecastView.swift in Sources */,
+				EFF10F09233F8209009AEEF3 /* Pipe.swift in Sources */,
 				EFDF4A042325165000C95B69 /* ActivityIndicatorView.swift in Sources */,
 				EF09144C23251520008544C3 /* LoadingView.swift in Sources */,
 				EFD2025C2315390B00A0ED6B /* ForecastDiscussionViewModel.swift in Sources */,
@@ -730,6 +739,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EF363E07233F742C0087F494 /* OhNo */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OhNo;
+		};
 		EF737325230175200015FCA1 /* ImageLoading */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ImageLoading;

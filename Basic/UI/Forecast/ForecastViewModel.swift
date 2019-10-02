@@ -33,7 +33,7 @@ extension ForecastViewModel {
 
         hourlyPeriods = hourlyForecast.properties.periods
             .prefix(8)
-            .map(HourlyForecastPeriodCellModel.init)
+            |> HourlyForecastPeriodCellModel.from
 
         self.delayedContent = delayedContent
     }
