@@ -9,8 +9,8 @@ import ImageLoading
 struct CurrentConditionsView: View {
     let model: CurrentConditionsViewModel
 
-    @State var referenceDate: Date = Date()
-    @ObservedObject var icon: LoadableImage
+    @State private var referenceDate: Date = Date()
+    @ObservedObject private(set) var icon: LoadableImage
 
     init(model: CurrentConditionsViewModel) {
         self.model = model

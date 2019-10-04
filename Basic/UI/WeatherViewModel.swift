@@ -15,8 +15,8 @@ final class WeatherViewModel: ObservableObject {
         case api(Error)
     }
 
-    @Published var forecast: Result<ForecastViewModel?, WeatherError> = .success(nil)
-    @Published var isLoading = false
+    @Published private(set) var forecast: Result<ForecastViewModel?, WeatherError> = .success(nil)
+    @Published private(set) var isLoading = false
 
     private let locationUpdater = LocationUpdater()
     private let urlSession = URLSession.shared

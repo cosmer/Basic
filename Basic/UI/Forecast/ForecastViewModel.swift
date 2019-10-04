@@ -44,8 +44,8 @@ extension ForecastViewModel {
         typealias ForecastDiscussionPublisher = AnyPublisher<ForecastDiscussionModel?, Never>
         typealias AlertsPublisher = AnyPublisher<AlertsModel?, Never>
 
-        @Published var forecastDiscussion: ForecastDiscussionViewModel?
-        @Published var alerts: ForecastAlertsNavigationModel?
+        @Published private(set) var forecastDiscussion: ForecastDiscussionViewModel?
+        @Published private(set) var alerts: ForecastAlertsNavigationModel?
 
         private var cancellables: [AnyCancellable] = []
 

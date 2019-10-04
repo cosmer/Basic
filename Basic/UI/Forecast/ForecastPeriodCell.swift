@@ -9,7 +9,7 @@ import ImageLoading
 struct ForecastPeriodCell: View {
     let model: ForecastPeriodCellModel
 
-    @ObservedObject var icon: LoadableImage
+    @ObservedObject private(set) var icon: LoadableImage
 
     init(model: ForecastPeriodCellModel) {
         self.model = model

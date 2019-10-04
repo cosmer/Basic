@@ -8,8 +8,8 @@ import Combine
 import API
 
 final class ForecastDiscussionViewModel: ObservableObject {
-    @Published var text: Result<NSAttributedString, Error> = .success(.init())
-    @Published var isLoading = false
+    @Published private(set) var text: Result<NSAttributedString, Error> = .success(.init())
+    @Published private(set) var isLoading = false
 
     private let model: ForecastDiscussionModel
 

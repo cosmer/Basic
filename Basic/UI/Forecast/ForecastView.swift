@@ -7,7 +7,7 @@ import SwiftUI
 
 struct ForecastView: View {
     let model: ForecastViewModel
-    @ObservedObject var delayed: ForecastViewModel.DelayedContent
+    @ObservedObject private(set) var delayed: ForecastViewModel.DelayedContent
 
     private let hourlyCellMetricsCache: HourlyForecastPeriodCell.Metrics.Cache
 

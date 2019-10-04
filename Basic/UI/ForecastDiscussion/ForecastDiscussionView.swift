@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct ForecastDiscussionView: View {
-    @ObservedObject var model: ForecastDiscussionViewModel
+    @ObservedObject private(set) var model: ForecastDiscussionViewModel
 
     var body: some View {
         Group {

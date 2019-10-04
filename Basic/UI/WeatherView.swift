@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct WeatherView: View {
-    @ObservedObject var model: WeatherViewModel
+    @ObservedObject private(set) var model: WeatherViewModel
 
     var body: some View {
         NavigationView {
