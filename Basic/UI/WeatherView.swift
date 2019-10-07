@@ -15,22 +15,22 @@ struct WeatherView: View {
                     $0.buildView(
                         some: {
                             ForecastView(model: $0)
-                                .navigationBarTitle($0.locationName)
+                                .navigationBarTitle(Text($0.locationName), displayMode: .inline)
                                 .navigationBarItems(leading: self.leadingForecastNavigationBarItems)
                         },
                         none: {
                             LoadingView()
-                                .navigationBarTitle("Weather")
+                                .navigationBarTitle("Weather", displayMode: .inline)
                         }
                     )
                 },
                 failure: {
                     if model.isLoading {
                         LoadingView()
-                            .navigationBarTitle("Weather")
+                            .navigationBarTitle("Weather", displayMode: .inline)
                     } else {
                         ErrorView(error: $0)
-                            .navigationBarTitle("Weather")
+                            .navigationBarTitle("Weather", displayMode: .inline)
                     }
                 }
             )
