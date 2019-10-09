@@ -13,7 +13,7 @@ struct ForecastDiscussionView: View {
             if model.isLoading {
                 LoadingView()
             } else {
-                model.text.buildView(
+                ResultView(model.text,
                     success: {
                         ScrollableText(text: $0)
                     },

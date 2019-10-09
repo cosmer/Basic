@@ -49,7 +49,7 @@ struct ForecastView: View {
     }
 
     private static func navigationLink(for model: ForecastAlertsNavigationModel) -> some View {
-        model.value.buildView(
+        EitherView(model.value,
             left: { (one) in
                 NavigationLink(destination: WeatherAlertView(model: one.model)) {
                     VStack(alignment: .leading) {

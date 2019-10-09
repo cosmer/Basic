@@ -10,9 +10,9 @@ struct WeatherView: View {
 
     var body: some View {
         NavigationView {
-            model.forecast.buildView(
+            ResultView(model.forecast,
                 success: {
-                    $0.buildView(
+                    OptionalView($0,
                         some: {
                             ForecastView(model: $0)
                                 .navigationBarTitle(Text($0.locationName), displayMode: .inline)

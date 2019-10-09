@@ -11,12 +11,12 @@
 		EF0CF557231C1BC500DD6553 /* UIContentSizeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF556231C1BC500DD6553 /* UIContentSizeCategory.swift */; };
 		EF0CF559231C46BF00DD6553 /* UILegibilityWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF558231C46BF00DD6553 /* UILegibilityWeight.swift */; };
 		EF0D399B231A8ADB0067359E /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0D399A231A8ADB0067359E /* Icon.swift */; };
-		EF136FBE2323D3B2001D2524 /* ViewBuilder+Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF136FBD2323D3B2001D2524 /* ViewBuilder+Result.swift */; };
+		EF136FBE2323D3B2001D2524 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF136FBD2323D3B2001D2524 /* ResultView.swift */; };
 		EF28080B230C013400FF018E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF28080A230C013400FF018E /* Formatters.swift */; };
 		EF2E767C23083BE0008EB40D /* CurrentConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */; };
 		EF2E767E23083BED008EB40D /* CurrentConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */; };
 		EF363E08233F742C0087F494 /* OhNo in Frameworks */ = {isa = PBXBuildFile; productRef = EF363E07233F742C0087F494 /* OhNo */; };
-		EF3646F72334F69300A3A70A /* ViewBuilder+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3646F62334F69300A3A70A /* ViewBuilder+Optional.swift */; };
+		EF3646F72334F69300A3A70A /* OptionalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3646F62334F69300A3A70A /* OptionalView.swift */; };
 		EF409DE5232F9B8B00877B6E /* LocationUpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */; };
 		EF6BF6872311E07A00159436 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF6862311E07A00159436 /* Tagged.swift */; };
 		EF6BF68B2312D12B00159436 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF68A2312D12B00159436 /* ErrorView.swift */; };
@@ -33,7 +33,7 @@
 		EFBB2DC822FC2BB500AAF7EE /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBB2DC722FC2BB500AAF7EE /* ForecastViewModel.swift */; };
 		EFC0CBF32322850200EFF256 /* ForecastAlertsNavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC0CBF22322850200EFF256 /* ForecastAlertsNavigationModel.swift */; };
 		EFC0CBF52322864000EFF256 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC0CBF42322864000EFF256 /* Either.swift */; };
-		EFC4F1EF232323C80086F82D /* ViewBuilder+Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC4F1EE232323C80086F82D /* ViewBuilder+Either.swift */; };
+		EFC4F1EF232323C80086F82D /* EitherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC4F1EE232323C80086F82D /* EitherView.swift */; };
 		EFD04B4223339104006B6748 /* OhNo in Frameworks */ = {isa = PBXBuildFile; productRef = EFD04B4123339104006B6748 /* OhNo */; };
 		EFD2025C2315390B00A0ED6B /* ForecastDiscussionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD2025B2315390B00A0ED6B /* ForecastDiscussionViewModel.swift */; };
 		EFD2025E2315392400A0ED6B /* ForecastDiscussionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD2025D2315392400A0ED6B /* ForecastDiscussionView.swift */; };
@@ -78,11 +78,11 @@
 		EF0CF556231C1BC500DD6553 /* UIContentSizeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIContentSizeCategory.swift; sourceTree = "<group>"; };
 		EF0CF558231C46BF00DD6553 /* UILegibilityWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILegibilityWeight.swift; sourceTree = "<group>"; };
 		EF0D399A231A8ADB0067359E /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
-		EF136FBD2323D3B2001D2524 /* ViewBuilder+Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewBuilder+Result.swift"; sourceTree = "<group>"; };
+		EF136FBD2323D3B2001D2524 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		EF28080A230C013400FF018E /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		EF2E767B23083BE0008EB40D /* CurrentConditionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentConditionsViewModel.swift; sourceTree = "<group>"; };
 		EF2E767D23083BED008EB40D /* CurrentConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentConditionsView.swift; sourceTree = "<group>"; };
-		EF3646F62334F69300A3A70A /* ViewBuilder+Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewBuilder+Optional.swift"; sourceTree = "<group>"; };
+		EF3646F62334F69300A3A70A /* OptionalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalView.swift; sourceTree = "<group>"; };
 		EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUpdateError.swift; sourceTree = "<group>"; };
 		EF6BF6862311E07A00159436 /* Tagged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tagged.swift; sourceTree = "<group>"; };
 		EF6BF68A2312D12B00159436 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		EFBB2DC722FC2BB500AAF7EE /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		EFC0CBF22322850200EFF256 /* ForecastAlertsNavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAlertsNavigationModel.swift; sourceTree = "<group>"; };
 		EFC0CBF42322864000EFF256 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
-		EFC4F1EE232323C80086F82D /* ViewBuilder+Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewBuilder+Either.swift"; sourceTree = "<group>"; };
+		EFC4F1EE232323C80086F82D /* EitherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EitherView.swift; sourceTree = "<group>"; };
 		EFD04B4023338F1F006B6748 /* OhNo */ = {isa = PBXFileReference; lastKnownFileType = folder; name = OhNo; path = lib/OhNo; sourceTree = "<group>"; };
 		EFD2025B2315390B00A0ED6B /* ForecastDiscussionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDiscussionViewModel.swift; sourceTree = "<group>"; };
 		EFD2025D2315392400A0ED6B /* ForecastDiscussionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDiscussionView.swift; sourceTree = "<group>"; };
@@ -195,13 +195,13 @@
 			isa = PBXGroup;
 			children = (
 				EFDF4A032325165000C95B69 /* ActivityIndicatorView.swift */,
+				EFC4F1EE232323C80086F82D /* EitherView.swift */,
 				EF0D399A231A8ADB0067359E /* Icon.swift */,
+				EF3646F62334F69300A3A70A /* OptionalView.swift */,
+				EF136FBD2323D3B2001D2524 /* ResultView.swift */,
 				EFD202622315E5E900A0ED6B /* ScrollableText.swift */,
 				EF0CF556231C1BC500DD6553 /* UIContentSizeCategory.swift */,
 				EF0CF558231C46BF00DD6553 /* UILegibilityWeight.swift */,
-				EFC4F1EE232323C80086F82D /* ViewBuilder+Either.swift */,
-				EF3646F62334F69300A3A70A /* ViewBuilder+Optional.swift */,
-				EF136FBD2323D3B2001D2524 /* ViewBuilder+Result.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -447,12 +447,12 @@
 				EF09144C23251520008544C3 /* LoadingView.swift in Sources */,
 				EFD2025C2315390B00A0ED6B /* ForecastDiscussionViewModel.swift in Sources */,
 				EF6BF68B2312D12B00159436 /* ErrorView.swift in Sources */,
-				EF136FBE2323D3B2001D2524 /* ViewBuilder+Result.swift in Sources */,
+				EF136FBE2323D3B2001D2524 /* ResultView.swift in Sources */,
 				EFAC52E8231FCFA40080AFB3 /* Result+Operators.swift in Sources */,
 				EFEE483C22F6EB5200F4C7B8 /* AppDelegate.swift in Sources */,
 				EFD354DA22FAF66100B98ECE /* Publisher+Operators.swift in Sources */,
 				EFDD5CDF2311493100261945 /* HourlyForecastPeriodCellModel.swift in Sources */,
-				EFC4F1EF232323C80086F82D /* ViewBuilder+Either.swift in Sources */,
+				EFC4F1EF232323C80086F82D /* EitherView.swift in Sources */,
 				EFEEE8B622F9890900A34E61 /* ForecastPeriodCellModel.swift in Sources */,
 				EF6BF6872311E07A00159436 /* Tagged.swift in Sources */,
 				EFDF4A082327C6E400C95B69 /* PartialRelativeDateTimeFormatter.swift in Sources */,
@@ -468,7 +468,7 @@
 				EFAFA7882333944300DAB9F7 /* ErrorLog+Default.swift in Sources */,
 				EF6BF68D2313F2C300159436 /* ForecastDiscussionModel.swift in Sources */,
 				EFD54230230EA0D800059214 /* Geometry+Distance.swift in Sources */,
-				EF3646F72334F69300A3A70A /* ViewBuilder+Optional.swift in Sources */,
+				EF3646F72334F69300A3A70A /* OptionalView.swift in Sources */,
 				EF0CF557231C1BC500DD6553 /* UIContentSizeCategory.swift in Sources */,
 				EFAC52F62321D8460080AFB3 /* PrettyPrintParagraphs.swift in Sources */,
 				EFEEE8B022F909D200A34E61 /* LocationUpdater.swift in Sources */,
