@@ -53,11 +53,11 @@ public final class LoadableImage: ObservableObject {
         cancellable = ImageLoader.shared.image(at: url)
             .receive(on: RunLoop.main)
             .sink(
-                receiveCompletion: { [unowned self] _ in
-                    self.cancellable = nil
+                receiveCompletion: { [weak self] _ in
+                    self?.cancellable = nil
                 },
-                receiveValue: { [unowned self] in
-                    self._image = $0
+                receiveValue: { [weak self] in
+                    self?._image = $0
                 }
             )
     }
