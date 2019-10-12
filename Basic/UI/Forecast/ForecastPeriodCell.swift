@@ -4,31 +4,27 @@
 //
 
 import SwiftUI
-import ImageLoading
 
 struct ForecastPeriodCell: View {
     let model: ForecastPeriodCellModel
 
-    @ObservedObject private(set) var icon: LoadableImage
-
     init(model: ForecastPeriodCellModel) {
         self.model = model
-        icon = LoadableImage(asset: model.icon)
     }
 
     var body: some View {
-        HStack(alignment: .top) {
-            Icon(uiImage: icon.image, size: 70)
+        VStack(alignment: .leading) {
+            Text(model.name)
+                .font(.headline)
 
-            VStack(alignment: .leading) {
-                Text(model.name)
-                    .font(.headline)
+            Text(model.forecast)
+                .fixedSize(horizontal: false, vertical: true)
 
-                Text(model.detailedForecast)
-                    .font(.body)
-            }
+            Text("\(model.temperature, formatter: model.temperatureFormatter)")
+
+            Text(model.wind)
         }
-        .padding(.vertical)
+        .font(.subheadline)
     }
 }
 
@@ -42,7 +38,8 @@ struct ForecastPeriodCell_Previews: PreviewProvider {
     static let model = ForecastPeriodCellModel(
         id: .init(rawValue: 1),
         name: "Sunday",
-        icon: .name("icons/day/bkn"),
-        detailedForecast: "Partly sunny, with a high near 84. Southeast wind 0 to 5 mph."
+        forecast: "Partly Sunny",
+        temperature: Measurement(value: 62, unit: .fahrenheit),
+        wind: "NE 15 mph"
     )
 }

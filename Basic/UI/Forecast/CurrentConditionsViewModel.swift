@@ -27,6 +27,11 @@ struct CurrentConditionsViewModel {
         return PartialRelativeDateTimeFormatter(referenceDate: referenceDate, formatter: Formatters.timestamp)
     }
 
+    func isOutdated(at date: Date) -> Bool {
+        let interval = DateInterval(start: timestamp, end: date)
+        return interval.duration > .hours(1)
+    }
+
     func referenceDatePublisher() -> Publishers.Autoconnect<Timer.TimerPublisher> {
         return Timer.publish(every: .minutes(1), on: .main, in: .common)
             .autoconnect()

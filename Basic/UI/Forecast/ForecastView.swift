@@ -80,15 +80,17 @@ struct ForecastView_Previews: PreviewProvider {
             ForecastPeriodCellModel(
                 id: .init(rawValue: 1),
                 name: "Overnight",
-                icon: .name("icons/night/bkn"),
-                detailedForecast: "Mostly cloudy, with a low around 66. East wind around 0 mph."
+                forecast: "Mostly Cloudy",
+                temperature: Measurement(value: 50, unit: .fahrenheit),
+                wind: "NE 15 to 20 mph"
             ),
 
             ForecastPeriodCellModel(
                 id: .init(rawValue: 2),
                 name: "Sunday",
-                icon: .name("icons/day/bkn"),
-                detailedForecast: "Partly sunny, with a high near 84. Southeast wind 0 to 5 mph."
+                forecast: "Partly Sunny",
+                temperature: Measurement(value: 62, unit: .fahrenheit),
+                wind: "E 0 mph"
             )
         ],
         hourlyPeriods: [

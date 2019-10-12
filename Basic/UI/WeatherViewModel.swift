@@ -6,7 +6,6 @@
 import Foundation
 import Combine
 import API
-import ImageLoading
 import OhNo
 
 final class WeatherViewModel: ObservableObject {
@@ -89,10 +88,7 @@ final class WeatherViewModel: ObservableObject {
                 }
             )
             .sink { [unowned self] (forecast) in
-                switch forecast {
-                case let .success(forecast):
-                    ImageLoader.shared.preloadAssets(forecast.assetsForImagePreloading())
-                case let .failure(error):
+                if case let .failure(error) = forecast {
                     self.errorLog.log(error)
                 }
 

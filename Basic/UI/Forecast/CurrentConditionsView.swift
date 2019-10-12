@@ -19,12 +19,17 @@ struct CurrentConditionsView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            Text("Now")
+                .font(.headline)
+
+            Text(model.description)
+                .font(.subheadline)
+
             HStack(alignment: .top) {
                 Icon(uiImage: icon.image, size: 70)
 
                 VStack(alignment: .leading) {
                     model.temperature.map { Text("\($0, formatter: model.temperatureFormatter)") }
-                    Text(model.description)
                     model.humidity.map { Text("Humidity: \($0, formatter: model.humidityFormatter)") }
                     model.dewpoint.map { Text("Dewpoint: \($0, formatter: model.temperatureFormatter)") }
                 }
@@ -33,7 +38,9 @@ struct CurrentConditionsView: View {
 
             Group {
                 Text(model.stationName)
+
                 Text("\(model.timestamp, formatter: model.timestampFormatter(for: referenceDate))")
+                    .foregroundColor(model.isOutdated(at: referenceDate) ? .red : nil)
             }
             .font(.footnote)
         }

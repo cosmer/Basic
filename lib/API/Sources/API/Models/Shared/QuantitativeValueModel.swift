@@ -17,7 +17,7 @@ public struct QuantitativeValueModel<Value, Unit>: Decodable where Value: Decoda
 }
 
 public extension QuantitativeValueModel {
-    func map<T, U>(transform: (QuantitativeValueModel<T, Unit>) -> U) -> U? where Value == Optional<T> {
+    func map<T, U>(_ transform: (QuantitativeValueModel<T, Unit>) -> U) -> U? where Value == Optional<T> {
         if let value = value {
             return transform(QuantitativeValueModel<T, Unit>(value: value, unit: unit))
         } else {
@@ -25,7 +25,7 @@ public extension QuantitativeValueModel {
         }
     }
 
-    func flatMap<T, U>(transform: (QuantitativeValueModel<T, Unit>) -> U?) -> U? where Value == Optional<T> {
+    func flatMap<T, U>(_ transform: (QuantitativeValueModel<T, Unit>) -> U?) -> U? where Value == Optional<T> {
         if let value = value {
             return transform(QuantitativeValueModel<T, Unit>(value: value, unit: unit))
         } else {

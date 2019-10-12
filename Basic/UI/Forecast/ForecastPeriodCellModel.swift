@@ -5,24 +5,34 @@
 
 import Foundation
 import API
-import ImageLoading
 
 struct ForecastPeriodCellModel: Identifiable {
     var id: Tagged<Int, Self>
     var name: String
-    var icon: LoadableImageAsset
-    var detailedForecast: String
+    var forecast: String
+    var temperature: Measurement<UnitTemperature>
+    var wind: String
+
+    var temperatureFormatter: Formatter { Formatters.temperature }
 }
 
 extension ForecastPeriodCellModel {
-    private static var iconMetrics: Endpoints.Icon.IconMetrics {
-        .init(size: .large, fontSize: 20)
-    }
-
     init(period: ForecastModel.Period) {
         id = ID(rawValue: period.number)
-        name = period.name
-        icon = .url(period.icon.with(Self.iconMetrics).buildURL())
-        detailedForecast = period.detailedForecast
+        name = period.localizedName
+        forecast = period.shortForecast
+        temperature = Measurement(value: Double(period.temperature), unit: period.temperatureUnit.rawValue)
+        wind = "\(period.windDirection) \(period.windSpeed)"
+    }
+}
+
+private extension ForecastModel.Period {
+    var localizedName: String {
+        switch name {
+        case "Columbus Day":
+            return "Indigenous Peoples' Day"
+        default:
+            return name
+        }
     }
 }
