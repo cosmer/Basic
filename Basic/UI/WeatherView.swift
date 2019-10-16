@@ -6,29 +6,51 @@
 import SwiftUI
 
 struct WeatherView: View {
+    enum ForecastType {
+        case daily, hourly
+    }
+
     @ObservedObject private(set) var model: WeatherViewModel
+
+    @State private var forecastType: ForecastType = .daily
 
     var body: some View {
         NavigationView {
-            ResultView(model.forecast,
-                success: {
-                    OptionalView($0,
-                        some: {
-                            ForecastView(model: $0)
+            ContentContainerView(
+                content: {
+                    ResultView(self.model.forecasts,
+                        success: {
+                            OptionalView($0,
+                                some: {
+                                    if self.forecastType == .daily {
+                                        DailyForecastView(model: $0.daily)
+                                    } else {
+                                        HourlyForecastView(model: $0.hourly)
+                                    }
+                                },
+                                none: {
+                                    LoadingView()
+                                }
+                            )
                         },
-                        none: {
-                            LoadingView()
+                        failure: {
+                            if self.model.isLoading {
+                                LoadingView()
+                            } else {
+                                ErrorView(error: $0)
+                            }
                         }
                     )
                 },
-                failure: {
-                    if model.isLoading {
-                        LoadingView()
-                    } else {
-                        ErrorView(error: $0)
+                controls: {
+                    Picker("Forecast Type", selection: self.$forecastType) {
+                        Text("Daily").tag(ForecastType.daily)
+                        Text("Hourly").tag(ForecastType.hourly)
                     }
+                    .pickerStyle(SegmentedPickerStyle())
                 }
             )
+            .edgesIgnoringSafeArea(.all)
             .navigationBarTitle(navigationBarTitle, displayMode: .inline)
             .navigationBarItems(leading: leadingForecastNavigationBarItems)
         }
@@ -36,9 +58,9 @@ struct WeatherView: View {
     }
 
     private var navigationBarTitle: Text {
-        switch model.forecast {
+        switch model.forecasts {
         case let .success(forecast?):
-            return Text(forecast.locationName)
+            return Text(forecast.navigationTitle)
         default:
             return Text("Weather")
         }
@@ -46,7 +68,7 @@ struct WeatherView: View {
 
     private var leadingForecastNavigationBarItems: some View {
         let showActivityIndicator: Bool
-        if model.isLoading, case .success(.some) = model.forecast {
+        if model.isLoading, case .success(.some) = model.forecasts {
             showActivityIndicator = true
         } else {
             showActivityIndicator = false

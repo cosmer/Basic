@@ -5,29 +5,19 @@
 
 import SwiftUI
 
-struct ForecastView: View {
-    let model: ForecastViewModel
-    @ObservedObject private(set) var delayed: ForecastViewModel.DelayedContent
+struct DailyForecastView: View {
+    let model: DailyForecastViewModel
+    @ObservedObject private(set) var delayed: DailyForecastViewModel.DelayedContent
 
-    private let hourlyCellMetricsCache: HourlyForecastPeriodCell.Metrics.Cache
-
-    @Environment(\.sizeCategory) private var sizeCategory
-    @Environment(\.legibilityWeight) private var legibilityWeight
-
-    init(model: ForecastViewModel) {
+    init(model: DailyForecastViewModel) {
         self.model = model
         self.delayed = model.delayedContent
-        hourlyCellMetricsCache = .init(models: model.hourlyPeriods)
     }
 
     var body: some View {
         List {
             self.model.currentConditions.map {
                 CurrentConditionsView(model: $0)
-            }
-
-            ForEach(self.model.hourlyPeriods) {
-                HourlyForecastPeriodCell(model: $0, metrics: self.hourlyCellMetrics)
             }
 
             self.delayed.alerts.map {
@@ -38,14 +28,10 @@ struct ForecastView: View {
                 NavigationLink("Forecast Discussion", destination: ForecastDiscussionView(model: $0))
             }
 
-            ForEach(self.model.periods) {
-                ForecastPeriodCell(model: $0)
+            ForEach(self.model.dailyForecasts) {
+                DailyForecastCell(model: $0)
             }
         }
-    }
-
-    private var hourlyCellMetrics: HourlyForecastPeriodCell.Metrics {
-        hourlyCellMetricsCache.metrics(sizeCategory: sizeCategory, weight: legibilityWeight)
     }
 
     private static func navigationLink(for model: ForecastAlertsNavigationModel) -> some View {
@@ -67,17 +53,16 @@ struct ForecastView: View {
     }
 }
 
-struct ForecastView_Previews: PreviewProvider {
+struct DailyForecastView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ForecastView(model: model)
+            DailyForecastView(model: model)
         }
     }
 
-    static let model = ForecastViewModel(
-        locationName: "Somewhere, XY",
-        periods: [
-            ForecastPeriodCellModel(
+    static let model = DailyForecastViewModel(
+        dailyForecasts: [
+            DailyForecastCellModel(
                 id: .init(rawValue: 1),
                 name: "Overnight",
                 forecast: "Mostly Cloudy",
@@ -85,15 +70,13 @@ struct ForecastView_Previews: PreviewProvider {
                 wind: "NE 15 to 20 mph"
             ),
 
-            ForecastPeriodCellModel(
+            DailyForecastCellModel(
                 id: .init(rawValue: 2),
                 name: "Sunday",
                 forecast: "Partly Sunny",
                 temperature: Measurement(value: 62, unit: .fahrenheit),
                 wind: "E 0 mph"
             )
-        ],
-        hourlyPeriods: [
         ],
         delayedContent: .init(
             forecastDiscussion: ForecastDiscussionViewModel(

@@ -5,10 +5,10 @@
 
 import SwiftUI
 
-struct ForecastPeriodCell: View {
-    let model: ForecastPeriodCellModel
+struct DailyForecastCell: View {
+    let model: DailyForecastCellModel
 
-    init(model: ForecastPeriodCellModel) {
+    init(model: DailyForecastCellModel) {
         self.model = model
     }
 
@@ -28,14 +28,14 @@ struct ForecastPeriodCell: View {
     }
 }
 
-struct ForecastPeriodCell_Previews: PreviewProvider {
+struct DailyForecastCell_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            ForecastPeriodCell(model: model)
+            DailyForecastCell(model: model)
         }
     }
 
-    static let model = ForecastPeriodCellModel(
+    static let model = DailyForecastCellModel(
         id: .init(rawValue: 1),
         name: "Sunday",
         forecast: "Partly Sunny",

@@ -7,38 +7,28 @@ import Foundation
 import API
 import Combine
 
-struct ForecastViewModel {
-    var locationName: String
+struct DailyForecastViewModel {
     var currentConditions: CurrentConditionsViewModel?
-    var periods: [ForecastPeriodCellModel]
-    var hourlyPeriods: [HourlyForecastPeriodCellModel]
+    var dailyForecasts: [DailyForecastCellModel]
     var delayedContent: DelayedContent
 }
 
-extension ForecastViewModel {
+extension DailyForecastViewModel {
     init(
-        point: PointsModel,
         currentConditions: CurrentConditionsModel?,
         forecast: ForecastModel,
-        hourlyForecast: HourlyForecastModel,
         delayedContent: DelayedContent
     ) {
-        locationName = point.properties.relativeLocation.properties.city
-
         self.currentConditions = currentConditions.map(CurrentConditionsViewModel.init)
 
-        periods = forecast.properties.periods
-            .map(ForecastPeriodCellModel.init)
-
-        hourlyPeriods = hourlyForecast.properties.periods
-            .prefix(8)
-            |> HourlyForecastPeriodCellModel.from
+        dailyForecasts = forecast.properties.periods
+            .map(DailyForecastCellModel.init)
 
         self.delayedContent = delayedContent
     }
 }
 
-extension ForecastViewModel {
+extension DailyForecastViewModel {
     final class DelayedContent: ObservableObject {
         typealias ForecastDiscussionPublisher = AnyPublisher<ForecastDiscussionModel?, Never>
         typealias AlertsPublisher = AnyPublisher<AlertsModel?, Never>

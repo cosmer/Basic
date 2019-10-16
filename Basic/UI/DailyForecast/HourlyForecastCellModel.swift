@@ -6,7 +6,7 @@
 import Foundation
 import API
 
-struct HourlyForecastPeriodCellModel: Identifiable {
+struct HourlyForecastCellModel: Identifiable {
     var id: Tagged<Int, Self>
     var time: Date
     var temperature: Measurement<UnitTemperature>
@@ -16,7 +16,7 @@ struct HourlyForecastPeriodCellModel: Identifiable {
     var temperatureFormatter: Formatter { Formatters.temperature }
 }
 
-extension HourlyForecastPeriodCellModel {
+extension HourlyForecastCellModel {
     init(period: HourlyForecastModel.Period) {
         id = ID(rawValue: period.number)
         time = period.startTime

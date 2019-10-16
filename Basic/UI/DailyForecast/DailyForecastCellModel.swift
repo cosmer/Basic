@@ -6,7 +6,7 @@
 import Foundation
 import API
 
-struct ForecastPeriodCellModel: Identifiable {
+struct DailyForecastCellModel: Identifiable {
     var id: Tagged<Int, Self>
     var name: String
     var forecast: String
@@ -16,7 +16,7 @@ struct ForecastPeriodCellModel: Identifiable {
     var temperatureFormatter: Formatter { Formatters.temperature }
 }
 
-extension ForecastPeriodCellModel {
+extension DailyForecastCellModel {
     init(period: ForecastModel.Period) {
         id = ID(rawValue: period.number)
         name = period.localizedName

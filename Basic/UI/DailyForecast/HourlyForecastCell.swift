@@ -5,13 +5,13 @@
 
 import SwiftUI
 
-struct HourlyForecastPeriodCell: View {
+struct HourlyForecastCell: View {
     struct Metrics {
         var time: CGFloat
         var temperature: CGFloat
     }
 
-    let model: HourlyForecastPeriodCellModel
+    let model: HourlyForecastCellModel
     let metrics: Metrics
 
     var body: some View {
@@ -32,24 +32,24 @@ struct HourlyForecastPeriodCell: View {
     }
 }
 
-extension HourlyForecastPeriodCell.Metrics {
+extension HourlyForecastCell.Metrics {
     final class Cache {
-        private let models: [HourlyForecastPeriodCellModel]
+        private let models: [HourlyForecastCellModel]
 
-        private var cachedMetrics: HourlyForecastPeriodCell.Metrics?
+        private var cachedMetrics: HourlyForecastCell.Metrics?
         private var cachedCategory: ContentSizeCategory = .large
         private var cachedWeight: LegibilityWeight?
 
-        init(models: [HourlyForecastPeriodCellModel]) {
+        init(models: [HourlyForecastCellModel]) {
             self.models = models
         }
 
-        func metrics(sizeCategory: ContentSizeCategory, weight: LegibilityWeight?) -> HourlyForecastPeriodCell.Metrics {
+        func metrics(sizeCategory: ContentSizeCategory, weight: LegibilityWeight?) -> HourlyForecastCell.Metrics {
             if let cachedMetrics = cachedMetrics, sizeCategory == cachedCategory && weight == cachedWeight {
                 return cachedMetrics
             }
 
-            let metrics = HourlyForecastPeriodCell.Metrics(
+            let metrics = HourlyForecastCell.Metrics(
                 models: models,
                 sizeCategory: sizeCategory,
                 weight: weight
@@ -62,7 +62,7 @@ extension HourlyForecastPeriodCell.Metrics {
         }
     }
 
-    init(models: [HourlyForecastPeriodCellModel], sizeCategory: ContentSizeCategory, weight: LegibilityWeight?) {
+    init(models: [HourlyForecastCellModel], sizeCategory: ContentSizeCategory, weight: LegibilityWeight?) {
         var traitCollections: [UITraitCollection] = []
 
         if let sizeCategory = UIContentSizeCategory(sizeCategory: sizeCategory) {
@@ -95,21 +95,21 @@ extension HourlyForecastPeriodCell.Metrics {
     }
 }
 
-struct HourlyForecastPeriodCell_Previews: PreviewProvider {
+struct HourlyForecastCell_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            HourlyForecastPeriodCell(model: model, metrics: metrics)
+            HourlyForecastCell(model: model, metrics: metrics)
         }
     }
 
-    static let model = HourlyForecastPeriodCellModel(
+    static let model = HourlyForecastCellModel(
         id: .init(rawValue: 1),
         time: Date(),
         temperature: Measurement(value: 66, unit: .fahrenheit),
         shortForecast: "Partly Sunny"
     )
 
-    static let metrics = HourlyForecastPeriodCell.Metrics(
+    static let metrics = HourlyForecastCell.Metrics(
         models: [model],
         sizeCategory: .large,
         weight: nil

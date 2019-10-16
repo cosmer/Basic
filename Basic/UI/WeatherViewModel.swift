@@ -14,7 +14,13 @@ final class WeatherViewModel: ObservableObject {
         case api(Error)
     }
 
-    @Published private(set) var forecast: Result<ForecastViewModel?, WeatherError> = .success(nil)
+    struct Forecasts {
+        var navigationTitle: String
+        var daily: DailyForecastViewModel
+        var hourly: HourlyForecastViewModel
+    }
+
+    @Published private(set) var forecasts: Result<Forecasts?, WeatherError> = .success(nil)
     @Published private(set) var isLoading = false
 
     private let locationUpdater = LocationUpdater()
@@ -40,7 +46,7 @@ final class WeatherViewModel: ObservableObject {
                     .materialize()
                     .eraseToAnyPublisher()
             }
-            .flatMapResult { [urlSession, errorLog] (point) -> AnyResultPublisher<ForecastViewModel, WeatherError> in
+            .flatMapResult { [urlSession, errorLog] (point) -> AnyResultPublisher<Forecasts, WeatherError> in
                 let forecast = urlSession.dataTaskPublisher(for: point.properties.forecast)
                 let hourlyForecast = urlSession.dataTaskPublisher(for: point.properties.forecast.hourly())
                 let conditions = CurrentConditionsModel.publisher(for: point, in: urlSession)
@@ -59,7 +65,7 @@ final class WeatherViewModel: ObservableObject {
 
                 return Publishers.Zip3(conditions, forecast, hourlyForecast)
                     .map {
-                        ForecastViewModel(
+                        Forecasts(
                             point: point,
                             currentConditions: $0,
                             forecast: $1,
@@ -93,8 +99,28 @@ final class WeatherViewModel: ObservableObject {
                 }
 
                 self.isLoading = false
-                self.forecast = forecast.map { $0 }
+                self.forecasts = forecast.map { $0 }
             }
+    }
+}
+
+private extension WeatherViewModel.Forecasts {
+    init(
+        point: PointsModel,
+        currentConditions: CurrentConditionsModel?,
+        forecast: ForecastModel,
+        hourlyForecast: HourlyForecastModel,
+        delayedContent: DailyForecastViewModel.DelayedContent
+    ) {
+        navigationTitle = point.properties.relativeLocation.properties.city
+
+        daily = DailyForecastViewModel(
+            currentConditions: currentConditions,
+            forecast: forecast,
+            delayedContent: delayedContent
+        )
+
+        hourly = HourlyForecastViewModel(forecast: hourlyForecast)
     }
 }
 
