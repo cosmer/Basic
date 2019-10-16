@@ -15,31 +15,44 @@ struct WeatherView: View {
                     OptionalView($0,
                         some: {
                             ForecastView(model: $0)
-                                .navigationBarTitle(Text($0.locationName), displayMode: .inline)
-                                .navigationBarItems(leading: self.leadingForecastNavigationBarItems)
                         },
                         none: {
                             LoadingView()
-                                .navigationBarTitle("Weather", displayMode: .inline)
                         }
                     )
                 },
                 failure: {
                     if model.isLoading {
                         LoadingView()
-                            .navigationBarTitle("Weather", displayMode: .inline)
                     } else {
                         ErrorView(error: $0)
-                            .navigationBarTitle("Weather", displayMode: .inline)
                     }
                 }
             )
+            .navigationBarTitle(navigationBarTitle, displayMode: .inline)
+            .navigationBarItems(leading: leadingForecastNavigationBarItems)
         }
         .onAppear { self.model.requestAuthorizationIfNeeded() }
     }
 
-    var leadingForecastNavigationBarItems: some View {
-        model.isLoading
+    private var navigationBarTitle: Text {
+        switch model.forecast {
+        case let .success(forecast?):
+            return Text(forecast.locationName)
+        default:
+            return Text("Weather")
+        }
+    }
+
+    private var leadingForecastNavigationBarItems: some View {
+        let showActivityIndicator: Bool
+        if model.isLoading, case .success(.some) = model.forecast {
+            showActivityIndicator = true
+        } else {
+            showActivityIndicator = false
+        }
+
+        return showActivityIndicator
             ? ActivityIndicatorView(style: .medium)
             : nil
     }
