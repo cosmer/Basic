@@ -49,7 +49,12 @@ final class WeatherViewModel: ObservableObject {
             .flatMapResult { [urlSession, errorLog] (point) -> AnyResultPublisher<Forecasts, WeatherError> in
                 let forecast = urlSession.dataTaskPublisher(for: point.properties.forecast)
                 let hourlyForecast = urlSession.dataTaskPublisher(for: point.properties.forecast.hourly())
+
                 let conditions = CurrentConditionsModel.publisher(for: point, in: urlSession)
+                    .handleError { errorLog.log($0) }
+                    .replaceError(with: nil)
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
 
                 let discussion = ForecastDiscussionModel.publisher(for: point, in: urlSession)
                     .handleError { errorLog.log($0) }
