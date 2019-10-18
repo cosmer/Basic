@@ -23,9 +23,13 @@ struct HourlyForecastCell: View {
             Text(model.temperatureFormatter.string(from: model.temperature))
                 .frame(width: metrics.temperature, alignment: .leading)
 
-            model.shortForecast.map {
-                Text($0)
-                    .lineLimit(2)
+            VStack(alignment: .leading) {
+                model.shortForecast.map {
+                    Text($0)
+                        .lineLimit(2)
+                }
+
+                Text(model.wind)
             }
         }
         .font(.subheadline)
@@ -106,6 +110,7 @@ struct HourlyForecastCell_Previews: PreviewProvider {
         id: .init(rawValue: 1),
         time: Date(),
         temperature: Measurement(value: 66, unit: .fahrenheit),
+        wind: "W 10 mph",
         shortForecast: "Partly Sunny"
     )
 

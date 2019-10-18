@@ -10,6 +10,7 @@ struct HourlyForecastCellModel: Identifiable {
     var id: Tagged<Int, Self>
     var time: Date
     var temperature: Measurement<UnitTemperature>
+    var wind: String
     var shortForecast: String?
     var timeZone: TimeZone?
 
@@ -22,6 +23,7 @@ extension HourlyForecastCellModel {
         id = ID(rawValue: period.number)
         time = period.startTime
         temperature = Measurement(value: period.temperature, unit: period.temperatureUnit.rawValue)
+        wind = "\(period.windDirection) \(period.windSpeed)"
         shortForecast = period.shortForecast
         self.timeZone = timeZone
     }
