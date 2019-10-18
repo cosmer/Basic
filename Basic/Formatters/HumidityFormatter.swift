@@ -22,10 +22,10 @@ final class HumidityFormatter: Formatter {
         guard let measurement = obj as? Measurement<UnitHumidity> else {
             return nil
         }
-        return string(for: measurement)
+        return string(from: measurement)
     }
 
-    func string(for measurement: Measurement<UnitHumidity>) -> String {
+    func string(from measurement: Measurement<UnitHumidity>) -> String {
         precondition(measurement.unit == .percent)
         return numberFormatter.string(from: measurement.value/100 as NSNumber)!
     }

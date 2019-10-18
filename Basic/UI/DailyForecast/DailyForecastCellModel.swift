@@ -13,7 +13,7 @@ struct DailyForecastCellModel: Identifiable {
     var temperature: Measurement<UnitTemperature>
     var wind: String
 
-    var temperatureFormatter: Formatter { Formatters.temperature }
+    var temperatureFormatter: MeasurementFormatter { Formatters.temperature }
 }
 
 extension DailyForecastCellModel {

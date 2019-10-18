@@ -20,7 +20,7 @@ struct DailyForecastCell: View {
             Text(model.forecast)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Text("\(model.temperature, formatter: model.temperatureFormatter)")
+            Text(model.temperatureFormatter.string(from: model.temperature))
 
             Text(model.wind)
         }

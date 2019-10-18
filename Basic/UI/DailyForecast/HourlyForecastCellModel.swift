@@ -11,22 +11,19 @@ struct HourlyForecastCellModel: Identifiable {
     var time: Date
     var temperature: Measurement<UnitTemperature>
     var shortForecast: String?
+    var timeZone: TimeZone?
 
-    var timeFormatter: Formatter { Formatters.hour }
-    var temperatureFormatter: Formatter { Formatters.temperature }
+    var timeFormatter: DateFormatter { Formatters.hour(for: timeZone) }
+    var temperatureFormatter: MeasurementFormatter { Formatters.temperature }
 }
 
 extension HourlyForecastCellModel {
-    init(period: HourlyForecastModel.Period) {
+    init(period: HourlyForecastModel.Period, timeZone: TimeZone?) {
         id = ID(rawValue: period.number)
         time = period.startTime
         temperature = Measurement(value: period.temperature, unit: period.temperatureUnit.rawValue)
         shortForecast = period.shortForecast
-    }
-
-    static func from<C>(periods: C) -> [Self] where C: Collection, C.Element == HourlyForecastModel.Period {
-        let models = periods.map(Self.init)
-        return removeConsecutiveShortForecasts(from: models)
+        self.timeZone = timeZone
     }
 
     static func removeConsecutiveShortForecasts(from models: [Self]) -> [Self] {

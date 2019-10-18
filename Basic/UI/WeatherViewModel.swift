@@ -125,7 +125,8 @@ private extension WeatherViewModel.Forecasts {
             delayedContent: delayedContent
         )
 
-        hourly = HourlyForecastViewModel(forecast: hourlyForecast)
+        let timeZone = TimeZone(identifier: point.properties.timeZone)
+        hourly = HourlyForecastViewModel(forecast: hourlyForecast, timeZone: timeZone)
     }
 }
 

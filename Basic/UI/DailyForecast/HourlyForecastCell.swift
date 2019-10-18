@@ -16,11 +16,11 @@ struct HourlyForecastCell: View {
 
     var body: some View {
         HStack(spacing: 20) {
-            Text("\(model.time, formatter: model.timeFormatter)")
+            Text(model.timeFormatter.string(from: model.time))
                 .fontWeight(.medium)
                 .frame(width: metrics.time, alignment: .leading)
 
-            Text("\(model.temperature, formatter: model.temperatureFormatter)")
+            Text(model.temperatureFormatter.string(from: model.temperature))
                 .frame(width: metrics.temperature, alignment: .leading)
 
             model.shortForecast.map {

@@ -20,11 +20,11 @@ struct CurrentConditionsViewModel {
     var dewpoint: Measurement<UnitTemperature>?
     var humidity: Measurement<UnitHumidity>?
 
-    var temperatureFormatter: Formatter { Formatters.temperature }
-    var humidityFormatter: Formatter { Formatters.humidity }
+    var temperatureFormatter: MeasurementFormatter { Formatters.temperature }
+    var humidityFormatter: HumidityFormatter { Formatters.humidity }
 
-    func timestampFormatter(for referenceDate: Date) -> Formatter {
-        return PartialRelativeDateTimeFormatter(referenceDate: referenceDate, formatter: Formatters.timestamp)
+    func timestampFormatter(for referenceDate: Date) -> AnyFormatter<Date> {
+        AnyFormatter { Formatters.timestamp.localizedString(for: $0, relativeTo: referenceDate) }
     }
 
     func isOutdated(at date: Date) -> Bool {

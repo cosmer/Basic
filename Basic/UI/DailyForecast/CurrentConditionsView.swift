@@ -29,7 +29,7 @@ struct CurrentConditionsView: View {
                 Icon(uiImage: icon.image, size: 70)
 
                 VStack(alignment: .leading) {
-                    model.temperature.map { Text("\($0, formatter: model.temperatureFormatter)") }
+                    model.temperature.map { Text(model.temperatureFormatter.string(from: $0)) }
                     model.humidity.map { Text("Humidity: \($0, formatter: model.humidityFormatter)") }
                     model.dewpoint.map { Text("Dewpoint: \($0, formatter: model.temperatureFormatter)") }
                 }

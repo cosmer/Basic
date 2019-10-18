@@ -14,8 +14,8 @@ struct HourlyForecastViewModel {
 }
 
 extension HourlyForecastViewModel {
-    init(forecast: HourlyForecastModel) {
+    init(forecast: HourlyForecastModel, timeZone: TimeZone?) {
         hourlyForecasts = forecast.properties.periods
-            .map(HourlyForecastCellModel.init)
+            .map { HourlyForecastCellModel(period: $0, timeZone: timeZone) }
     }
 }
