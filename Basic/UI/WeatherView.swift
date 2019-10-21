@@ -43,11 +43,10 @@ struct WeatherView: View {
                     )
                 },
                 controls: {
-                    Picker("Forecast Type", selection: self.$forecastType) {
-                        Text("Daily").tag(ForecastType.daily)
-                        Text("Hourly").tag(ForecastType.hourly)
+                    HStack {
+                        self.forecastTypePicker
+                        self.forecastDiscussionLink
                     }
-                    .pickerStyle(SegmentedPickerStyle())
                 }
             )
             .edgesIgnoringSafeArea(.all)
@@ -77,6 +76,25 @@ struct WeatherView: View {
         return showActivityIndicator
             ? ActivityIndicatorView(style: .medium)
             : nil
+    }
+
+    private var forecastTypePicker: some View {
+        Picker("Forecast Type", selection: self.$forecastType) {
+            Text("Daily").tag(ForecastType.daily)
+            Text("Hourly").tag(ForecastType.hourly)
+        }
+        .pickerStyle(SegmentedPickerStyle())
+    }
+
+    private var forecastDiscussionLink: some View {
+        let destination = (model.forecasts.success ?? nil)
+            .map { ForecastDiscussionView(model: $0.discussion) }
+
+        return NavigationLink(destination: destination) {
+            Image(systemName: "ellipses.bubble")
+                .frame(width: 44, height: 44)
+        }
+        .disabled(destination == nil)
     }
 }
 

@@ -24,10 +24,6 @@ struct DailyForecastView: View {
                 Self.navigationLink(for: $0)
             }
 
-            self.delayed.forecastDiscussion.map {
-                NavigationLink("Forecast Discussion", destination: ForecastDiscussionView(model: $0))
-            }
-
             ForEach(self.model.dailyForecasts) {
                 DailyForecastCell(model: $0)
             }
@@ -79,9 +75,6 @@ struct DailyForecastView_Previews: PreviewProvider {
             )
         ],
         delayedContent: .init(
-            forecastDiscussion: ForecastDiscussionViewModel(
-                model: ForecastDiscussionModel(officeId: .grayME)
-            ),
             alerts: ForecastAlertsNavigationModel(
                 model: WeatherAlertListModel(alerts: WeatherAlertViewModel.previews)
             )

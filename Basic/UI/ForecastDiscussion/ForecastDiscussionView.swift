@@ -36,7 +36,7 @@ struct ForecastDiscussionView_Previews: PreviewProvider {
     }
 
     static let model = ForecastDiscussionViewModel(
-        model: .init(officeId: .grayME),
+        officeId: .grayME,
         text: .success(text)
     )
 

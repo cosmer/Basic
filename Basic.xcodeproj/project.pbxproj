@@ -20,7 +20,6 @@
 		EF409DE5232F9B8B00877B6E /* LocationUpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */; };
 		EF6BF6872311E07A00159436 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF6862311E07A00159436 /* Tagged.swift */; };
 		EF6BF68B2312D12B00159436 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF68A2312D12B00159436 /* ErrorView.swift */; };
-		EF6BF68D2313F2C300159436 /* ForecastDiscussionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6BF68C2313F2C300159436 /* ForecastDiscussionModel.swift */; };
 		EF737326230175200015FCA1 /* ImageLoading in Frameworks */ = {isa = PBXBuildFile; productRef = EF737325230175200015FCA1 /* ImageLoading */; };
 		EF73FFB02357D18C0074D1DB /* HourlyForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73FFAF2357D18C0074D1DB /* HourlyForecastViewModel.swift */; };
 		EF73FFB22357D1A00074D1DB /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73FFB12357D1A00074D1DB /* HourlyForecastView.swift */; };
@@ -90,7 +89,6 @@
 		EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUpdateError.swift; sourceTree = "<group>"; };
 		EF6BF6862311E07A00159436 /* Tagged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tagged.swift; sourceTree = "<group>"; };
 		EF6BF68A2312D12B00159436 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		EF6BF68C2313F2C300159436 /* ForecastDiscussionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDiscussionModel.swift; sourceTree = "<group>"; };
 		EF737324230175110015FCA1 /* ImageLoading */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ImageLoading; path = lib/ImageLoading; sourceTree = "<group>"; };
 		EF73FFAF2357D18C0074D1DB /* HourlyForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewModel.swift; sourceTree = "<group>"; };
 		EF73FFB12357D1A00074D1DB /* HourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
@@ -245,7 +243,6 @@
 			isa = PBXGroup;
 			children = (
 				EFD54232230EA8F700059214 /* CurrentConditionsModel.swift */,
-				EF6BF68C2313F2C300159436 /* ForecastDiscussionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -490,7 +487,6 @@
 				EFEEE8B422F988E000A34E61 /* DailyForecastCell.swift in Sources */,
 				EFC0CBF52322864000EFF256 /* Either.swift in Sources */,
 				EFAFA7882333944300DAB9F7 /* ErrorLog+Default.swift in Sources */,
-				EF6BF68D2313F2C300159436 /* ForecastDiscussionModel.swift in Sources */,
 				EFD54230230EA0D800059214 /* Geometry+Distance.swift in Sources */,
 				EF3646F72334F69300A3A70A /* OptionalView.swift in Sources */,
 				EF0CF557231C1BC500DD6553 /* UIContentSizeCategory.swift in Sources */,

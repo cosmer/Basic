@@ -6,22 +6,23 @@
 import SwiftUI
 import Combine
 import API
+import OhNo
 
 final class ForecastDiscussionViewModel: ObservableObject {
     @Published private(set) var text: Result<NSAttributedString, Error> = .success(.init())
     @Published private(set) var isLoading = false
 
-    private let model: ForecastDiscussionModel
+    private let officeId: OfficeID
 
     private var cancellable: AnyCancellable?
 
-    init(model: ForecastDiscussionModel) {
-        self.model = model
+    init(officeId: OfficeID) {
+        self.officeId = officeId
     }
 
     /// For previews.
-    convenience init(model: ForecastDiscussionModel, text: Result<String, Error>) {
-        self.init(model: model)
+    convenience init(officeId: OfficeID, text: Result<String, Error>) {
+        self.init(officeId: officeId)
 
         self.text = text.map { NSAttributedString(string: $0, attributes: Self.bodyAttributes) }
         cancellable = AnyCancellable({ })
@@ -31,6 +32,10 @@ final class ForecastDiscussionViewModel: ObservableObject {
         var errorDescription: String? {
             NSLocalizedString("Forecast discussions are not currently available at this location.", comment: "")
         }
+    }
+
+    private static var errorLog: ScopedErrorLog {
+        ErrorLog.default.scoped(to: "ForecastDiscussionViewModel")
     }
 
     private static var bodyAttributes: [NSAttributedString.Key: Any] {
@@ -52,7 +57,7 @@ final class ForecastDiscussionViewModel: ObservableObject {
 
         isLoading = true
 
-        let endpoint = Endpoints.products(officeId: model.officeId, code: .forecastDiscussion)
+        let endpoint = Endpoints.products(officeId: officeId, code: .forecastDiscussion)
         cancellable = URLSession.shared.dataTaskPublisher(for: endpoint)
             .tryMap { (products) -> ProductsModel.Product in
                 guard let product = products.products.first else {
@@ -90,6 +95,7 @@ final class ForecastDiscussionViewModel: ObservableObject {
 
                 return text
             }
+            .handleError { Self.errorLog.log($0) }
             .materialize()
             .receive(on: RunLoop.main)
             .sink { [unowned self] (text) in

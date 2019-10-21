@@ -30,21 +30,14 @@ extension DailyForecastViewModel {
 
 extension DailyForecastViewModel {
     final class DelayedContent: ObservableObject {
-        typealias ForecastDiscussionPublisher = AnyPublisher<ForecastDiscussionModel?, Never>
         typealias AlertsPublisher = AnyPublisher<AlertsModel?, Never>
 
-        @Published private(set) var forecastDiscussion: ForecastDiscussionViewModel?
         @Published private(set) var alerts: ForecastAlertsNavigationModel?
 
         private var cancellables: [AnyCancellable] = []
 
-        init(forecastDiscussion: ForecastDiscussionPublisher, alerts: AlertsPublisher) {
+        init(alerts: AlertsPublisher) {
             cancellables = [
-                forecastDiscussion
-                    .map { $0.map(ForecastDiscussionViewModel.init) }
-                    .receive(on: RunLoop.main)
-                    .sink { [weak self] in self?.forecastDiscussion = $0 },
-
                 alerts
                     .map { $0.flatMap(ForecastAlertsNavigationModel.init) }
                     .receive(on: RunLoop.main)
@@ -52,8 +45,7 @@ extension DailyForecastViewModel {
             ]
         }
 
-        init(forecastDiscussion: ForecastDiscussionViewModel?, alerts: ForecastAlertsNavigationModel?) {
-            self.forecastDiscussion = forecastDiscussion
+        init(alerts: ForecastAlertsNavigationModel?) {
             self.alerts = alerts
         }
     }

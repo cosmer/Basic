@@ -18,6 +18,7 @@ final class WeatherViewModel: ObservableObject {
         var navigationTitle: String
         var daily: DailyForecastViewModel
         var hourly: HourlyForecastViewModel
+        var discussion: ForecastDiscussionViewModel
     }
 
     @Published private(set) var forecasts: Result<Forecasts?, WeatherError> = .success(nil)
@@ -56,11 +57,6 @@ final class WeatherViewModel: ObservableObject {
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
 
-                let discussion = ForecastDiscussionModel.publisher(for: point, in: urlSession)
-                    .handleError { errorLog.log($0) }
-                    .replaceError(with: nil)
-                    .eraseToAnyPublisher()
-
                 let alertsEndpoint = Endpoints.activeAlerts(zoneId: point.properties.forecastZone.zoneId())
                 let alerts = urlSession.dataTaskPublisher(for: alertsEndpoint)
                     .handleError { errorLog.log($0) }
@@ -76,7 +72,6 @@ final class WeatherViewModel: ObservableObject {
                             forecast: $1,
                             hourlyForecast: $2,
                             delayedContent: .init(
-                                forecastDiscussion: discussion,
                                 alerts: alerts
                             )
                         )
@@ -127,6 +122,8 @@ private extension WeatherViewModel.Forecasts {
 
         let timeZone = TimeZone(identifier: point.properties.timeZone)
         hourly = HourlyForecastViewModel(forecast: hourlyForecast, timeZone: timeZone)
+
+        discussion = ForecastDiscussionViewModel(officeId: point.properties.forecastOffice.officeId())
     }
 }
 
