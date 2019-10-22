@@ -36,6 +36,7 @@
 		EFC0CBF32322850200EFF256 /* ForecastAlertsNavigationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC0CBF22322850200EFF256 /* ForecastAlertsNavigationModel.swift */; };
 		EFC0CBF52322864000EFF256 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC0CBF42322864000EFF256 /* Either.swift */; };
 		EFC4F1EF232323C80086F82D /* EitherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC4F1EE232323C80086F82D /* EitherView.swift */; };
+		EFC53503235DC3AA00822A58 /* BasicAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = EFC53502235DC3AA00822A58 /* BasicAlgorithms */; };
 		EFD04B4223339104006B6748 /* OhNo in Frameworks */ = {isa = PBXBuildFile; productRef = EFD04B4123339104006B6748 /* OhNo */; };
 		EFD2025C2315390B00A0ED6B /* ForecastDiscussionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD2025B2315390B00A0ED6B /* ForecastDiscussionViewModel.swift */; };
 		EFD2025E2315392400A0ED6B /* ForecastDiscussionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD2025D2315392400A0ED6B /* ForecastDiscussionView.swift */; };
@@ -105,6 +106,7 @@
 		EFC0CBF22322850200EFF256 /* ForecastAlertsNavigationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAlertsNavigationModel.swift; sourceTree = "<group>"; };
 		EFC0CBF42322864000EFF256 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 		EFC4F1EE232323C80086F82D /* EitherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EitherView.swift; sourceTree = "<group>"; };
+		EFC53501235DC39E00822A58 /* BasicAlgorithms */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BasicAlgorithms; path = lib/BasicAlgorithms; sourceTree = "<group>"; };
 		EFD04B4023338F1F006B6748 /* OhNo */ = {isa = PBXFileReference; lastKnownFileType = folder; name = OhNo; path = lib/OhNo; sourceTree = "<group>"; };
 		EFD2025B2315390B00A0ED6B /* ForecastDiscussionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDiscussionViewModel.swift; sourceTree = "<group>"; };
 		EFD2025D2315392400A0ED6B /* ForecastDiscussionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDiscussionView.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				EFD354D822FAD8F000B98ECE /* API in Frameworks */,
 				EF737326230175200015FCA1 /* ImageLoading in Frameworks */,
 				EFD04B4223339104006B6748 /* OhNo in Frameworks */,
+				EFC53503235DC3AA00822A58 /* BasicAlgorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +256,7 @@
 				EFEE486722F6EF7A00F4C7B8 /* API */,
 				EF737324230175110015FCA1 /* ImageLoading */,
 				EFD04B4023338F1F006B6748 /* OhNo */,
+				EFC53501235DC39E00822A58 /* BasicAlgorithms */,
 				EFEE483A22F6EB5200F4C7B8 /* Basic */,
 				EFEE485422F6EB5300F4C7B8 /* BasicTests */,
 				EFEE483922F6EB5200F4C7B8 /* Products */,
@@ -359,6 +363,7 @@
 				EFD354D722FAD8F000B98ECE /* API */,
 				EF737325230175200015FCA1 /* ImageLoading */,
 				EFD04B4123339104006B6748 /* OhNo */,
+				EFC53502235DC3AA00822A58 /* BasicAlgorithms */,
 			);
 			productName = Basic;
 			productReference = EFEE483822F6EB5200F4C7B8 /* Basic.app */;
@@ -766,6 +771,10 @@
 		EF737325230175200015FCA1 /* ImageLoading */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ImageLoading;
+		};
+		EFC53502235DC3AA00822A58 /* BasicAlgorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BasicAlgorithms;
 		};
 		EFD04B4123339104006B6748 /* OhNo */ = {
 			isa = XCSwiftPackageProductDependency;

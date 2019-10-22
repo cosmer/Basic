@@ -12,14 +12,14 @@ struct HourlyForecastCellModel: Identifiable {
     var temperature: Measurement<UnitTemperature>
     var wind: String
     var shortForecast: String?
-    var timeZone: TimeZone?
+    var timeZone: TimeZone
 
     var timeFormatter: DateFormatter { Formatters.hour(for: timeZone) }
     var temperatureFormatter: MeasurementFormatter { Formatters.temperature }
 }
 
 extension HourlyForecastCellModel {
-    init(period: HourlyForecastModel.Period, timeZone: TimeZone?) {
+    init(period: HourlyForecastModel.Period, timeZone: TimeZone) {
         id = ID(rawValue: period.number)
         time = period.startTime
         temperature = Measurement(value: period.temperature, unit: period.temperatureUnit.rawValue)

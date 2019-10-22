@@ -111,7 +111,8 @@ struct HourlyForecastCell_Previews: PreviewProvider {
         time: Date(),
         temperature: Measurement(value: 66, unit: .fahrenheit),
         wind: "W 10 mph",
-        shortForecast: "Partly Sunny"
+        shortForecast: "Partly Sunny",
+        timeZone: .current
     )
 
     static let metrics = HourlyForecastCell.Metrics(

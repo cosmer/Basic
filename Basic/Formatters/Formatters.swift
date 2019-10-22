@@ -23,6 +23,18 @@ enum Formatters {
         return formatter
     }()
 
+    private static func dayName() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.formattingContext = .standalone
+        formatter.setLocalizedDateFormatFromTemplate("cccc")
+        return formatter
+    }
+
+    private static var dayNameCache = Cache(dayName, \.timeZone)
+    static func dayName(for timeZone: TimeZone) -> DateFormatter {
+        dayNameCache[timeZone]
+    }
+
     private static func hour() -> DateFormatter {
         let formatter = DateFormatter()
         formatter.formattingContext = .standalone
@@ -30,23 +42,37 @@ enum Formatters {
         return formatter
     }
 
-    private static var hourCache: [TimeZone?: DateFormatter] = [:]
+    private static let hourCache = Cache(hour, \.timeZone)
+    static func hour(for timeZone: TimeZone) -> DateFormatter {
+        return hourCache[timeZone]
+    }
+}
 
-    static func hour(for timeZone: TimeZone?) -> DateFormatter {
+private final class Cache<Value> {
+    private let factory: () -> Value
+    private let keyPath: ReferenceWritableKeyPath<Value, TimeZone>
+
+    private var cachedValue: Value?
+    private var cachedTimeZone: TimeZone?
+
+    init(_ factory: @escaping () -> Value, _ keyPath: ReferenceWritableKeyPath<Value, TimeZone>) {
+        self.keyPath = keyPath
+        self.factory = factory
+    }
+
+    subscript(_ timeZone: TimeZone) -> Value {
         assertOnMainQueue()
 
-        if let formatter = hourCache[timeZone] {
-            return formatter
+        if let cachedTimeZone = cachedTimeZone, cachedTimeZone == timeZone, let value = cachedValue {
+            return value
         }
 
-        let formatter = hour()
-        formatter.timeZone = timeZone
+        let value = factory()
+        value[keyPath: keyPath] = timeZone
 
-        if hourCache.count >= 3 {
-            hourCache.removeAll()
-        }
+        cachedValue = value
+        cachedTimeZone = timeZone
 
-        hourCache[timeZone] = formatter
-        return formatter
+        return value
     }
 }

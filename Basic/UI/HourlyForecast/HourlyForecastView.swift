@@ -18,13 +18,17 @@ struct HourlyForecastView: View {
 
     init(model: HourlyForecastViewModel) {
         self.model = model
-        hourlyCellMetricsCache = .init(models: model.hourlyForecasts)
+        hourlyCellMetricsCache = .init(models: model.sections.flatMap { $0.forecasts })
     }
 
     var body: some View {
         List {
-            ForEach(self.model.hourlyForecasts) {
-                HourlyForecastCell(model: $0, metrics: self.hourlyCellMetrics)
+            ForEach(model.sections) { section in
+                Section(header: Text(section.timeFormatter.string(from: section.time))) {
+                    ForEach(section.forecasts) {
+                        HourlyForecastCell(model: $0, metrics: self.hourlyCellMetrics)
+                    }
+                }
             }
         }
     }
@@ -39,7 +43,7 @@ struct HourlyForecastView_Previews: PreviewProvider {
         HourlyForecastView(model: model)
     }
 
-    static let model = HourlyForecastViewModel(hourlyForecasts: [
+    static let model = HourlyForecastViewModel(sections: [
 
     ])
 }
