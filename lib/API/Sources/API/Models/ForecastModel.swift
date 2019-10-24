@@ -14,6 +14,7 @@ public struct ForecastModel: Decodable {
         public var isDaytime: Bool
         public var temperature: Int
         public var temperatureUnit: UnitModel<UnitTemperature>
+        public var temperatureTrend: TemperatureTrend?
         public var windSpeed: String
         public var windDirection: String
         public var icon: Endpoints.Icon
