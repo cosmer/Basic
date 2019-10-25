@@ -17,3 +17,11 @@ extension EndpointTags {
         public typealias Model = HourlyForecastModel
     }
 }
+
+extension Endpoint where Tag == EndpointTags.HourlyForecast {
+    public func with(units: UnitSystem) -> Endpoints.HourlyForecast {
+        replacingQueryItems(with: [
+            ("units", units.rawValue)
+        ])
+    }
+}
