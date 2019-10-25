@@ -53,7 +53,7 @@ final class WeatherViewModel: ObservableObject {
                 let forecastEndpoint = point.properties.forecast.with(units: units)
                 let forecast = urlSession.dataTaskPublisher(for: forecastEndpoint)
 
-                let hourlyForecastEndpoint = point.properties.forecast.hourly().with(units: units)
+                let hourlyForecastEndpoint = point.properties.forecastHourly.with(units: units)
                 let hourlyForecast = urlSession.dataTaskPublisher(for: hourlyForecastEndpoint)
 
                 let conditions = CurrentConditionsModel.publisher(for: point, in: urlSession)

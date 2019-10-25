@@ -19,10 +19,6 @@ extension EndpointTags {
 }
 
 extension Endpoint where Tag == EndpointTags.Forecast {
-    public func hourly() -> Endpoints.HourlyForecast {
-        return appending(pathComponent: "hourly")
-    }
-
     public func with(units: UnitSystem) -> Endpoints.Forecast {
         replacingQueryItems(with: [
             ("units", units.rawValue)
