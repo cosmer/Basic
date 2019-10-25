@@ -48,6 +48,12 @@ extension Endpoint: Decodable {
     }
 }
 
+extension Endpoint: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "\(Tag.self) - \(buildURL().debugDescription)"
+    }
+}
+
 extension Endpoint {
     init(pathComponents: [String]) {
         let url = pathComponents.reduce(into: baseURL) { $0.appendPathComponent($1) }
