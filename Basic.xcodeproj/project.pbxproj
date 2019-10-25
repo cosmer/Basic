@@ -63,7 +63,6 @@
 		EFEEE8B022F909D200A34E61 /* LocationUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEEE8AF22F909D200A34E61 /* LocationUpdater.swift */; };
 		EFEEE8B422F988E000A34E61 /* DailyForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEEE8B322F988E000A34E61 /* DailyForecastCell.swift */; };
 		EFEEE8B622F9890900A34E61 /* DailyForecastCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEEE8B522F9890900A34E61 /* DailyForecastCellModel.swift */; };
-		EFF10F09233F8209009AEEF3 /* Pipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF10F08233F8209009AEEF3 /* Pipe.swift */; };
 		EFF7489623587F7100B43A4D /* DispatchAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF7489523587F7100B43A4D /* DispatchAssert.swift */; };
 /* End PBXBuildFile section */
 
@@ -137,7 +136,6 @@
 		EFEEE8AF22F909D200A34E61 /* LocationUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUpdater.swift; sourceTree = "<group>"; };
 		EFEEE8B322F988E000A34E61 /* DailyForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastCell.swift; sourceTree = "<group>"; };
 		EFEEE8B522F9890900A34E61 /* DailyForecastCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastCellModel.swift; sourceTree = "<group>"; };
-		EFF10F08233F8209009AEEF3 /* Pipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipe.swift; sourceTree = "<group>"; };
 		EFF7489523587F7100B43A4D /* DispatchAssert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchAssert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -334,7 +332,6 @@
 				EFD5422F230EA0D800059214 /* Geometry+Distance.swift */,
 				EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */,
 				EFEEE8AF22F909D200A34E61 /* LocationUpdater.swift */,
-				EFF10F08233F8209009AEEF3 /* Pipe.swift */,
 				EFD354D922FAF66100B98ECE /* Publisher+Operators.swift */,
 				EFAC52E7231FCFA40080AFB3 /* Result+Operators.swift */,
 				EF6BF6862311E07A00159436 /* Tagged.swift */,
@@ -465,7 +462,6 @@
 				EF28080B230C013400FF018E /* Formatters.swift in Sources */,
 				EFD5422D230D50A100059214 /* HumidityFormatter.swift in Sources */,
 				EFBB2DC622FC2BA900AAF7EE /* DailyForecastView.swift in Sources */,
-				EFF10F09233F8209009AEEF3 /* Pipe.swift in Sources */,
 				EFDF4A042325165000C95B69 /* ActivityIndicatorView.swift in Sources */,
 				EF7714B32355DD1D0060217C /* ContentContainerView.swift in Sources */,
 				EF09144C23251520008544C3 /* LoadingView.swift in Sources */,
