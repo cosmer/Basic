@@ -59,7 +59,7 @@ struct DailyForecastView_Previews: PreviewProvider {
     static let model = DailyForecastViewModel(
         dailyForecasts: [
             DailyForecastCellModel(
-                id: .init(rawValue: 1),
+                id: .init(rawValue: Date()),
                 name: "Overnight",
                 forecast: "Mostly Cloudy",
                 temperature: Measurement(value: 50, unit: .fahrenheit),
@@ -67,7 +67,7 @@ struct DailyForecastView_Previews: PreviewProvider {
             ),
 
             DailyForecastCellModel(
-                id: .init(rawValue: 2),
+                id: .init(rawValue: Date().addingTimeInterval(1)),
                 name: "Sunday",
                 forecast: "Partly Sunny",
                 temperature: Measurement(value: 62, unit: .fahrenheit),

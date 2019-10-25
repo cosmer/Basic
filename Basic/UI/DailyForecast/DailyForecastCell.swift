@@ -36,7 +36,7 @@ struct DailyForecastCell_Previews: PreviewProvider {
     }
 
     static let model = DailyForecastCellModel(
-        id: .init(rawValue: 1),
+        id: .init(rawValue: Date()),
         name: "Sunday",
         forecast: "Partly Sunny",
         temperature: Measurement(value: 62, unit: .fahrenheit),

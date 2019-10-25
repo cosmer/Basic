@@ -7,7 +7,7 @@ import Foundation
 import API
 
 struct HourlyForecastCellModel: Identifiable {
-    var id: Tagged<Int, Self>
+    var id: Tagged<Date, Self>
     var time: Date
     var temperature: Measurement<UnitTemperature>
     var wind: String
@@ -20,7 +20,7 @@ struct HourlyForecastCellModel: Identifiable {
 
 extension HourlyForecastCellModel {
     init(period: HourlyForecastModel.Period, timeZone: TimeZone) {
-        id = ID(rawValue: period.number)
+        id = ID(rawValue: period.startTime)
         time = period.startTime
         temperature = Measurement(value: period.temperature, unit: period.temperatureUnit.rawValue)
         wind = "\(period.windDirection) \(period.windSpeed)"

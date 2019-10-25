@@ -7,7 +7,7 @@ import Foundation
 import API
 
 struct DailyForecastCellModel: Identifiable {
-    var id: Tagged<Int, Self>
+    var id: Tagged<Date, Self>
     var name: String
     var forecast: String
     var temperature: Measurement<UnitTemperature>
@@ -18,7 +18,7 @@ struct DailyForecastCellModel: Identifiable {
 
 extension DailyForecastCellModel {
     init(period: ForecastModel.Period) {
-        id = ID(rawValue: period.number)
+        id = ID(rawValue: period.startTime)
         name = period.localizedName
         forecast = period.shortForecast
         temperature = Measurement(value: Double(period.temperature), unit: period.temperatureUnit.rawValue)
