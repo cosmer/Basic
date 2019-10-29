@@ -63,4 +63,9 @@ final class TopLevelModelTests: XCTestCase {
         let data = problemModelData.data(using: .utf8)!
         XCTAssertNoThrow(try decoder.decode(ProblemModel.self, from: data))
     }
+
+    func testForecastGridDataModel() {
+        let data = forecastGridDataModelData.data(using: .utf8)!
+        XCTAssertNoThrow(try decoder.decode(ForecastGridDataModel.self, from: data))
+    }
 }

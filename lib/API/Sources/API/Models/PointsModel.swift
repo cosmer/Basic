@@ -25,7 +25,7 @@ public struct PointsModel: Decodable {
         public var gridY: Int
         public var forecast: Endpoints.Forecast
         public var forecastHourly: Endpoints.HourlyForecast
-        public var forecastGridData: URL
+        public var forecastGridData: Endpoints.ForecastGridData
         public var observationStations: Endpoints.ObservationStations
         public var relativeLocation: RelativeLocation
         public var forecastZone: Endpoints.ForecastZone

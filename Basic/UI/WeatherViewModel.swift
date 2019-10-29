@@ -56,6 +56,9 @@ final class WeatherViewModel: ObservableObject {
                 let hourlyForecastEndpoint = point.properties.forecastHourly.with(units: units)
                 let hourlyForecast = urlSession.dataTaskPublisher(for: hourlyForecastEndpoint)
 
+                let forecastGridDataEndpoint = point.properties.forecastGridData
+                let forecastGridData = urlSession.dataTaskPublisher(for: forecastGridDataEndpoint)
+
                 let conditions = CurrentConditionsModel.publisher(for: point, in: urlSession)
                     .handleError { errorLog.log($0) }
                     .replaceError(with: nil)
@@ -69,13 +72,14 @@ final class WeatherViewModel: ObservableObject {
                     .replaceError(with: nil)
                     .eraseToAnyPublisher()
 
-                return Publishers.Zip3(conditions, forecast, hourlyForecast)
+                return Publishers.Zip4(conditions, forecast, hourlyForecast, forecastGridData)
                     .map {
                         Forecasts(
                             point: point,
                             currentConditions: $0,
                             forecast: $1,
                             hourlyForecast: $2,
+                            gridData: $3,
                             delayedContent: .init(
                                 alerts: alerts
                             )
@@ -115,6 +119,7 @@ private extension WeatherViewModel.Forecasts {
         currentConditions: CurrentConditionsModel?,
         forecast: ForecastModel,
         hourlyForecast: HourlyForecastModel,
+        gridData: ForecastGridDataModel,
         delayedContent: DailyForecastViewModel.DelayedContent
     ) {
         navigationTitle = point.properties.relativeLocation.properties.city

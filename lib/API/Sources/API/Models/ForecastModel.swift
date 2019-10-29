@@ -28,6 +28,7 @@ public struct ForecastModel: Decodable {
         public var forecastGenerator: String
         public var generatedAt: Date
         public var updateTime: Date
+        public var validTimes: ISO8601TimeInterval
         public var elevation: QuantitativeValueModel<Double, UnitLength>
         public var periods: [Period]
     }

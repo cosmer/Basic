@@ -31,6 +31,8 @@ extension UnitLength: UnitDecodable {
         switch unitCode {
         case "unit:m":
             return .meters
+        case "unit:mm":
+            return .millimeters
         default:
             return nil
         }
