@@ -14,7 +14,7 @@ enum Formatters {
         return formatter
     }()
 
-    static let humidity = HumidityFormatter()
+    static let percent = PercentFormatter()
 
     static let timestamp: RelativeDateTimeFormatter = {
         let formatter = RelativeDateTimeFormatter()

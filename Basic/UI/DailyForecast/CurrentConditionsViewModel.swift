@@ -21,7 +21,7 @@ struct CurrentConditionsViewModel {
     var humidity: Measurement<UnitHumidity>?
 
     var temperatureFormatter: MeasurementFormatter { Formatters.temperature }
-    var humidityFormatter: HumidityFormatter { Formatters.humidity }
+    var humidityFormatter: PercentFormatter { Formatters.percent }
 
     func timestampFormatter(for referenceDate: Date) -> AnyFormatter<Date> {
         AnyFormatter { Formatters.timestamp.localizedString(for: $0, relativeTo: referenceDate) }
