@@ -9,10 +9,12 @@ struct Icon: View {
     let uiImage: UIImage?
     let size: CGFloat
 
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
         ZStack {
             shape
-                .fill(Color(.secondarySystemBackground))
+                .fill(fillColor)
                 .frame(width: size, height: size)
 
             uiImage.map {
@@ -29,12 +31,34 @@ struct Icon: View {
         RoundedRectangle(cornerRadius: 4, style: .continuous)
     }
 
+    private var fillColor: Color {
+        switch colorScheme {
+        case .dark:
+            return Color(white: 0.78)
+        case .light:
+            return Color(white: 0.25)
+        @unknown default:
+            return .white
+        }
+    }
+
     private var borderWidth: CGFloat { 2 }
     private var imageSize: CGFloat { size - 2*borderWidth }
 }
 
 struct Icon_Previews: PreviewProvider {
     static var previews: some View {
-        Icon(uiImage: UIImage(named: "icons/day/bkn"), size: 67)
+        Group {
+            Icon(uiImage: UIImage(named: "icons/day/bkn"), size: 67)
+                .padding()
+                .background(Color(.systemBackground))
+                .environment(\.colorScheme, .light)
+
+            Icon(uiImage: UIImage(named: "icons/day/bkn"), size: 67)
+                .padding()
+                .background(Color(.systemBackground))
+                .environment(\.colorScheme, .dark)
+        }
+        .previewLayout(.sizeThatFits)
     }
 }
