@@ -102,13 +102,19 @@ final class WeatherViewModel: ObservableObject {
                     self.isLoading = false
                 }
             )
-            .sink { [unowned self] (forecast) in
-                if case let .failure(error) = forecast {
+            .sink { [unowned self] (forecasts) in
+                if case let .failure(error) = forecasts {
                     self.errorLog.log(error)
                 }
 
                 self.isLoading = false
-                self.forecasts = forecast.map { $0 }
+
+                switch (self.forecasts, forecasts) {
+                case (.success(.some), .failure):
+                    break
+                default:
+                    self.forecasts = forecasts.map { $0 }
+                }
             }
     }
 }
