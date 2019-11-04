@@ -33,7 +33,7 @@ struct CurrentConditionsView: View {
                 VStack(alignment: .leading) {
                     model.temperature.map {
                         Text(model.temperatureFormatter.string(from: $0))
-                            .fontWeight(.bold)
+                            .fontWeight(.medium)
                     }
 
                     model.humidity.map { Text("Humidity: \($0, formatter: model.humidityFormatter)") }
