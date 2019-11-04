@@ -24,6 +24,7 @@
 		EF73FFB02357D18C0074D1DB /* HourlyForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73FFAF2357D18C0074D1DB /* HourlyForecastViewModel.swift */; };
 		EF73FFB22357D1A00074D1DB /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73FFB12357D1A00074D1DB /* HourlyForecastView.swift */; };
 		EF7714B32355DD1D0060217C /* ContentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7714B22355DD1D0060217C /* ContentContainerView.swift */; };
+		EF8918F4237043A60001E144 /* UnknownTimeZoneError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8918F3237043A60001E144 /* UnknownTimeZoneError.swift */; };
 		EFAC52E8231FCFA40080AFB3 /* Result+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAC52E7231FCFA40080AFB3 /* Result+Operators.swift */; };
 		EFAC52EA232118740080AFB3 /* WeatherAlertListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAC52E9232118740080AFB3 /* WeatherAlertListModel.swift */; };
 		EFAC52EC232118810080AFB3 /* WeatherAlertList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAC52EB232118810080AFB3 /* WeatherAlertList.swift */; };
@@ -93,6 +94,7 @@
 		EF73FFAF2357D18C0074D1DB /* HourlyForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewModel.swift; sourceTree = "<group>"; };
 		EF73FFB12357D1A00074D1DB /* HourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
 		EF7714B22355DD1D0060217C /* ContentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentContainerView.swift; sourceTree = "<group>"; };
+		EF8918F3237043A60001E144 /* UnknownTimeZoneError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownTimeZoneError.swift; sourceTree = "<group>"; };
 		EFAC52E7231FCFA40080AFB3 /* Result+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Operators.swift"; sourceTree = "<group>"; };
 		EFAC52E9232118740080AFB3 /* WeatherAlertListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAlertListModel.swift; sourceTree = "<group>"; };
 		EFAC52EB232118810080AFB3 /* WeatherAlertList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAlertList.swift; sourceTree = "<group>"; };
@@ -196,6 +198,14 @@
 			path = WeatherAlerts;
 			sourceTree = "<group>";
 		};
+		EF3D8FD5236F415F00BB8C8D /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				EF8918F3237043A60001E144 /* UnknownTimeZoneError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		EF4CBA9A2357CE5000A39B31 /* HourlyForecast */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				EFEEE8AE22F909C700A34E61 /* Core */,
+				EF3D8FD5236F415F00BB8C8D /* Errors */,
 				EFD5422E230D51C700059214 /* Formatters */,
 				EFD54231230EA8E900059214 /* Models */,
 				EFEEE8AD22F909B100A34E61 /* UI */,
@@ -498,6 +509,7 @@
 				EFAC52EC232118810080AFB3 /* WeatherAlertList.swift in Sources */,
 				EFEE484122F6EB5200F4C7B8 /* Basic.xcdatamodeld in Sources */,
 				EFAC52F02321189D0080AFB3 /* WeatherAlertView.swift in Sources */,
+				EF8918F4237043A60001E144 /* UnknownTimeZoneError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

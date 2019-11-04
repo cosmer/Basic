@@ -26,9 +26,12 @@ final class WeatherViewModel: ObservableObject {
 
     private let locationUpdater = LocationUpdater()
     private let urlSession = URLSession.shared
-    private let errorLog = ErrorLog.default.scoped(to: "WeatherViewModel")
 
     private var cancellable: AnyCancellable?
+
+    fileprivate static var errorLog: ScopedErrorLog {
+        ErrorLog.default.scoped(to: "WeatherViewModel")
+    }
 
     func requestAuthorizationIfNeeded() {
         locationUpdater.requestAuthorizationIfNeeded()
@@ -47,7 +50,7 @@ final class WeatherViewModel: ObservableObject {
                     .materialize()
                     .eraseToAnyPublisher()
             }
-            .flatMapResult { [urlSession, errorLog] (point) -> AnyResultPublisher<Forecasts, WeatherError> in
+            .flatMapResult { [urlSession] (point) -> AnyResultPublisher<Forecasts, WeatherError> in
                 let units: UnitSystem = Locale.current.usesMetricSystem ? .si : .us
 
                 let forecastEndpoint = point.properties.forecast.with(units: units)
@@ -60,14 +63,14 @@ final class WeatherViewModel: ObservableObject {
                 let forecastGridData = urlSession.dataTaskPublisher(for: forecastGridDataEndpoint)
 
                 let conditions = CurrentConditionsModel.publisher(for: point, in: urlSession)
-                    .handleError { errorLog.log($0) }
+                    .handleError { Self.errorLog.log($0) }
                     .replaceError(with: nil)
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
 
                 let alertsEndpoint = Endpoints.activeAlerts(zoneId: point.properties.forecastZone.zoneId())
                 let alerts = urlSession.dataTaskPublisher(for: alertsEndpoint)
-                    .handleError { errorLog.log($0) }
+                    .handleError { Self.errorLog.log($0) }
                     .map { Optional.some($0) }
                     .replaceError(with: nil)
                     .eraseToAnyPublisher()
@@ -104,7 +107,7 @@ final class WeatherViewModel: ObservableObject {
             )
             .sink { [unowned self] (forecasts) in
                 if case let .failure(error) = forecasts {
-                    self.errorLog.log(error)
+                    Self.errorLog.log(error)
                 }
 
                 self.isLoading = false
@@ -136,8 +139,12 @@ private extension WeatherViewModel.Forecasts {
             delayedContent: delayedContent
         )
 
-        let timeZone = TimeZone(identifier: point.properties.timeZone) ?? .current
-        hourly = HourlyForecastViewModel(forecast: hourlyForecast, timeZone: timeZone)
+        let timeZone = TimeZone(identifier: point.properties.timeZone)
+        if timeZone == nil {
+            WeatherViewModel.errorLog.log(UnknownTimeZoneError(identifier: point.properties.timeZone))
+        }
+
+        hourly = HourlyForecastViewModel(forecast: hourlyForecast, timeZone: timeZone ?? .current)
 
         discussion = ForecastDiscussionViewModel(officeId: point.properties.forecastOffice.officeId())
     }
