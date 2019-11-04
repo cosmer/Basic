@@ -13,9 +13,21 @@ struct DailyForecastCellModel: Identifiable {
     var icon: LoadableImageAsset
     var detailedForecast: String
     var temperature: Measurement<UnitTemperature>
+    var temperatureTrend: TemperatureTrend?
     var wind: String
 
-    var temperatureFormatter: MeasurementFormatter { Formatters.temperature }
+    var temperatureFormatter: AnyFormatter<Measurement<UnitTemperature>> {
+        AnyFormatter { [temperatureTrend] (t) in
+            switch temperatureTrend {
+            case nil:
+                return Formatters.temperature.string(from: t)
+            case .rising?:
+                return "\(Formatters.temperature.string(from: t)) ↑"
+            case .falling?:
+                return "\(Formatters.temperature.string(from: t)) ↓"
+            }
+        }
+    }
 }
 
 extension DailyForecastCellModel {
@@ -29,6 +41,7 @@ extension DailyForecastCellModel {
         icon = .url(period.icon.with(Self.iconMetrics).buildURL())
         detailedForecast = period.detailedForecast
         temperature = Measurement(value: Double(period.temperature), unit: period.temperatureUnit.rawValue)
+        temperatureTrend = period.temperatureTrend
         wind = "\(period.windDirection) \(period.windSpeed)"
     }
 }
