@@ -6,25 +6,16 @@
 import SwiftUI
 
 struct ForecastDiscussionView: View {
-    @ObservedObject private(set) var model: ForecastDiscussionViewModel
+    let model: ForecastDiscussionViewModel
+
+    @State private var text: LoadableResult<NSAttributedString, Error> = .success(.init())
 
     var body: some View {
-        Group {
-            if model.isLoading {
-                LoadingView()
-            } else {
-                ResultView(model.text,
-                    success: {
-                        ScrollableText(text: $0)
-                    },
-                    failure: {
-                        ErrorView(error: $0)
-                    }
-                )
-            }
+        LoadableResultView(text) {
+            ScrollableText(text: $0)
         }
+        .onReceive(model.text) { self.text = $0 }
         .navigationBarTitle("Forecast Discussion", displayMode: .inline)
-        .onAppear(perform: model.load)
     }
 }
 

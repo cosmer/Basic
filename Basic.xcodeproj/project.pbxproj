@@ -25,6 +25,8 @@
 		EF73FFB22357D1A00074D1DB /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73FFB12357D1A00074D1DB /* HourlyForecastView.swift */; };
 		EF7714B32355DD1D0060217C /* ContentContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7714B22355DD1D0060217C /* ContentContainerView.swift */; };
 		EF8918F4237043A60001E144 /* UnknownTimeZoneError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8918F3237043A60001E144 /* UnknownTimeZoneError.swift */; };
+		EF8918F6237194CD0001E144 /* LoadableResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8918F5237194CD0001E144 /* LoadableResult.swift */; };
+		EF8918F8237194F60001E144 /* LoadableResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8918F7237194F60001E144 /* LoadableResultView.swift */; };
 		EFAC52E8231FCFA40080AFB3 /* Result+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAC52E7231FCFA40080AFB3 /* Result+Operators.swift */; };
 		EFAC52EA232118740080AFB3 /* WeatherAlertListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAC52E9232118740080AFB3 /* WeatherAlertListModel.swift */; };
 		EFAC52EC232118810080AFB3 /* WeatherAlertList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAC52EB232118810080AFB3 /* WeatherAlertList.swift */; };
@@ -95,6 +97,8 @@
 		EF73FFB12357D1A00074D1DB /* HourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
 		EF7714B22355DD1D0060217C /* ContentContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentContainerView.swift; sourceTree = "<group>"; };
 		EF8918F3237043A60001E144 /* UnknownTimeZoneError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownTimeZoneError.swift; sourceTree = "<group>"; };
+		EF8918F5237194CD0001E144 /* LoadableResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableResult.swift; sourceTree = "<group>"; };
+		EF8918F7237194F60001E144 /* LoadableResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableResultView.swift; sourceTree = "<group>"; };
 		EFAC52E7231FCFA40080AFB3 /* Result+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Operators.swift"; sourceTree = "<group>"; };
 		EFAC52E9232118740080AFB3 /* WeatherAlertListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAlertListModel.swift; sourceTree = "<group>"; };
 		EFAC52EB232118810080AFB3 /* WeatherAlertList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAlertList.swift; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 				EFDF4A032325165000C95B69 /* ActivityIndicatorView.swift */,
 				EFC4F1EE232323C80086F82D /* EitherView.swift */,
 				EF0D399A231A8ADB0067359E /* Icon.swift */,
+				EF8918F7237194F60001E144 /* LoadableResultView.swift */,
 				EF3646F62334F69300A3A70A /* OptionalView.swift */,
 				EF136FBD2323D3B2001D2524 /* ResultView.swift */,
 				EFD202622315E5E900A0ED6B /* ScrollableText.swift */,
@@ -341,6 +346,7 @@
 				EFC0CBF42322864000EFF256 /* Either.swift */,
 				EFAFA7872333944300DAB9F7 /* ErrorLog+Default.swift */,
 				EFD5422F230EA0D800059214 /* Geometry+Distance.swift */,
+				EF8918F5237194CD0001E144 /* LoadableResult.swift */,
 				EF409DE4232F9B8B00877B6E /* LocationUpdateError.swift */,
 				EFEEE8AF22F909D200A34E61 /* LocationUpdater.swift */,
 				EFD354D922FAF66100B98ECE /* Publisher+Operators.swift */,
@@ -493,6 +499,7 @@
 				EFBB2DC822FC2BB500AAF7EE /* DailyForecastViewModel.swift in Sources */,
 				EFD2025E2315392400A0ED6B /* ForecastDiscussionView.swift in Sources */,
 				EF409DE5232F9B8B00877B6E /* LocationUpdateError.swift in Sources */,
+				EF8918F6237194CD0001E144 /* LoadableResult.swift in Sources */,
 				EFD54233230EA8F700059214 /* CurrentConditionsModel.swift in Sources */,
 				EFEE484322F6EB5200F4C7B8 /* WeatherView.swift in Sources */,
 				EFF7489623587F7100B43A4D /* DispatchAssert.swift in Sources */,
@@ -508,6 +515,7 @@
 				EFDF4A062327B6DA00C95B69 /* TimeInterval+Durations.swift in Sources */,
 				EFAC52EC232118810080AFB3 /* WeatherAlertList.swift in Sources */,
 				EFEE484122F6EB5200F4C7B8 /* Basic.xcdatamodeld in Sources */,
+				EF8918F8237194F60001E144 /* LoadableResultView.swift in Sources */,
 				EFAC52F02321189D0080AFB3 /* WeatherAlertView.swift in Sources */,
 				EF8918F4237043A60001E144 /* UnknownTimeZoneError.swift in Sources */,
 			);

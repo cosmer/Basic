@@ -8,24 +8,19 @@ import Combine
 import API
 import OhNo
 
-final class ForecastDiscussionViewModel: ObservableObject {
-    @Published private(set) var text: Result<NSAttributedString, Error> = .success(.init())
-    @Published private(set) var isLoading = false
-
+final class ForecastDiscussionViewModel {
     private let officeId: OfficeID
-
-    private var cancellable: AnyCancellable?
 
     init(officeId: OfficeID) {
         self.officeId = officeId
     }
 
     /// For previews.
-    convenience init(officeId: OfficeID, text: Result<String, Error>) {
+    convenience init(officeId: OfficeID, text: LoadableResult<String, Error>) {
         self.init(officeId: officeId)
 
-        self.text = text.map { NSAttributedString(string: $0, attributes: Self.bodyAttributes) }
-        cancellable = AnyCancellable({ })
+        self.text = CurrentValueSubject(text.map { NSAttributedString(string: $0, attributes: Self.bodyAttributes) })
+            .eraseToAnyPublisher()
     }
 
     struct NotAvailableError: LocalizedError {
@@ -50,57 +45,49 @@ final class ForecastDiscussionViewModel: ObservableObject {
         [.font: UIFont.preferredFont(forTextStyle: .headline)]
     }
 
-    func load() {
-        if cancellable != nil {
-            return
-        }
-
-        isLoading = true
-
-        let endpoint = Endpoints.products(officeId: officeId, code: .forecastDiscussion)
-        cancellable = URLSession.shared.dataTaskPublisher(for: endpoint)
+    private(set) lazy var text: AnyPublisher<LoadableResult<NSAttributedString, Error>, Never> =
+        URLSession.shared.dataTaskPublisher(for: Endpoints.products(officeId: officeId, code: .forecastDiscussion))
             .tryMap { (products) -> ProductsModel.Product in
                 guard let product = products.products.first else {
                     throw NotAvailableError()
                 }
                 return product
-            }
-            .flatMap { (product) -> AnyPublisher<ProductModel, Error> in
-                let endpoint = Endpoints.product(id: product.id)
-                return URLSession.shared.dataTaskPublisher(for: endpoint)
-            }
-            .map { (product) -> NSAttributedString in
-                let defaultAttributes = Self.bodyAttributes
-                let preambleAttributes = Self.preambleAttributes
-                let headerAttributes = Self.headerAttributes
+        }
+        .flatMap { (product) -> AnyPublisher<ProductModel, Error> in
+            let endpoint = Endpoints.product(id: product.id)
+            return URLSession.shared.dataTaskPublisher(for: endpoint)
+        }
+        .map { (product) -> NSAttributedString in
+            let defaultAttributes = Self.bodyAttributes
+            let preambleAttributes = Self.preambleAttributes
+            let headerAttributes = Self.headerAttributes
 
-                let text = NSMutableAttributedString()
-                ForecastDiscussionParser.shared.parse(product.productText) { (type, segment) in
-                    switch type {
-                    case .preamble:
-                        text.append(NSAttributedString(string: segment, attributes: preambleAttributes))
-                    case .sectionHeader:
-                        let content = segment + "\n"
-                        text.append(NSAttributedString(string: content, attributes: headerAttributes))
-                    case .sectionSeparator:
-                        let content = "\n\n"
-                        text.append(NSAttributedString(string: content, attributes: defaultAttributes))
-                    case .body:
-                        text.append(NSAttributedString(string: segment, attributes: defaultAttributes))
-                    }
+            let text = NSMutableAttributedString()
+            ForecastDiscussionParser.shared.parse(product.productText) { (type, segment) in
+                switch type {
+                case .preamble:
+                    text.append(NSAttributedString(string: segment, attributes: preambleAttributes))
+                case .sectionHeader:
+                    let content = segment + "\n"
+                    text.append(NSAttributedString(string: content, attributes: headerAttributes))
+                case .sectionSeparator:
+                    let content = "\n\n"
+                    text.append(NSAttributedString(string: content, attributes: defaultAttributes))
+                case .body:
+                    text.append(NSAttributedString(string: segment, attributes: defaultAttributes))
                 }
-
-                let textRange = NSRange(location: 0, length: text.length)
-                text.addAttribute(.foregroundColor, value: UIColor.label, range: textRange)
-
-                return text
             }
-            .handleError { Self.errorLog.log($0) }
-            .materialize()
-            .receive(on: RunLoop.main)
-            .sink { [unowned self] (text) in
-                self.isLoading = false
-                self.text = text
-            }
-    }
+
+            let textRange = NSRange(location: 0, length: text.length)
+            text.addAttribute(.foregroundColor, value: UIColor.label, range: textRange)
+
+            return text
+        }
+        .handleError { Self.errorLog.log($0) }
+        .map { LoadableResult.success($0) }
+        .catch { Just(LoadableResult.failure($0)) }
+        .receive(on: RunLoop.main)
+        .multicast(subject: CurrentValueSubject(.loading))
+        .autoconnect()
+        .eraseToAnyPublisher()
 }
