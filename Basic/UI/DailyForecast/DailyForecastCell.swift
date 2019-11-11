@@ -22,7 +22,7 @@ struct DailyForecastCell: View {
                 .font(.headline)
 
             HStack(alignment: .top) {
-                Icon(uiImage: icon.image, size: 92)
+                Icon(uiImage: icon.image, precipitationChance: model.iconPrecipitationChance)
 
                 VStack(alignment: .leading) {
                     Text(model.temperatureFormatter.string(from: model.temperature))

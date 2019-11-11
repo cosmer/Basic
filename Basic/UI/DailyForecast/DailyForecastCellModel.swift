@@ -11,6 +11,7 @@ struct DailyForecastCellModel: Identifiable {
     var id: Tagged<Date, Self>
     var name: String
     var icon: LoadableImageAsset
+    var iconPrecipitationChance: IconPrecipitationChance?
     var detailedForecast: String
     var temperature: Measurement<UnitTemperature>
     var temperatureTrend: TemperatureTrend?
@@ -32,17 +33,24 @@ struct DailyForecastCellModel: Identifiable {
 
 extension DailyForecastCellModel {
     private static var iconMetrics: Endpoints.Icon.IconMetrics {
-        .init(size: .large, fontSize: 20)
+        .init(size: .large, fontSize: nil)
     }
 
     init(period: ForecastModel.Period) {
         id = ID(rawValue: period.startTime)
         name = period.localizedName
-        icon = .url(period.icon.with(Self.iconMetrics).buildURL())
         detailedForecast = period.detailedForecast
         temperature = Measurement(value: Double(period.temperature), unit: period.temperatureUnit.rawValue)
         temperatureTrend = period.temperatureTrend
         wind = "\(period.windDirection) \(period.windSpeed)"
+
+        if let (icon, iconPrecipitationChance) = IconEndpointParser.extractPreciptationChance(from: period.icon) {
+            self.icon = .url(icon.with(Self.iconMetrics).buildURL())
+            self.iconPrecipitationChance = iconPrecipitationChance
+        } else {
+            icon = .url(period.icon.with(Self.iconMetrics).buildURL())
+            iconPrecipitationChance = nil
+        }
     }
 }
 

@@ -28,7 +28,7 @@ struct CurrentConditionsView: View {
                 .font(.subheadline)
 
             HStack(alignment: .top) {
-                Icon(uiImage: icon.image, size: 92)
+                Icon(uiImage: icon.image)
 
                 VStack(alignment: .leading) {
                     model.temperature.map {
