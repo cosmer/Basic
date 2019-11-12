@@ -6,7 +6,7 @@
 import Foundation
 import API
 
-struct ForecastAlertsNavigationModel {
+struct WeatherAlertsNavigationModel {
     struct One {
         var model: WeatherAlertViewModel
         var label: String
@@ -27,7 +27,7 @@ struct ForecastAlertsNavigationModel {
     }
 }
 
-extension ForecastAlertsNavigationModel {
+extension WeatherAlertsNavigationModel {
     init?(alerts: AlertsModel) {
         switch alerts.features.count {
         case 0:

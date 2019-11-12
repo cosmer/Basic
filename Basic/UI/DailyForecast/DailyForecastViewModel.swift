@@ -32,20 +32,20 @@ extension DailyForecastViewModel {
     final class DelayedContent: ObservableObject {
         typealias AlertsPublisher = AnyPublisher<AlertsModel?, Never>
 
-        @Published private(set) var alerts: ForecastAlertsNavigationModel?
+        @Published private(set) var alerts: WeatherAlertsNavigationModel?
 
         private var cancellables: [AnyCancellable] = []
 
         init(alerts: AlertsPublisher) {
             cancellables = [
                 alerts
-                    .map { $0.flatMap(ForecastAlertsNavigationModel.init) }
+                    .map { $0.flatMap(WeatherAlertsNavigationModel.init) }
                     .receive(on: RunLoop.main)
                     .sink { [weak self] in self?.alerts = $0 },
             ]
         }
 
-        init(alerts: ForecastAlertsNavigationModel?) {
+        init(alerts: WeatherAlertsNavigationModel?) {
             self.alerts = alerts
         }
     }

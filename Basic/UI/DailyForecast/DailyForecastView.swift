@@ -18,7 +18,7 @@ struct DailyForecastView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 self.delayed.alerts.map {
-                    Self.navigationLink(for: $0)
+                    WeatherAlertsNavigationView(model: $0)
                 }
 
                 self.model.currentConditions.map { (model) in
@@ -46,24 +46,6 @@ struct DailyForecastView: View {
     private static var cellBackground: some View {
         RoundedRectangle(cornerRadius: 6, style: .continuous)
             .fill(Color(.secondarySystemBackground))
-    }
-
-    private static func navigationLink(for model: ForecastAlertsNavigationModel) -> some View {
-        EitherView(model.value,
-            left: { (one) in
-                NavigationLink(destination: WeatherAlertView(model: one.model)) {
-                    VStack(alignment: .leading) {
-                        Text("Severe Weather Alert")
-                        Text(one.label)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                }
-            },
-            right: { (many) in
-                NavigationLink("Severe Weather Alerts", destination: WeatherAlertList(model: many.model))
-            }
-        )
     }
 }
 
@@ -105,7 +87,7 @@ struct DailyForecastView_Previews: PreviewProvider {
             )
         ],
         delayedContent: .init(
-            alerts: ForecastAlertsNavigationModel(
+            alerts: WeatherAlertsNavigationModel(
                 model: WeatherAlertViewModel.previews[0]
             )
         )
