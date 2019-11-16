@@ -19,6 +19,7 @@ struct DailyForecastView: View {
             VStack(alignment: .leading, spacing: 16) {
                 self.delayed.alerts.map {
                     WeatherAlertsNavigationView(model: $0)
+                        .card(fill: Color(.secondarySystemBackground))
                 }
 
                 self.model.currentConditions.map { (model) in
@@ -26,8 +27,7 @@ struct DailyForecastView: View {
                         CurrentConditionsView(model: model)
                         Spacer()
                     }
-                    .padding()
-                    .background(Self.cellBackground)
+                    .card(fill: Color(.secondarySystemBackground))
                 }
 
                 ForEach(self.model.dailyForecasts) { (model) in
@@ -35,17 +35,11 @@ struct DailyForecastView: View {
                         DailyForecastCell(model: model)
                         Spacer()
                     }
-                    .padding()
-                    .background(Self.cellBackground)
+                    .card(fill: Color(.secondarySystemBackground))
                 }
             }
             .padding()
         }
-    }
-
-    private static var cellBackground: some View {
-        RoundedRectangle(cornerRadius: 6, style: .continuous)
-            .fill(Color(.secondarySystemBackground))
     }
 }
 

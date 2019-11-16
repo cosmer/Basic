@@ -55,6 +55,7 @@
 		EFDF4A042325165000C95B69 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDF4A032325165000C95B69 /* ActivityIndicatorView.swift */; };
 		EFDF4A062327B6DA00C95B69 /* TimeInterval+Durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDF4A052327B6DA00C95B69 /* TimeInterval+Durations.swift */; };
 		EFDF4A082327C6E400C95B69 /* AnyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDF4A072327C6E400C95B69 /* AnyFormatter.swift */; };
+		EFE6BB10237C1D91008A7551 /* CardStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE6BB0F237C1D91008A7551 /* CardStyle.swift */; };
 		EFEE483C22F6EB5200F4C7B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE483B22F6EB5200F4C7B8 /* AppDelegate.swift */; };
 		EFEE483E22F6EB5200F4C7B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE483D22F6EB5200F4C7B8 /* SceneDelegate.swift */; };
 		EFEE484122F6EB5200F4C7B8 /* Basic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EFEE483F22F6EB5200F4C7B8 /* Basic.xcdatamodeld */; };
@@ -127,6 +128,7 @@
 		EFDF4A032325165000C95B69 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		EFDF4A052327B6DA00C95B69 /* TimeInterval+Durations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Durations.swift"; sourceTree = "<group>"; };
 		EFDF4A072327C6E400C95B69 /* AnyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyFormatter.swift; sourceTree = "<group>"; };
+		EFE6BB0F237C1D91008A7551 /* CardStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStyle.swift; sourceTree = "<group>"; };
 		EFEE483822F6EB5200F4C7B8 /* Basic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Basic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFEE483B22F6EB5200F4C7B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFEE483D22F6EB5200F4C7B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				EFDF4A032325165000C95B69 /* ActivityIndicatorView.swift */,
+				EFE6BB0F237C1D91008A7551 /* CardStyle.swift */,
 				EFC4F1EE232323C80086F82D /* EitherView.swift */,
 				EF0D399A231A8ADB0067359E /* Icon.swift */,
 				EF8918F7237194F60001E144 /* LoadableResultView.swift */,
@@ -479,6 +482,7 @@
 				EF0CF559231C46BF00DD6553 /* UILegibilityWeight.swift in Sources */,
 				EFDD5CDD2311492200261945 /* HourlyForecastCell.swift in Sources */,
 				EFC0CBF32322850200EFF256 /* WeatherAlertsNavigationModel.swift in Sources */,
+				EFE6BB10237C1D91008A7551 /* CardStyle.swift in Sources */,
 				EF28080B230C013400FF018E /* Formatters.swift in Sources */,
 				EF4260DA237AD39D00DCEEEE /* WeatherAlertsNavigationView.swift in Sources */,
 				EFD5422D230D50A100059214 /* PercentFormatter.swift in Sources */,

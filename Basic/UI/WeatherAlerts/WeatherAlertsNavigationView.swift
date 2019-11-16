@@ -12,18 +12,40 @@ struct WeatherAlertsNavigationView: View {
         EitherView(model.value,
             left: { (one) in
                 NavigationLink(destination: WeatherAlertView(model: one.model)) {
-                    VStack(alignment: .leading) {
-                        Text("Severe Weather Alert")
-                        Text(one.label)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                    HStack {
+                        Self.icon
+
+                        VStack(alignment: .leading) {
+                            Text("Severe Weather Alert")
+                                .font(.headline)
+
+                            Text(one.label)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+
+                        Spacer()
                     }
                 }
             },
             right: { (many) in
-                NavigationLink("Severe Weather Alerts", destination: WeatherAlertList(model: many.model))
+                NavigationLink(destination: WeatherAlertList(model: many.model)) {
+                    HStack {
+                        Self.icon
+
+                        Text("Severe Weather Alerts")
+                            .font(.headline)
+
+                        Spacer()
+                    }
+                }
             }
         )
+    }
+
+    private static var icon: some View {
+        Image(systemName: "exclamationmark.triangle.fill")
+            .accentColor(.red)
     }
 }
 
@@ -34,12 +56,16 @@ struct WeatherAlertsNavigationView_Previews: PreviewProvider {
                 WeatherAlertsNavigationView(model: WeatherAlertsNavigationModel(
                     model: WeatherAlertViewModel.previews[0]
                 ))
+                .card(fill: Color(.secondarySystemBackground))
+                .padding()
             }
 
             NavigationView {
                 WeatherAlertsNavigationView(model: WeatherAlertsNavigationModel(
                     model: .init(alerts: WeatherAlertViewModel.previews)
                 ))
+                .card(fill: Color(.secondarySystemBackground))
+                .padding()
             }
         }
     }
