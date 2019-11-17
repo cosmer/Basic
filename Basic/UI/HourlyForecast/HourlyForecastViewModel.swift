@@ -14,8 +14,8 @@ struct HourlyForecastViewModel {
     struct Section: Identifiable {
         var id: Date { time }
         var time: Date
-        var forecasts: [HourlyForecastCellModel]
         var timeZone: TimeZone
+        var forecasts: [HourlyForecastCellModel]
 
         var timeFormatter: DateFormatter { Formatters.dayName(for: timeZone) }
     }
@@ -33,7 +33,7 @@ extension HourlyForecastViewModel {
             .map { (periods) in
                 let forecasts = periods.map { HourlyForecastCellModel(period: $0, timeZone: timeZone) }
                 let time = periods.first!.startOfDay(in: calendar)
-                return Section(time: time, forecasts: forecasts, timeZone: timeZone)
+                return Section(time: time, timeZone: timeZone, forecasts: forecasts)
             }
     }
 }

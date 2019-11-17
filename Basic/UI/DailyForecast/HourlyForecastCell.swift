@@ -107,7 +107,6 @@ struct HourlyForecastCell_Previews: PreviewProvider {
     }
 
     static let model = HourlyForecastCellModel(
-        id: .init(rawValue: Date()),
         time: Date(),
         temperature: Measurement(value: 66, unit: .fahrenheit),
         wind: "W 10 mph",

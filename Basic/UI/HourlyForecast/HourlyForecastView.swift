@@ -43,7 +43,16 @@ struct HourlyForecastView_Previews: PreviewProvider {
         HourlyForecastView(model: model)
     }
 
-    static let model = HourlyForecastViewModel(sections: [
-
-    ])
+    static let model = HourlyForecastViewModel(
+        sections: [
+            .init(time: Date(), timeZone: .current, forecasts: [
+                HourlyForecastCellModel(
+                    time: Date(),
+                    temperature: .init(value: 63, unit: .fahrenheit),
+                    wind: "12 mph",
+                    shortForecast: "Partly Sunny", timeZone: .current
+                )
+            ]),
+        ]
+    )
 }
