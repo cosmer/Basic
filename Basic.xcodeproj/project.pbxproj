@@ -123,8 +123,8 @@
 		EFD5422C230D50A100059214 /* PercentFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentFormatter.swift; sourceTree = "<group>"; };
 		EFD5422F230EA0D800059214 /* Geometry+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Geometry+Distance.swift"; sourceTree = "<group>"; };
 		EFD54232230EA8F700059214 /* CurrentConditionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentConditionsModel.swift; sourceTree = "<group>"; };
-		EFDD5CDC2311492200261945 /* HourlyForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HourlyForecastCell.swift; path = ../DailyForecast/HourlyForecastCell.swift; sourceTree = "<group>"; };
-		EFDD5CDE2311493100261945 /* HourlyForecastCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HourlyForecastCellModel.swift; path = ../DailyForecast/HourlyForecastCellModel.swift; sourceTree = "<group>"; };
+		EFDD5CDC2311492200261945 /* HourlyForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastCell.swift; sourceTree = "<group>"; };
+		EFDD5CDE2311493100261945 /* HourlyForecastCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastCellModel.swift; sourceTree = "<group>"; };
 		EFDF4A032325165000C95B69 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		EFDF4A052327B6DA00C95B69 /* TimeInterval+Durations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Durations.swift"; sourceTree = "<group>"; };
 		EFDF4A072327C6E400C95B69 /* AnyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyFormatter.swift; sourceTree = "<group>"; };
