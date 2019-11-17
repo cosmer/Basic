@@ -8,45 +8,20 @@ import API
 import Combine
 
 struct DailyForecastViewModel {
+    typealias AlertsPublisher = AnyPublisher<WeatherAlertsNavigationModel, Never>
+
     var currentConditions: CurrentConditionsViewModel?
     var dailyForecasts: [DailyForecastCellModel]
-    var delayedContent: DelayedContent
+    var alertsPublisher: AlertsPublisher
 }
 
 extension DailyForecastViewModel {
-    init(
-        currentConditions: CurrentConditionsModel?,
-        forecast: ForecastModel,
-        delayedContent: DelayedContent
-    ) {
+    init(currentConditions: CurrentConditionsModel?, forecast: ForecastModel, alertsPublisher: AlertsPublisher) {
         self.currentConditions = currentConditions.map(CurrentConditionsViewModel.init)
 
         dailyForecasts = forecast.properties.periods
             .map(DailyForecastCellModel.init)
 
-        self.delayedContent = delayedContent
-    }
-}
-
-extension DailyForecastViewModel {
-    final class DelayedContent: ObservableObject {
-        typealias AlertsPublisher = AnyPublisher<AlertsModel?, Never>
-
-        @Published private(set) var alerts: WeatherAlertsNavigationModel?
-
-        private var cancellables: [AnyCancellable] = []
-
-        init(alerts: AlertsPublisher) {
-            cancellables = [
-                alerts
-                    .map { $0.flatMap(WeatherAlertsNavigationModel.init) }
-                    .receive(on: RunLoop.main)
-                    .sink { [weak self] in self?.alerts = $0 },
-            ]
-        }
-
-        init(alerts: WeatherAlertsNavigationModel?) {
-            self.alerts = alerts
-        }
+        self.alertsPublisher = alertsPublisher
     }
 }

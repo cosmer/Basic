@@ -66,13 +66,16 @@ final class WeatherViewModel: ObservableObject {
                     .handleError { Self.errorLog.log($0) }
                     .replaceError(with: nil)
                     .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
 
                 let alertsEndpoint = Endpoints.activeAlerts(zoneId: point.properties.forecastZone.zoneId())
                 let alerts = urlSession.dataTaskPublisher(for: alertsEndpoint)
                     .handleError { Self.errorLog.log($0) }
-                    .map { Optional.some($0) }
+                    .map(WeatherAlertsNavigationModel.init)
                     .replaceError(with: nil)
+                    .receive(on: RunLoop.main)
+                    .multicast(subject: CurrentValueSubject(nil))
+                    .autoconnect()
+                    .compactMap { $0 }
                     .eraseToAnyPublisher()
 
                 return Publishers.Zip4(conditions, forecast, hourlyForecast, forecastGridData)
@@ -83,9 +86,7 @@ final class WeatherViewModel: ObservableObject {
                             forecast: $1,
                             hourlyForecast: $2,
                             gridData: $3,
-                            delayedContent: .init(
-                                alerts: alerts
-                            )
+                            alertsPublisher: alerts
                         )
                     }
                     .mapError { WeatherError.api($0) }
@@ -129,14 +130,14 @@ private extension WeatherViewModel.Forecasts {
         forecast: ForecastModel,
         hourlyForecast: HourlyForecastModel,
         gridData: ForecastGridDataModel,
-        delayedContent: DailyForecastViewModel.DelayedContent
+        alertsPublisher: AnyPublisher<WeatherAlertsNavigationModel, Never>
     ) {
         navigationTitle = point.properties.relativeLocation.properties.city
 
         daily = DailyForecastViewModel(
             currentConditions: currentConditions,
             forecast: forecast,
-            delayedContent: delayedContent
+            alertsPublisher: alertsPublisher
         )
 
         let timeZone = TimeZone(identifier: point.properties.timeZone)

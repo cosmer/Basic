@@ -4,20 +4,17 @@
 //
 
 import SwiftUI
+import Combine
 
 struct DailyForecastView: View {
     let model: DailyForecastViewModel
-    @ObservedObject private(set) var delayed: DailyForecastViewModel.DelayedContent
 
-    init(model: DailyForecastViewModel) {
-        self.model = model
-        self.delayed = model.delayedContent
-    }
+    @State private var alertsNavigationModel: WeatherAlertsNavigationModel?
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                self.delayed.alerts.map {
+                alertsNavigationModel.map {
                     WeatherAlertsNavigationView(model: $0)
                         .card(fill: Color(.secondarySystemBackground))
                 }
@@ -39,6 +36,9 @@ struct DailyForecastView: View {
                 }
             }
             .padding()
+        }
+        .onReceive(model.alertsPublisher) {
+            self.alertsNavigationModel = $0
         }
     }
 }
@@ -80,10 +80,7 @@ struct DailyForecastView_Previews: PreviewProvider {
                 wind: "E 0 mph"
             )
         ],
-        delayedContent: .init(
-            alerts: WeatherAlertsNavigationModel(
-                model: WeatherAlertViewModel.previews[0]
-            )
-        )
+        alertsPublisher: CurrentValueSubject(WeatherAlertsNavigationModel(model: WeatherAlertViewModel.previews[0]))
+            .eraseToAnyPublisher()
     )
 }
