@@ -11,13 +11,9 @@ struct WeatherAlertView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text(model.headline)
+                Text(model.headline + "\n")
                     .font(.headline)
                     .fixedSize(horizontal: false, vertical: true) // Hack!
-
-                Text("\n")
-                    .font(.headline)
-                    .accessibility(hidden: true)
 
                 Text(model.area)
                     .font(.subheadline)
