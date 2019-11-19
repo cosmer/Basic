@@ -13,17 +13,17 @@ struct WeatherAlertView: View {
             VStack(alignment: .leading) {
                 Text(model.headline + "\n")
                     .font(.headline)
-                    .fixedSize(horizontal: false, vertical: true) // Hack!
+                    .fixMultilineTextTruncation()
 
                 Text(model.area)
                     .font(.subheadline)
-                    .fixedSize(horizontal: false, vertical: true) // Hack!
+                    .fixMultilineTextTruncation()
 
                 Divider()
 
                 Text(model.description)
                     .font(.body)
-                    .fixedSize(horizontal: false, vertical: true) // Hack!
+                    .fixMultilineTextTruncation()
             }
             .padding()
         }

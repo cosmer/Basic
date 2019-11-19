@@ -44,7 +44,7 @@ struct CurrentConditionsView: View {
             Divider()
 
             Text(model.description)
-                .fixedSize(horizontal: false, vertical: true)
+                .fixMultilineTextTruncation()
                 .font(.body)
         }
         .onReceive(model.referenceDatePublisher()) {

@@ -35,7 +35,7 @@ struct DailyForecastCell: View {
             Divider()
 
             Text(model.detailedForecast)
-                .fixedSize(horizontal: false, vertical: true)
+                .fixMultilineTextTruncation()
                 .font(.body)
         }
     }
