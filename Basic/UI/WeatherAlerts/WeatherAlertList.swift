@@ -10,7 +10,10 @@ struct WeatherAlertList: View {
 
     var body: some View {
         List(model.alerts) { (alert) in
-            NavigationLink(alert.title, destination: WeatherAlertView(model: alert))
+            NavigationLink(destination: WeatherAlertView(model: alert)) {
+                Text(alert.title)
+                    .frame(minHeight: 44)
+            }
         }
         .navigationBarTitle("Alerts", displayMode: .inline)
     }
