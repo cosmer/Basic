@@ -29,7 +29,7 @@ struct Icon: View {
         }
     }
 
-    private var size: CGFloat { 98 }
+    private var size: CGFloat { 96 }
     private var borderWidth: CGFloat { 2 }
     private var imageSize: CGFloat { size - 2*borderWidth }
 
