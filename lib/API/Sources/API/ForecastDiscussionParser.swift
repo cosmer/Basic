@@ -22,7 +22,7 @@ public final class ForecastDiscussionParser {
     }
 
     private let sectionHeaderRegex =
-        try! NSRegularExpression(pattern: #"^\.([A-Z\p{Z}\d\/]+)\Q...\E\n"#, options: [.anchorsMatchLines])
+        try! NSRegularExpression(pattern: #"^\.([A-Z\p{Z}\d\/]+)\Q...\E\n*"#, options: [.anchorsMatchLines])
 
     private let sectionSeparatorRegex =
         try! NSRegularExpression(pattern: #"\n\n&&\n\n"#, options: [])
