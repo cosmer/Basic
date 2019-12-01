@@ -45,6 +45,10 @@ final class ForecastDiscussionViewModel {
         [.font: UIFont.preferredFont(forTextStyle: .headline)]
     }
 
+    private static var paragraphTitleAttributes: [NSAttributedString.Key: Any] {
+        [.font: UIFont.preferredFont(forTextStyle: .subheadline)]
+    }
+
     private(set) lazy var text: AnyPublisher<LoadableResult<NSAttributedString, Error>, Never> =
         URLSession.shared.dataTaskPublisher(for: Endpoints.products(officeId: officeId, code: .forecastDiscussion))
             .tryMap { (products) -> ProductsModel.Product in
@@ -61,9 +65,10 @@ final class ForecastDiscussionViewModel {
             let defaultAttributes = Self.bodyAttributes
             let preambleAttributes = Self.preambleAttributes
             let headerAttributes = Self.headerAttributes
+            let paragraphTitleAttributes = Self.paragraphTitleAttributes
 
             let text = NSMutableAttributedString()
-            ForecastDiscussionParser.shared.parse(product.productText) { (type, segment) in
+            ForecastDiscussionParser(discussion: product.productText).parse { (type, segment) in
                 switch type {
                 case .preamble:
                     text.append(NSAttributedString(string: segment, attributes: preambleAttributes))
@@ -73,6 +78,9 @@ final class ForecastDiscussionViewModel {
                 case .sectionSeparator:
                     let content = "\n\n"
                     text.append(NSAttributedString(string: content, attributes: defaultAttributes))
+                case .paragraphTitle:
+                    let content = segment + "\n"
+                    text.append(NSAttributedString(string: content, attributes: paragraphTitleAttributes))
                 case .body, .footer:
                     text.append(NSAttributedString(string: segment, attributes: defaultAttributes))
                 }
