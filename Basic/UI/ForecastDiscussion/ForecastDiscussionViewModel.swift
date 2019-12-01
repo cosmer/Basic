@@ -73,7 +73,7 @@ final class ForecastDiscussionViewModel {
                 case .sectionSeparator:
                     let content = "\n\n"
                     text.append(NSAttributedString(string: content, attributes: defaultAttributes))
-                case .body:
+                case .body, .footer:
                     text.append(NSAttributedString(string: segment, attributes: defaultAttributes))
                 }
             }

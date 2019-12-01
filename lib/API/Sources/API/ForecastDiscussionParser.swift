@@ -13,6 +13,7 @@ public final class ForecastDiscussionParser {
         case sectionHeader
         case sectionSeparator
         case body
+        case footer
     }
 
     private struct Match {
@@ -88,7 +89,7 @@ public final class ForecastDiscussionParser {
 
         let footer = discussion[lastMatch.range.upperBound...]
         if !footer.isEmpty {
-            callback(.body, footer.removingManualLineBreaks())
+            callback(.footer, String(footer))
         }
     }
 }

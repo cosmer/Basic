@@ -48,6 +48,9 @@ final class ForecastDiscussionParserTests: XCTestCase {
             "Short Term /through Wednesday/...SW flow will increase ahead of a weak cold front late today...but we should stay below SCA\'s even on the open waters. Onshore winds develop and increase Wednesday afternoon in advance of the next storm system. The open waters could approach SCAs towards evening.\n\nLong Term...A gale watch may be needed Thursday into Friday as a strong pressure gradient remains over the waters...mainly for the outer waters and Penobscot Bay.",
             "High astronomical tides will continue today. However...there should be little in the way of surge for the late morning high tide today as winds and seas will remain rather light.",
             "ME...None. NH...None. MARINE...None.",
+        ])
+
+        XCTAssertEqual(segments[.footer] ?? [], [
             "$$\n\nES",
         ])
     }
@@ -84,7 +87,10 @@ final class ForecastDiscussionParserTests: XCTestCase {
             "as of 4:05 AM PST Tuesday...Quiet this morning ahead of an approaching weather system. Clouds increasing in the afternoon in the Bay Area becoming MVFR cigs. Light rain initially becoming briefly heavy early this evening. Frontal system should be through the Bay Area after 06Z with rain turning to light to moderate showers. Southerly winds this afternoon reaching its maximum speed just ahead of the frontal passage. Could see gusts to 30 kt at the surface but gusts to 50 kt above the surface will cause LLWS. Model guidance suggest a 20-25 percent chance of thunderstorms during the evening hours.\n\nVicinity of KSFO...VFR this morning. MVFR cigs after 20Z with rain beginning shortly afterwards. A brief period of heavy rain sometime between 00Z and 06Z as the front passes. Bases initially at 3000 ft but lowering to 1000 to 1500 ft during heavier rains. Light northwest winds becoming south to southeast after 20Z. Winds up to 20 kt with gusts to 30 kt just ahead of frontal passage. Winds above the surface could be as high as 50 kt causing LLWS. Winds switching to southwest after 06Z. Showers and a possibility of thunderstorms in the post-frontal environment.\n\nSFO Bridge Approach...Similar to KSFO.\n\nMonterey Bay Terminals...VFR for today. Rain could arrive by 00Z with cigs gradually lowering to MVFR. Brief period of moderate to heavy rain between 04Z and 08Z with southerly winds gusting to 20 kt. Winds above the surface could be as high as 40 kt causing LLWS. Rain turning to showers after 08-09Z and winds becoming southwest and decreasing.",
             "as of 03:38 AM PST Tuesday...A surface low will deepen rapidly off the Oregon coast today and tonight. An associated cold front will move across the coastal waters early tonight. Strong southerly winds ahead of the front will bring gale force winds to the northern and outer waters.  There is a slight chance of thunderstorms tonight into Wednesday morning. Winds will slowly decrease on Wednesday as the low moves into Oregon. The strong winds will generate large swells that will peak on Wednesday.",
             ".Tday...Wind Advisory...CAZ006-505-507-509-511-512-517-518 Flash Flood Watch...CAZ506-507 SCA...Pigeon Pt to Pt Pinos 0-10 nm until 6 AM SCA...Pigeon Pt to Pt Pinos 0-10 nm from 4 PM SCA...Pt Arena to Pigeon Pt 10-60 nm until 2 PM GLW...Pt Arena to Pigeon Pt 10-60 nm from 2 PM SCA...Pt Arena to Pt Reyes 0-10 nm SCA...Pt Reyes to Pigeon Pt 0-10 nm SCA...Pigeon Pt to Pt Piedras Blancas 10-60 nm GLW...SF Bay from 4 PM GLW...Pt Arena to Pt Reyes 0-10 nm from 4 PM GLW...Pt Reyes to Pigeon Pt 0-10 nm from 4 PM GLW...Pigeon Pt to Pt Piedras Blancas 10-60 nm from 4 PM SCA...Rough Bar Advisory for SF Bar SCA...Pt Pinos to Pt Piedras Blancas 0-10 nm",
-            "$$\n\nPUBLIC FORECAST: Rowe AVIATION: W Pi MARINE: W Pi\n\nVisit us at www.weather.gov/sanfrancisco\n\nFollow us on Facebook, Twitter, and YouTube at: www.facebook.com/nwsbayarea www.twitter.com/nwsbayarea www.youtube.com/nwsbayarea",
+        ])
+
+        XCTAssertEqual(segments[.footer] ?? [], [
+            "$$\n\nPUBLIC FORECAST: Rowe\nAVIATION: W Pi\nMARINE: W Pi\n\nVisit us at www.weather.gov/sanfrancisco\n\nFollow us on Facebook, Twitter, and YouTube at:\nwww.facebook.com/nwsbayarea\nwww.twitter.com/nwsbayarea\nwww.youtube.com/nwsbayarea",
         ])
     }
 }
