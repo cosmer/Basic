@@ -12,11 +12,11 @@ public extension StringProtocol {
             .map { (paragraph) -> String in
                 var lines: [String] = []
                 paragraph.enumerateLines { (line, _) in
-                    if !line.isEmpty {
-                        lines.append(line.trimmingCharacters(in: .whitespacesAndNewlines))
-                    }
+                    lines.append(line.trimmingCharacters(in: .whitespacesAndNewlines))
                 }
-                return lines.joined(separator: " ")
+                return lines
+                    .filter { !$0.isEmpty }
+                    .joined(separator: " ")
             }
             .joined(separator: "\n\n")
     }
