@@ -111,8 +111,6 @@ final class WeatherViewModel: ObservableObject {
                     Self.errorLog.log(error)
                 }
 
-                self.isLoading = false
-
                 switch (self.forecasts, forecasts) {
                 case (.success(.some), .failure):
                     break
