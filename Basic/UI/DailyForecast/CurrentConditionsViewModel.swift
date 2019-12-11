@@ -25,11 +25,6 @@ struct CurrentConditionsViewModel {
         AnyFormatter { Formatters.timestamp.localizedString(for: $0, relativeTo: referenceDate) }
     }
 
-    func isOutdated(at date: Date) -> Bool {
-        let interval = DateInterval(start: timestamp, end: date)
-        return interval.duration > .hours(1.5)
-    }
-
     func referenceDatePublisher() -> Publishers.Autoconnect<Timer.TimerPublisher> {
         return Timer.publish(every: .minutes(1), on: .main, in: .common)
             .autoconnect()

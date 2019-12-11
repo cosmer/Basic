@@ -20,7 +20,6 @@ struct CurrentConditionsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(model.timestampFormatter(for: referenceDate).string(from: model.timestamp).capitalized(with: .current))
-                .foregroundColor(model.isOutdated(at: referenceDate) ? .red : nil)
                 .font(.headline)
 
             Text(model.stationName)
