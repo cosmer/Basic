@@ -6,15 +6,12 @@
 import SwiftUI
 
 struct ForecastDiscussionView: View {
-    let model: ForecastDiscussionViewModel
-
-    @State private var text: LoadableResult<NSAttributedString, Error> = .success(.init())
+    let model: LoadableForecastDiscussionViewModel
 
     var body: some View {
-        LoadableResultView(text) {
-            ScrollableText(text: $0)
+        LoadableResultView(model: model) {
+            ScrollableText(text: $0.text)
         }
-        .onReceive(model.text) { self.text = $0 }
         .navigationBarTitle("Forecast Discussion", displayMode: .inline)
     }
 }
@@ -26,10 +23,7 @@ struct ForecastDiscussionView_Previews: PreviewProvider {
         }
     }
 
-    static let model = ForecastDiscussionViewModel(
-        officeId: .grayME,
-        text: .success(text)
-    )
+    static let model = LoadableForecastDiscussionViewModel(productText: text)
 
     static let text =
         """

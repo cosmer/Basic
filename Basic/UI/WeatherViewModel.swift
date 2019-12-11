@@ -18,7 +18,7 @@ final class WeatherViewModel: ObservableObject {
         var navigationTitle: String
         var daily: DailyForecastViewModel
         var hourly: HourlyForecastViewModel
-        var discussion: ForecastDiscussionViewModel
+        var discussion: LoadableForecastDiscussionViewModel
     }
 
     @Published private(set) var forecasts: Result<Forecasts?, WeatherError> = .success(nil)
@@ -145,7 +145,7 @@ private extension WeatherViewModel.Forecasts {
 
         hourly = HourlyForecastViewModel(forecast: hourlyForecast, timeZone: timeZone ?? .current)
 
-        discussion = ForecastDiscussionViewModel(officeId: point.properties.forecastOffice.officeId())
+        discussion = LoadableForecastDiscussionViewModel(officeId: point.properties.forecastOffice.officeId())
     }
 }
 

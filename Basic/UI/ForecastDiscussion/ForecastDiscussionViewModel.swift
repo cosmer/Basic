@@ -8,20 +8,8 @@ import Combine
 import API
 import OhNo
 
-final class ForecastDiscussionViewModel {
-    private let officeId: OfficeID
-
-    init(officeId: OfficeID) {
-        self.officeId = officeId
-    }
-
-    /// For previews.
-    convenience init(officeId: OfficeID, text: LoadableResult<String, Error>) {
-        self.init(officeId: officeId)
-
-        self.text = CurrentValueSubject(text.map { NSAttributedString(string: $0, attributes: Self.bodyAttributes) })
-            .eraseToAnyPublisher()
-    }
+struct ForecastDiscussionViewModel {
+    let text: NSAttributedString
 
     struct NotAvailableError: LocalizedError {
         var errorDescription: String? {
@@ -29,7 +17,7 @@ final class ForecastDiscussionViewModel {
         }
     }
 
-    private static var errorLog: ScopedErrorLog {
+    fileprivate static var errorLog: ScopedErrorLog {
         ErrorLog.default.scoped(to: "ForecastDiscussionViewModel")
     }
 
@@ -49,53 +37,68 @@ final class ForecastDiscussionViewModel {
         [.font: UIFont.preferredFont(forTextStyle: .subheadline)]
     }
 
-    private(set) lazy var text: AnyPublisher<LoadableResult<NSAttributedString, Error>, Never> =
-        URLSession.shared.dataTaskPublisher(for: Endpoints.products(officeId: officeId, code: .forecastDiscussion))
+    init(productText: String) {
+        let defaultAttributes = Self.bodyAttributes
+        let preambleAttributes = Self.preambleAttributes
+        let headerAttributes = Self.headerAttributes
+        let paragraphTitleAttributes = Self.paragraphTitleAttributes
+
+        let text = NSMutableAttributedString()
+        ForecastDiscussionParser(discussion: productText).parse { (type, segment) in
+            switch type {
+            case .preamble:
+                text.append(NSAttributedString(string: segment, attributes: preambleAttributes))
+            case .sectionHeader:
+                let content = segment + "\n"
+                text.append(NSAttributedString(string: content, attributes: headerAttributes))
+            case .sectionSeparator:
+                let content = "\n\n"
+                text.append(NSAttributedString(string: content, attributes: defaultAttributes))
+            case .paragraphTitle:
+                let content = segment + "\n"
+                text.append(NSAttributedString(string: content, attributes: paragraphTitleAttributes))
+            case .body, .footer:
+                text.append(NSAttributedString(string: segment, attributes: defaultAttributes))
+            }
+        }
+
+        let textRange = NSRange(location: 0, length: text.length)
+        text.addAttribute(.foregroundColor, value: UIColor.label, range: textRange)
+
+        self.text = text
+    }
+}
+
+typealias LoadableForecastDiscussionViewModel = LoadableResultViewModel<ForecastDiscussionViewModel>
+
+extension LoadableResultViewModel where Value == ForecastDiscussionViewModel {
+    /// For previews.
+    convenience init(productText: String) {
+        let publisher = Just(productText)
+            .map(ForecastDiscussionViewModel.init)
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+
+        self.init(publisher: publisher)
+    }
+
+    convenience init(officeId: OfficeID) {
+        let publisher = URLSession.shared
+            .dataTaskPublisher(for: Endpoints.products(officeId: officeId, code: .forecastDiscussion))
             .tryMap { (products) -> ProductsModel.Product in
                 guard let product = products.products.first else {
-                    throw NotAvailableError()
+                    throw ForecastDiscussionViewModel.NotAvailableError()
                 }
                 return product
-        }
-        .flatMap { (product) -> AnyPublisher<ProductModel, Error> in
-            let endpoint = Endpoints.product(id: product.id)
-            return URLSession.shared.dataTaskPublisher(for: endpoint)
-        }
-        .map { (product) -> NSAttributedString in
-            let defaultAttributes = Self.bodyAttributes
-            let preambleAttributes = Self.preambleAttributes
-            let headerAttributes = Self.headerAttributes
-            let paragraphTitleAttributes = Self.paragraphTitleAttributes
-
-            let text = NSMutableAttributedString()
-            ForecastDiscussionParser(discussion: product.productText).parse { (type, segment) in
-                switch type {
-                case .preamble:
-                    text.append(NSAttributedString(string: segment, attributes: preambleAttributes))
-                case .sectionHeader:
-                    let content = segment + "\n"
-                    text.append(NSAttributedString(string: content, attributes: headerAttributes))
-                case .sectionSeparator:
-                    let content = "\n\n"
-                    text.append(NSAttributedString(string: content, attributes: defaultAttributes))
-                case .paragraphTitle:
-                    let content = segment + "\n"
-                    text.append(NSAttributedString(string: content, attributes: paragraphTitleAttributes))
-                case .body, .footer:
-                    text.append(NSAttributedString(string: segment, attributes: defaultAttributes))
-                }
             }
+            .flatMap { (product) -> AnyPublisher<ProductModel, Error> in
+                let endpoint = Endpoints.product(id: product.id)
+                return URLSession.shared.dataTaskPublisher(for: endpoint)
+            }
+            .map { ForecastDiscussionViewModel(productText: $0.productText) }
+            .handleError { ForecastDiscussionViewModel.errorLog.log($0) }
+            .eraseToAnyPublisher()
 
-            let textRange = NSRange(location: 0, length: text.length)
-            text.addAttribute(.foregroundColor, value: UIColor.label, range: textRange)
-
-            return text
-        }
-        .handleError { Self.errorLog.log($0) }
-        .map { LoadableResult.success($0) }
-        .catch { Just(LoadableResult.failure($0)) }
-        .receive(on: RunLoop.main)
-        .multicast(subject: CurrentValueSubject(.loading))
-        .autoconnect()
-        .eraseToAnyPublisher()
+        self.init(publisher: publisher)
+    }
 }

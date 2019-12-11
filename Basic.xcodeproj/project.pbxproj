@@ -46,6 +46,7 @@
 		EFD2025C2315390B00A0ED6B /* ForecastDiscussionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD2025B2315390B00A0ED6B /* ForecastDiscussionViewModel.swift */; };
 		EFD2025E2315392400A0ED6B /* ForecastDiscussionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD2025D2315392400A0ED6B /* ForecastDiscussionView.swift */; };
 		EFD202632315E5E900A0ED6B /* ScrollableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD202622315E5E900A0ED6B /* ScrollableText.swift */; };
+		EFD2369C23A1B1BA00DFA9E4 /* LoadableResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD2369B23A1B1BA00DFA9E4 /* LoadableResultViewModel.swift */; };
 		EFD354D822FAD8F000B98ECE /* API in Frameworks */ = {isa = PBXBuildFile; productRef = EFD354D722FAD8F000B98ECE /* API */; };
 		EFD354DA22FAF66100B98ECE /* Publisher+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD354D922FAF66100B98ECE /* Publisher+Operators.swift */; };
 		EFD5422D230D50A100059214 /* PercentFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD5422C230D50A100059214 /* PercentFormatter.swift */; };
@@ -121,6 +122,7 @@
 		EFD2025B2315390B00A0ED6B /* ForecastDiscussionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDiscussionViewModel.swift; sourceTree = "<group>"; };
 		EFD2025D2315392400A0ED6B /* ForecastDiscussionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDiscussionView.swift; sourceTree = "<group>"; };
 		EFD202622315E5E900A0ED6B /* ScrollableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableText.swift; sourceTree = "<group>"; };
+		EFD2369B23A1B1BA00DFA9E4 /* LoadableResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableResultViewModel.swift; sourceTree = "<group>"; };
 		EFD354D922FAF66100B98ECE /* Publisher+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Operators.swift"; sourceTree = "<group>"; };
 		EFD5422C230D50A100059214 /* PercentFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentFormatter.swift; sourceTree = "<group>"; };
 		EFD5422F230EA0D800059214 /* Geometry+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Geometry+Distance.swift"; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				EFC4F1EE232323C80086F82D /* EitherView.swift */,
 				EF0D399A231A8ADB0067359E /* Icon.swift */,
 				EF8918F7237194F60001E144 /* LoadableResultView.swift */,
+				EFD2369B23A1B1BA00DFA9E4 /* LoadableResultViewModel.swift */,
 				EF3646F62334F69300A3A70A /* OptionalView.swift */,
 				EF136FBD2323D3B2001D2524 /* ResultView.swift */,
 				EFD202622315E5E900A0ED6B /* ScrollableText.swift */,
@@ -478,6 +481,7 @@
 			files = (
 				EF2E767E23083BED008EB40D /* CurrentConditionsView.swift in Sources */,
 				EFEEE8AC22F8EA9F00A34E61 /* WeatherViewModel.swift in Sources */,
+				EFD2369C23A1B1BA00DFA9E4 /* LoadableResultViewModel.swift in Sources */,
 				EF73FFB22357D1A00074D1DB /* HourlyForecastView.swift in Sources */,
 				EFAC52F2232118A60080AFB3 /* WeatherAlertViewModel.swift in Sources */,
 				EF0D399B231A8ADB0067359E /* Icon.swift in Sources */,

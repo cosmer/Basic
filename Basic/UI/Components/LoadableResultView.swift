@@ -6,16 +6,22 @@
 import SwiftUI
 
 struct LoadableResultView<Success, SuccessContent>: View where SuccessContent: View {
-    let body: TupleView<(LoadingView?, SuccessContent?, ErrorView?)>
+    @ObservedObject private(set) var model: LoadableResultViewModel<Success>
 
-    init(_ result: LoadableResult<Success, Error>, @ViewBuilder success: (Success) -> SuccessContent) {
-        switch result {
+    let success: (Success) -> SuccessContent
+
+    var body: TupleView<(LoadingView?, SuccessContent?, ErrorView?)> {
+        model.load()
+
+        switch model.value {
+        case .none:
+            return ViewBuilder.buildBlock(nil, nil, nil)
         case .loading:
-            body = ViewBuilder.buildBlock(LoadingView(), nil, nil)
+            return ViewBuilder.buildBlock(LoadingView(), nil, nil)
         case .success(let value):
-            body = ViewBuilder.buildBlock(nil, success(value), nil)
+            return ViewBuilder.buildBlock(nil, success(value), nil)
         case .failure(let error):
-            body = ViewBuilder.buildBlock(nil, nil, ErrorView(error: error))
+            return ViewBuilder.buildBlock(nil, nil, ErrorView(error: error))
         }
     }
 }

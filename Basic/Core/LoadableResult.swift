@@ -6,6 +6,7 @@
 import Foundation
 
 enum LoadableResult<Success, Failure> where Failure: Error {
+    case none
     case loading
     case success(Success)
     case failure(Failure)
@@ -14,6 +15,8 @@ enum LoadableResult<Success, Failure> where Failure: Error {
 extension LoadableResult {
     func map<T>(_ transform: (Success) throws -> T) rethrows -> LoadableResult<T, Failure> {
         switch self {
+        case .none:
+            return .none
         case .loading:
             return .loading
         case .success(let value):
